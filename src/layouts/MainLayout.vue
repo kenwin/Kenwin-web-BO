@@ -12,7 +12,7 @@
         />
 
         <q-toolbar-title> Kenwin Backoffice </q-toolbar-title>
-
+        <q-btn @click="logout()" stretch flat label="Cerrar sesion" />
       </q-toolbar>
     </q-header>
 
@@ -37,6 +37,8 @@
 <script>
 import { defineComponent, ref } from "vue";
 import EssentialLink from "components/EssentialLink.vue";
+import { useAuth } from "stores/auth";
+import { useRouter } from "vue-router";
 
 const linksList = [
   {
@@ -50,7 +52,7 @@ const linksList = [
     caption: "Formularios de contacto",
     icon: "record_voice_over",
     link: "/contact_forms",
-  }
+  },
 ];
 
 export default defineComponent({
@@ -62,14 +64,25 @@ export default defineComponent({
 
   setup() {
     const leftDrawerOpen = ref(false);
+    const store = useAuth();
+    const router = useRouter();
 
     return {
+      store,
+      router,
       essentialLinks: linksList,
       leftDrawerOpen,
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
       },
     };
+  },
+
+  methods: {
+    async logout() {
+      await this.store.logoutUser(this.data);
+      this.router.push({ path: "/login" });
+    },
   },
 });
 </script>
