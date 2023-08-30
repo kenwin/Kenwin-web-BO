@@ -4,9 +4,14 @@
       <q-page
         class="bg-cyan window-height window-width row justify-center items-center"
       >
-        <div class="column">
+        <q-inner-loading v-if="loading" :showing="loading">
+          <q-spinner size="50px" color="primary" />
+        </q-inner-loading>
+        <div v-else class="column">
           <div class="row">
-            <h5 class="text-h5 text-white q-my-md" size="lg">Iniciar Sesión</h5>
+            <h5 class="text-h5 text-white q-my-md" size="lg">
+              Iniciar Sesión | Kenwin Backoffice
+            </h5>
           </div>
           <div class="row">
             <q-card square bordered class="q-pa-lg shadow-1">
@@ -15,7 +20,6 @@
                   <q-input
                     square
                     filled
-                    clearable
                     v-model="data.email"
                     type="email"
                     label="email"
@@ -23,10 +27,10 @@
                   <q-input
                     square
                     filled
-                    clearable
                     v-model="data.password"
                     type="password"
                     label="contraseña"
+                    @keyup.enter="login()"
                   />
                 </q-form>
               </q-card-section>
@@ -49,6 +53,7 @@
 </template>
 
 <script>
+import { ref } from "vue";
 import { useAuth } from "stores/auth";
 import { useRouter } from "vue-router";
 
@@ -57,9 +62,11 @@ export default {
   setup() {
     const store = useAuth();
     const router = useRouter();
+    const loading = store.getLoading;
     return {
       store,
       router,
+      loading,
     };
   },
   data() {
@@ -73,7 +80,14 @@ export default {
   methods: {
     async login() {
       await this.store.logginUser(this.data);
-      this.router.push({ path: "/" });
+      if (this.store.getToken) {
+        this.router.push({ path: "/" });
+      } else {
+        this.$q.notify({
+          type: "negative",
+          message: "Email y/o contraseña incorrectos!",
+        });
+      }
     },
   },
 };
