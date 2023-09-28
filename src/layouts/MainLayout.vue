@@ -53,6 +53,18 @@ const linksList = [
     icon: "record_voice_over",
     link: "/contact_forms",
   },
+  {
+    title: "Noticias",
+    caption: "Listado de noticias",
+    icon: "feed",
+    link: "/news",
+  },
+  {
+    title: "Descargas",
+    caption: "Recursos de descargas",
+    icon: "download",
+    link: "/downloads",
+  },
 ];
 
 export default defineComponent({

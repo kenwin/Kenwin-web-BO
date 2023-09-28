@@ -2,19 +2,19 @@ import { defineStore } from "pinia";
 import { api } from "boot/axios";
 import { useAuth } from "stores/auth";
 
-export const useContactForm = defineStore("contactForm", {
+export const useDownloads = defineStore("downloads", {
   state: () => ({
-    form: {},
-    formsList: [],
+    download: {},
+    downloadsList: [],
     loading: false,
   }),
   getters: {
-    getForm: (state) => state.form,
-    getFormList: (state) => state.formsList,
+    getDownload: (state) => state.download,
+    getDownloadsList: (state) => state.downloadsList,
     getLoading: (state) => state.loading,
   },
   actions: {
-    async getFormsList() {
+    async getApiDownloads() {
       this.loading = true;
       const auth = useAuth();
 
@@ -31,10 +31,10 @@ export const useContactForm = defineStore("contactForm", {
 
       try {
         await api
-          .get("/api/contact", getConfig)
+          .get("/api/downloads", getConfig)
           .then((response) => {
-            console.log(response.data.data);
-            this.formsList = response.data.data;
+            console.log(response.data);
+            this.downloadsList = response.data;
             this.loading = false;
           })
           .catch((error) => {
@@ -46,7 +46,7 @@ export const useContactForm = defineStore("contactForm", {
         this.loading = false;
       }
     },
-    async getFormById(form_id) {
+    async getDownloadById(download_id) {
       this.loading = true;
       const auth = useAuth();
 
@@ -63,10 +63,10 @@ export const useContactForm = defineStore("contactForm", {
 
       try {
         await api
-          .get("/api/contact/" + form_id, getConfig)
+          .get("/api/downloads/" + download_id, getConfig)
           .then((response) => {
             console.log(response);
-            this.form = response.data.data;
+            this.download = response.data[0];
             this.loading = false;
           })
           .catch((error) => {

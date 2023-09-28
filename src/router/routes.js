@@ -22,6 +22,38 @@ const routes = [
         meta: { requiresAuth: true },
         component: () => import("src/pages/ContactForm/ContactForm.vue"),
       },
+      {
+        path: "news",
+        name: "news",
+        meta: { requiresAuth: true },
+        component: () => import("src/pages/News/News.vue"),
+      },
+      {
+        path: "news/info/:news_id",
+        name: "news_info",
+        props: true,
+        meta: { requiresAuth: true },
+        component: () => import("src/pages/News/NewsInfo.vue"),
+      },
+      {
+        path: "news/create",
+        name: "news_create",
+        meta: { requiresAuth: true },
+        component: () => import("src/pages/News/NewsCreate.vue"),
+      },
+      {
+        path: "downloads",
+        name: "downloads",
+        meta: { requiresAuth: true },
+        component: () => import("src/pages/Downloads/Downloads.vue"),
+      },
+      {
+        path: "downloads/info/:download_id",
+        name: "downloads_info",
+        props: true,
+        meta: { requiresAuth: true },
+        component: () => import("src/pages/Downloads/DownloadsInfo.vue"),
+      },
     ],
   },
 

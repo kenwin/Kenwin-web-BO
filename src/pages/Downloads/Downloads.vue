@@ -2,9 +2,9 @@
   <q-page>
     <div class="row q-pa-sm">
       <div class="col-12">
-        <p class="text-h5">Formularios de contacto</p>
+        <p class="text-h5">Listado de recursos de descargas</p>
       </div>
-      <div v-if="contactFormList.length == 0" class="col-12">
+      <div v-if="downloadsList.length == 0" class="col-12">
         <q-list bordered separator>
           <q-item>
             <q-item-section>
@@ -20,25 +20,23 @@
       </div>
       <div v-else class="col-12">
         <q-list bordered separator>
-          <q-item v-for="(form, key) in contactFormList" :key="key">
+          <q-item v-for="(download, key) in downloadsList" :key="key">
             <q-item-section avatar top>
-              <q-avatar icon="inbox" color="primary" text-color="white" />
+              <q-avatar icon="download" color="primary" text-color="white" />
             </q-item-section>
 
             <q-item-section>
               <q-item-label>
-                <b>Nombre: </b> {{ form.name }} {{ form.last_name }} |
-                <b>Email: </b> {{ form.email }} | <b>Telefono: </b
-                >{{ form.phone }} | <b>Pais: </b>{{ form.country }}
-              </q-item-label>
-              <q-item-label caption>
-                <b>Mensaje: </b> {{ form.message }}
+                <b>Nombre de la seccion: </b> {{ download.name }} |
+                <b>Activo: </b> {{ download.active }} |
+                <b>Fecha de creacion: </b>
+                {{ download.created_at }}
               </q-item-label>
             </q-item-section>
 
             <q-item-section side>
               <q-btn
-                :to="'/contact_form/' + form.id"
+                :to="'/downloads/info/' + download.id"
                 class="gt-xs"
                 size="12px"
                 flat
@@ -56,21 +54,21 @@
 
 <script>
 import { computed } from "vue";
-import { useContactForm } from "stores/contactForm";
+import { useDownloads } from "stores/downloads";
 
 export default {
-  name: "ContactForms",
+  name: "DownloadsSection",
   setup() {
-    const store = useContactForm();
-    const contactFormList = computed(() => store.getFormList);
+    const store = useDownloads();
+    const downloadsList = computed(() => store.getDownloadsList);
 
     return {
       store,
-      contactFormList,
+      downloadsList,
     };
   },
   async mounted() {
-    await this.store.getFormsList();
+    await this.store.getApiDownloads();
   },
 };
 </script>
