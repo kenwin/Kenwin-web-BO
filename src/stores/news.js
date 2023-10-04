@@ -14,6 +14,9 @@ export const useNews = defineStore("news", {
     getLoading: (state) => state.loading,
   },
   actions: {
+    setNews(payload) {
+      this.news = payload;
+    },
     async getApiNews() {
       this.loading = true;
       const auth = useAuth();
@@ -117,6 +120,58 @@ export const useNews = defineStore("news", {
       try {
         await api
           .post("/api/noticias", formData, config)
+          .then((response) => {
+            console.log(response);
+            this.loading = false;
+          })
+          .catch((error) => {
+            // handle error
+            console.log(error);
+          });
+      } catch (error) {
+        if (error) throw error;
+        this.loading = false;
+      }
+    },
+    async editNews(id) {
+      this.loading = true;
+      const auth = useAuth();
+
+      if (!auth.getToken) {
+        console.log("Null token");
+        return;
+      }
+
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
+          Authorization: "Bearer " + auth.getToken,
+        },
+      };
+
+      const formData = new FormData();
+      if (this.news) {
+        formData.set("epigrafe", this.news.epigrafe);
+      }
+      if (this.news) {
+        formData.set("titulo", this.news.titulo);
+      }
+      if (this.news) {
+        formData.set("subtitulo", this.news.subtitulo);
+      }
+      if (this.news) {
+        formData.set("cuerpo", this.news.cuerpo);
+      }
+      if (this.news) {
+        formData.set("autor", this.news.autor);
+      }
+      if (this.news && this.news.image) {
+        formData.set("image", this.news.image);
+      }
+
+      try {
+        await api
+          .post("/api/noticias/" + id, formData, config)
           .then((response) => {
             console.log(response);
             this.loading = false;

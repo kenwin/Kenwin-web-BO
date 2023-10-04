@@ -10,7 +10,7 @@
             <q-btn outline round color="primary" icon="west" to="/news" />
           </q-item-section>
           <q-item-section
-            ><div class="text-h5">Informacion de noticia</div></q-item-section
+            ><div class="text-h5">Editar noticia</div></q-item-section
           >
         </q-item>
         <q-separator />
@@ -18,40 +18,59 @@
       <div class="col-12">
         <q-item>
           <q-item-section>
-            <div class="text-h6"><b>Titulo:</b> {{ newsSelected.titulo }}</div>
+            <q-input
+              v-model="newsData.epigrafe"
+              filled
+              label="Epigrafe (opcional)"
+            />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <div class="text-h6">
-              <b>Subtitulo:</b> {{ newsSelected.subtitulo || " " }}
-            </div>
+            <q-input
+              v-model="newsData.titulo"
+              filled
+              label="Titulo (Usado para generar el Slug)"
+            />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <div class="text-h6">
-              <b>Epigrafe:</b> {{ newsSelected.epigrafe || " " }}
-            </div>
+            <q-input v-model="newsData.subtitulo" filled label="Subtitulo" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <div class="text-h6">
-              <b>Imagen de portada:</b> {{ newsSelected.imagen_portada || " " }}
-            </div>
+            <q-input
+              @update:model-value="
+                (val) => {
+                  newsData.image = val[0];
+                }
+              "
+              filled
+              type="file"
+              hint="Imagen de portada"
+            />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <div class="text-h6">
-              <b>Autor:</b> {{ newsSelected.autor || " " }}
-            </div>
+            <q-input
+              v-model="newsData.cuerpo"
+              filled
+              type="textarea"
+              label="Cuerpo de la noticia"
+            />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <div class="text-h7"><b>Cuerpo:</b> {{ newsSelected.cuerpo }}</div>
+            <q-input v-model="newsData.autor" filled label="Autor" />
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section>
+            <q-btn @click="onSubmit()" color="green" label="Guardar noticia" />
           </q-item-section>
         </q-item>
       </div>
@@ -63,22 +82,35 @@
 import { computed } from "vue";
 import { useNews } from "stores/news";
 import { useRouter } from "vue-router";
+import { ref } from "vue";
 
 export default {
-  name: "NewsInfo",
+  name: "NewsEdit",
   props: ["news_id"],
   setup() {
     const store = useNews();
     const router = useRouter();
-    const newsSelected = computed(() => store.getNews);
     const loading = computed(() => store.getLoading);
 
     return {
       store,
       router,
-      newsSelected,
       loading,
+      file: ref(null),
     };
+  },
+  data() {
+    return {};
+  },
+  computed: {
+    newsData: {
+      get() {
+        return this.store.getNews;
+      },
+      set(newValue) {
+        this.store.setNews(newValue);
+      },
+    },
   },
   mounted() {
     if (this.news_id) {
@@ -90,6 +122,11 @@ export default {
   methods: {
     async getNews(news_id) {
       await this.store.getNewsById(news_id);
+    },
+    async onSubmit() {
+      await this.store.editNews(this.news_id).then(() => {
+        this.router.push({ path: "/news" });
+      });
     },
   },
 };

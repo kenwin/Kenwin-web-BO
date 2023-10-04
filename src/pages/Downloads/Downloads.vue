@@ -49,12 +49,37 @@
         </q-list>
       </div>
     </div>
+    <q-page-sticky position="bottom-right" :offset="[18, 18]">
+      <q-fab
+        v-model="fabLeft"
+        vertical-actions-align="right"
+        color="green"
+        icon="add"
+        direction="up"
+      >
+        <q-fab-action
+          label-position="right"
+          color="primary"
+          icon="download"
+          label="Crear recurso"
+          :to="'downloads/create/resource'"
+        />
+        <q-fab-action
+          label-position="right"
+          color="primary"
+          icon="download"
+          label="Crear sección"
+          :to="'downloads/create/section'"
+        />
+      </q-fab>
+    </q-page-sticky>
   </q-page>
 </template>
 
 <script>
 import { computed } from "vue";
 import { useDownloads } from "stores/downloads";
+import { ref } from "vue";
 
 export default {
   name: "DownloadsSection",
@@ -63,6 +88,7 @@ export default {
     const downloadsList = computed(() => store.getDownloadsList);
 
     return {
+      fabLeft: ref(false),
       store,
       downloadsList,
     };

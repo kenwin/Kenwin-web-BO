@@ -74,7 +74,6 @@ export default {
     };
   },
   mounted() {
-    console.log(this.download_id);
     if (this.download_id) {
       this.getDownload(this.download_id);
     } else {

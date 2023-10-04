@@ -42,7 +42,7 @@
                     <q-item clickable :to="'/news/info/' + news.id">
                       <q-item-section>Ver mas</q-item-section>
                     </q-item>
-                    <q-item clickable>
+                    <q-item clickable :to="'/news/edit/' + news.id">
                       <q-item-section>Editar</q-item-section>
                     </q-item>
                     <q-item clickable @click="deleteNews(news.id)">

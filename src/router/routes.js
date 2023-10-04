@@ -42,6 +42,13 @@ const routes = [
         component: () => import("src/pages/News/NewsCreate.vue"),
       },
       {
+        path: "news/edit/:news_id",
+        name: "news_edit",
+        props: true,
+        meta: { requiresAuth: true },
+        component: () => import("src/pages/News/NewsEdit.vue"),
+      },
+      {
         path: "downloads",
         name: "downloads",
         meta: { requiresAuth: true },
@@ -53,6 +60,20 @@ const routes = [
         props: true,
         meta: { requiresAuth: true },
         component: () => import("src/pages/Downloads/DownloadsInfo.vue"),
+      },
+      {
+        path: "downloads/create/section",
+        name: "downloads_create_section",
+        meta: { requiresAuth: true },
+        component: () =>
+          import("src/pages/Downloads/DownloadsCreateSection.vue"),
+      },
+      {
+        path: "downloads/create/resource",
+        name: "downloads_create_resource",
+        meta: { requiresAuth: true },
+        component: () =>
+          import("src/pages/Downloads/DownloadsCreateResource.vue"),
       },
     ],
   },
