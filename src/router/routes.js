@@ -55,25 +55,30 @@ const routes = [
         component: () => import("src/pages/Downloads/Downloads.vue"),
       },
       {
-        path: "downloads/info/:download_id",
+        path: "downloads/sections/info/:download_id",
         name: "downloads_info",
         props: true,
         meta: { requiresAuth: true },
-        component: () => import("src/pages/Downloads/DownloadsInfo.vue"),
+        component: () => import("src/pages/Downloads/Sections/Info.vue"),
       },
       {
-        path: "downloads/create/section",
+        path: "downloads/sections/create",
         name: "downloads_create_section",
         meta: { requiresAuth: true },
-        component: () =>
-          import("src/pages/Downloads/DownloadsCreateSection.vue"),
+        component: () => import("src/pages/Downloads/Sections/Create.vue"),
       },
       {
-        path: "downloads/create/resource",
+        path: "downloads/sections/edit/:section_id",
+        name: "downloads_edit_section",
+        props: true,
+        meta: { requiresAuth: true },
+        component: () => import("src/pages/Downloads/Sections/Edit.vue"),
+      },
+      {
+        path: "downloads/resources/create",
         name: "downloads_create_resource",
         meta: { requiresAuth: true },
-        component: () =>
-          import("src/pages/Downloads/DownloadsCreateResource.vue"),
+        component: () => import("src/pages/Downloads/Resources/Create.vue"),
       },
     ],
   },

@@ -2,7 +2,7 @@
   <q-page>
     <div class="row q-pa-sm">
       <div class="col-12">
-        <p class="text-h5">Listado de recursos de descargas</p>
+        <p class="text-h5">Listado de secciones de descargas</p>
       </div>
       <div v-if="downloadsList.length == 0" class="col-12">
         <q-list bordered separator>
@@ -35,15 +35,27 @@
             </q-item-section>
 
             <q-item-section side>
-              <q-btn
-                :to="'/downloads/info/' + download.id"
-                class="gt-xs"
-                size="12px"
-                flat
-                dense
-                round
-                icon="visibility"
-              />
+              <q-btn color="grey-7" round flat icon="more_vert">
+                <q-menu cover auto-close>
+                  <q-list>
+                    <q-item
+                      clickable
+                      :to="'/downloads/sections/info/' + download.id"
+                    >
+                      <q-item-section>Ver mas</q-item-section>
+                    </q-item>
+                    <q-item
+                      clickable
+                      :to="'/downloads/sections/edit/' + download.id"
+                    >
+                      <q-item-section>Editar</q-item-section>
+                    </q-item>
+                    <q-item clickable @click="deleteSection(download.id)">
+                      <q-item-section>Borrar</q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-menu>
+              </q-btn>
             </q-item-section>
           </q-item>
         </q-list>
@@ -62,14 +74,14 @@
           color="primary"
           icon="download"
           label="Crear recurso"
-          :to="'downloads/create/resource'"
+          :to="'downloads/resources/create'"
         />
         <q-fab-action
           label-position="right"
           color="primary"
           icon="download"
           label="Crear sección"
-          :to="'downloads/create/section'"
+          :to="'downloads/sections/create'"
         />
       </q-fab>
     </q-page-sticky>
@@ -95,6 +107,12 @@ export default {
   },
   async mounted() {
     await this.store.getApiDownloads();
+  },
+  methods: {
+    async deleteSection(section_id) {
+      await this.store.deleteSection(section_id);
+      await this.store.getApiDownloads();
+    },
   },
 };
 </script>

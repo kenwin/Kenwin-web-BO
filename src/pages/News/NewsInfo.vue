@@ -40,6 +40,15 @@
             <div class="text-h6">
               <b>Imagen de portada:</b> {{ newsSelected.imagen_portada || " " }}
             </div>
+            <div class="q-pa-md">
+              <div class="q-gutter-md row">
+                <q-img
+                  :src="imgUrl + newsSelected.imagen_portada"
+                  spinner-color="white"
+                  style="max-width: 70%; height: 350px"
+                />
+              </div>
+            </div>
           </q-item-section>
         </q-item>
         <q-item>
@@ -60,7 +69,7 @@
 </template>
 
 <script>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useNews } from "stores/news";
 import { useRouter } from "vue-router";
 
@@ -80,7 +89,13 @@ export default {
       loading,
     };
   },
+  computed: {
+    imgUrl() {
+      return "http://localhost:8000/images/news_images/";
+    },
+  },
   mounted() {
+    console.log(process.env.API_URL);
     if (this.news_id) {
       this.getNews(this.news_id);
     } else {
