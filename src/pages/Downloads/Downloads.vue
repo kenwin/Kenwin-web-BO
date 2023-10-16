@@ -30,7 +30,7 @@
                 <b>Nombre de la seccion: </b> {{ download.name }} |
                 <b>Activo: </b> {{ download.active }} |
                 <b>Fecha de creacion: </b>
-                {{ download.created_at }}
+                {{ formatDate(download.created_at) }}
               </q-item-label>
             </q-item-section>
 
@@ -92,6 +92,7 @@
 import { computed } from "vue";
 import { useDownloads } from "stores/downloads";
 import { ref } from "vue";
+import moment from "moment";
 
 export default {
   name: "DownloadsSection",
@@ -112,6 +113,9 @@ export default {
     async deleteSection(section_id) {
       await this.store.deleteSection(section_id);
       await this.store.getApiDownloads();
+    },
+    formatDate(date) {
+      return moment(String(date)).format("MM/DD/YYYY hh:mm");
     },
   },
 };

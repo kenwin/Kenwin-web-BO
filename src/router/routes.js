@@ -56,7 +56,7 @@ const routes = [
       },
       {
         path: "downloads/sections/info/:download_id",
-        name: "downloads_info",
+        name: "downloads_info_section",
         props: true,
         meta: { requiresAuth: true },
         component: () => import("src/pages/Downloads/Sections/Info.vue"),
@@ -79,6 +79,13 @@ const routes = [
         name: "downloads_create_resource",
         meta: { requiresAuth: true },
         component: () => import("src/pages/Downloads/Resources/Create.vue"),
+      },
+      {
+        path: "downloads/resources/info/:download_id",
+        name: "downloads_info_resources",
+        props: true,
+        meta: { requiresAuth: true },
+        component: () => import("src/pages/Downloads/Resources/Info.vue"),
       },
     ],
   },

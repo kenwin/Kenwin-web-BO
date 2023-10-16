@@ -11,7 +11,7 @@
           </q-item-section>
           <q-item-section
             ><div class="text-h5">
-              Informacion del recurso de descarga
+              Informacion de la seccion de descarga
             </div></q-item-section
           >
         </q-item>
@@ -39,11 +39,31 @@
             <q-item-section>
               <q-item-label>
                 <b>Nombre del recurso: </b> {{ resource.name }} |
-                <b>Fecha de creacion: </b> {{ resource.created_at }}
+                <b>Fecha de creacion: </b> {{ formatDate(resource.created_at) }}
               </q-item-label>
               <q-item-label caption>
                 <b>URL: </b> {{ resource.url }}
               </q-item-label>
+            </q-item-section>
+            <q-item-section side>
+              <q-btn color="grey-7" round flat icon="more_vert">
+                <q-menu cover auto-close>
+                  <q-list>
+                    <q-item
+                      clickable
+                      :to="'/downloads/resources/info/' + resource.id"
+                    >
+                      <q-item-section>Ver mas</q-item-section>
+                    </q-item>
+                    <q-item
+                      clickable
+                      @click="deleteResource(resource.id, resource.id_folder)"
+                    >
+                      <q-item-section>Borrar</q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-menu>
+              </q-btn>
             </q-item-section>
           </q-item>
         </q-list>
@@ -56,6 +76,7 @@
 import { computed } from "vue";
 import { useDownloads } from "stores/downloads";
 import { useRouter } from "vue-router";
+import moment from "moment";
 
 export default {
   name: "DownloadsInfo",
@@ -83,6 +104,13 @@ export default {
   methods: {
     async getDownload(download_id) {
       await this.store.getDownloadById(download_id);
+    },
+    async deleteResource(resource_id, folder_id) {
+      await this.store.deleteResource(resource_id);
+      await this.store.getDownloadById(folder_id);
+    },
+    formatDate(date) {
+      return moment(String(date)).format("MM/DD/YYYY hh:mm");
     },
   },
 };
