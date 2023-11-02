@@ -65,6 +65,12 @@ const linksList = [
     icon: "download",
     link: "/downloads",
   },
+  {
+    title: "Capacitaciones",
+    caption: "Listado de capacitaciones",
+    icon: "source",
+    link: "/training",
+  },
 ];
 
 export default defineComponent({

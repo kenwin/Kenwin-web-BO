@@ -87,6 +87,26 @@ const routes = [
         meta: { requiresAuth: true },
         component: () => import("src/pages/Downloads/Resources/Info.vue"),
       },
+      {
+        path: "training",
+        name: "training",
+        meta: { requiresAuth: true },
+        component: () => import("src/pages/Training/Training.vue"),
+      },
+      {
+        path: "training/info/:training_id",
+        name: "training_info",
+        props: true,
+        meta: { requiresAuth: true },
+        component: () => import("src/pages/Training/TrainingInfo.vue"),
+      },
+      {
+        path: "training/edit/:training_id",
+        name: "training_edit",
+        props: true,
+        meta: { requiresAuth: true },
+        component: () => import("src/pages/Training/TrainingEdit.vue"),
+      },
     ],
   },
 
