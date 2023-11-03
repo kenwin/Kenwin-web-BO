@@ -81,7 +81,7 @@ export const useTraining = defineStore("training", {
         this.loading = false;
       }
     },
-    async createNews(data) {
+    async createTraining(data) {
       this.loading = true;
       const auth = useAuth();
 
@@ -91,23 +91,20 @@ export const useTraining = defineStore("training", {
       }
 
       const formData = new FormData();
-      if (data.epigrafe) {
-        formData.set("epigrafe", data.epigrafe);
+      if (data.name) {
+        formData.set("name", data.name);
       }
-      if (data.titulo) {
-        formData.set("titulo", data.titulo);
+      if (data.date_start) {
+        formData.set("date_start", data.date_start);
       }
-      if (data.subtitulo) {
-        formData.set("subtitulo", data.subtitulo);
+      if (data.date_end) {
+        formData.set("date_end", data.date_end);
       }
-      if (data.cuerpo) {
-        formData.set("cuerpo", data.cuerpo);
+      if (data.duration_description) {
+        formData.set("duration_description", data.duration_description);
       }
-      if (data.autor) {
-        formData.set("autor", data.autor);
-      }
-      if (data.image) {
-        formData.set("image", data.image);
+      if (data.description) {
+        formData.set("description", data.description);
       }
 
       const config = {
@@ -119,7 +116,7 @@ export const useTraining = defineStore("training", {
 
       try {
         await api
-          .post("/api/noticias", formData, config)
+          .post("/api/training", formData, config)
           .then((response) => {
             console.log(response);
             this.loading = false;

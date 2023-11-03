@@ -57,7 +57,7 @@
       </div>
     </div>
     <q-page-sticky position="bottom-right" :offset="[18, 18]">
-      <q-btn :to="'news/create'" fab icon="add" color="green" />
+      <q-btn :to="'training/create'" fab icon="add" color="green" />
     </q-page-sticky>
   </q-page>
 </template>
