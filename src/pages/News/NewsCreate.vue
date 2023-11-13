@@ -55,12 +55,11 @@
         </q-item>
         <q-item>
           <q-item-section>
-            <q-input
+            <ckeditor
+              :editor="editor"
               v-model="form.cuerpo"
-              filled
-              type="textarea"
-              label="Cuerpo de la noticia"
-            />
+              :config="editorConfig"
+            ></ckeditor>
           </q-item-section>
         </q-item>
         <q-item>
@@ -83,6 +82,7 @@ import { computed } from "vue";
 import { useNews } from "stores/news";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 export default {
   name: "NewsCreate",
@@ -96,6 +96,10 @@ export default {
       router,
       loading,
       file: ref(null),
+      editor: ClassicEditor,
+      editorConfig: {
+        // The configuration of the editor.
+      },
     };
   },
   data() {
@@ -104,7 +108,7 @@ export default {
         epigrafe: "",
         titulo: "",
         subtitulo: "",
-        cuerpo: "",
+        cuerpo: "<p>Cuerpo de la noticia</p>",
         autor: "",
         image: ref(null),
       },
