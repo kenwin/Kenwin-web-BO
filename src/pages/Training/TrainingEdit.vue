@@ -50,12 +50,11 @@
         </q-item>
         <q-item>
           <q-item-section>
-            <q-input
+            <ckeditor
+              :editor="editor"
               v-model="trainingData.description"
-              filled
-              type="textarea"
-              label="Descripcion"
-            />
+              :config="editorConfig"
+            ></ckeditor>
           </q-item-section>
         </q-item>
         <q-item>
@@ -77,6 +76,7 @@ import { computed } from "vue";
 import { useTraining } from "stores/training";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 export default {
   name: "TrainingEdit",
@@ -91,6 +91,10 @@ export default {
       router,
       loading,
       file: ref(null),
+      editor: ClassicEditor,
+      editorConfig: {
+        // The configuration of the editor.
+      },
     };
   },
   data() {

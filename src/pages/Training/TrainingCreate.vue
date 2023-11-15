@@ -42,12 +42,11 @@
         </q-item>
         <q-item>
           <q-item-section>
-            <q-input
+            <ckeditor
+              :editor="editor"
               v-model="form.description"
-              filled
-              type="textarea"
-              label="Descripcion de la capacitacion"
-            />
+              :config="editorConfig"
+            ></ckeditor>
           </q-item-section>
         </q-item>
         <q-item>
@@ -69,6 +68,7 @@ import { computed } from "vue";
 import { useTraining } from "stores/training";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 export default {
   name: "NewsCreate",
@@ -81,6 +81,10 @@ export default {
       store,
       router,
       loading,
+      editor: ClassicEditor,
+      editorConfig: {
+        // The configuration of the editor.
+      },
     };
   },
   data() {
@@ -90,7 +94,7 @@ export default {
         date_start: "",
         date_end: "",
         duration_description: "",
-        description: "",
+        description: "<p>Descripcion de la capacitacion</p>",
       },
     };
   },

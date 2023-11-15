@@ -60,7 +60,8 @@
         </q-item>
         <q-item>
           <q-item-section>
-            <div class="text-h7"><b>Cuerpo:</b> {{ newsSelected.cuerpo }}</div>
+            <div class="text-h6"><b>Cuerpo:</b></div>
+            <div class="text-h7" v-html="newsSelected.cuerpo"></div>
           </q-item-section>
         </q-item>
       </div>
