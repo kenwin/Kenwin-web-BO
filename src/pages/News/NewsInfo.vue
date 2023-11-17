@@ -64,6 +64,14 @@
             <div class="text-h7" v-html="newsSelected.cuerpo"></div>
           </q-item-section>
         </q-item>
+        <q-list>
+          <q-item color="primary" clickable :to="'/news/edit/' + newsSelected.id">
+            <q-item-section>Editar noticia</q-item-section>
+          </q-item>
+          <q-item color="primary" clickable @click="removeNews(newsSelected.id)">
+            <q-item-section>Borrar noticia</q-item-section>
+          </q-item>
+        </q-list>
       </div>
     </div>
   </q-page>
@@ -106,6 +114,10 @@ export default {
   methods: {
     async getNews(news_id) {
       await this.store.getNewsById(news_id);
+    },
+    async removeNews(news_id) {
+      await this.store.deleteNews(news_id);
+      this.router.push({ path: "/news" });
     },
   },
 };

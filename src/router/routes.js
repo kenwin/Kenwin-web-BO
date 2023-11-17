@@ -26,7 +26,27 @@ const routes = [
         path: "news",
         name: "news",
         meta: { requiresAuth: true },
-        component: () => import("src/pages/News/News.vue"),
+        component: () => import("src/pages/News/Categories/Categories.vue"),
+      },
+      {
+        path: "categorias/:category_id",
+        name: "category_info",
+        props: true,
+        meta: { requiresAuth: true },
+        component: () => import("src/pages/News/Categories/CategoriesInfo.vue"),
+      },
+      {
+        path: "categorias/create",
+        name: "categories_create",
+        meta: { requiresAuth: true },
+        component: () => import("src/pages/News/Categories/CategoriesCreate.vue"),
+      },
+      {
+        path: "categorias/edit/:category_id",
+        name: "categories_edit",
+        props: true,
+        meta: { requiresAuth: true },
+        component: () => import("src/pages/News/Categories/CategoriesEdit.vue"),
       },
       {
         path: "news/info/:news_id",

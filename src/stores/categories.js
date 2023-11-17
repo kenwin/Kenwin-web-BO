@@ -2,22 +2,22 @@ import { defineStore } from "pinia";
 import { api } from "boot/axios";
 import { useAuth } from "stores/auth";
 
-export const useNews = defineStore("news", {
+export const useCategories = defineStore("categories", {
   state: () => ({
-    news: {},
-    newsList: [],
+    categories: {},
+    categoriesList: [],
     loading: false,
   }),
   getters: {
-    getNews: (state) => state.news,
-    getNewsList: (state) => state.newsList,
+    getCategories: (state) => state.categories,
+    getCategoriesList: (state) => state.categoriesList,
     getLoading: (state) => state.loading,
   },
   actions: {
-    setNews(payload) {
-      this.news = payload;
+    setCategories(payload) {
+      this.categories = payload;
     },
-    async getApiNews() {
+    async getApiCategories() {
       this.loading = true;
       const auth = useAuth();
 
@@ -34,10 +34,10 @@ export const useNews = defineStore("news", {
 
       try {
         await api
-          .get("/api/noticias", config)
+          .get("/api/categorias", config)
           .then((response) => {
             console.log(response.data);
-            this.newsList = response.data;
+            this.categoriesList = response.data;
             this.loading = false;
           })
           .catch((error) => {
@@ -49,7 +49,7 @@ export const useNews = defineStore("news", {
         this.loading = false;
       }
     },
-    async getNewsById(news_id) {
+    async getCategoriesById(categories_id) {
       this.loading = true;
       const auth = useAuth();
 
@@ -66,10 +66,10 @@ export const useNews = defineStore("news", {
 
       try {
         await api
-          .get("/api/noticias/" + news_id, config)
+          .get("/api/categorias/" + categories_id, config)
           .then((response) => {
             console.log(response);
-            this.news = response.data;
+            this.categories = response.data;
             this.loading = false;
           })
           .catch((error) => {
@@ -81,7 +81,7 @@ export const useNews = defineStore("news", {
         this.loading = false;
       }
     },
-    async createNews(data) {
+    async createCategory(data) {
       this.loading = true;
       const auth = useAuth();
 
@@ -91,38 +91,19 @@ export const useNews = defineStore("news", {
       }
 
       const formData = new FormData();
-      if (data.epigrafe) {
-        formData.set("epigrafe", data.epigrafe);
-      }
-      if (data.titulo) {
-        formData.set("titulo", data.titulo);
-      }
-      if (data.subtitulo) {
-        formData.set("subtitulo", data.subtitulo);
-      }
-      if (data.categories) {
-        formData.set("categories", data.categories);
-      }
-      if (data.cuerpo) {
-        formData.set("cuerpo", data.cuerpo);
-      }
-      if (data.autor) {
-        formData.set("autor", data.autor);
-      }
-      if (data.image) {
-        formData.set("image", data.image);
+      if (data.nombre) {
+        formData.set("nombre", data.nombre);
       }
 
       const config = {
         headers: {
-          "content-type": "multipart/form-data",
           Authorization: "Bearer " + auth.getToken,
         },
       };
 
       try {
         await api
-          .post("/api/noticias", formData, config)
+          .post("/api/categorias", formData, config)
           .then((response) => {
             console.log(response);
             this.loading = false;
@@ -136,7 +117,7 @@ export const useNews = defineStore("news", {
         this.loading = false;
       }
     },
-    async editNews(id) {
+    async editCategories(id) {
       this.loading = true;
       const auth = useAuth();
 
@@ -147,37 +128,18 @@ export const useNews = defineStore("news", {
 
       const config = {
         headers: {
-          "content-type": "multipart/form-data",
           Authorization: "Bearer " + auth.getToken,
         },
       };
 
       const formData = new FormData();
-      if (this.news) {
-        formData.set("epigrafe", this.news.epigrafe);
-      }
-      if (this.news) {
-        formData.set("titulo", this.news.titulo);
-      }
-      if (this.news) {
-        formData.set("subtitulo", this.news.subtitulo);
-      }
-      if (this.news) {
-        formData.set("categories", this.news.categories);
-      }
-      if (this.news) {
-        formData.set("cuerpo", this.news.cuerpo);
-      }
-      if (this.news) {
-        formData.set("autor", this.news.autor);
-      }
-      if (this.news && this.news.image) {
-        formData.set("image", this.news.image);
+      if (this.categories) {
+        formData.set("nombre", this.categories.nombre);
       }
 
       try {
         await api
-          .post("/api/noticias/" + id, formData, config)
+          .patch("/api/categorias/" + id, formData, config)
           .then((response) => {
             console.log(response);
             this.loading = false;
@@ -191,7 +153,7 @@ export const useNews = defineStore("news", {
         this.loading = false;
       }
     },
-    async deleteNews(news_id) {
+    async deleteCategory(categories_id) {
       this.loading = true;
       const auth = useAuth();
 
@@ -202,14 +164,13 @@ export const useNews = defineStore("news", {
 
       const config = {
         headers: {
-          "content-type": "multipart/form-data",
           Authorization: "Bearer " + auth.getToken,
         },
       };
 
       try {
         await api
-          .post("/api/noticias/delete/" + news_id, config)
+          .delete("/api/categorias/" + categories_id, config)
           .then((response) => {
             console.log(response);
             this.loading = false;

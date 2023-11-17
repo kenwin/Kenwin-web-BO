@@ -56,9 +56,32 @@
         </q-list>
       </div>
     </div>
+
     <q-page-sticky position="bottom-right" :offset="[18, 18]">
-      <q-btn :to="'news/create'" fab icon="add" color="green" />
-    </q-page-sticky>
+        <q-fab
+          v-model="fabLeft"
+          vertical-actions-align="right"
+          color="green"
+          icon="add"
+          direction="up"
+        >
+          <q-fab-action
+            label-position="right"
+            color="primary"
+            icon="add"
+            label="Crear noticia"
+            :to="'news/create'"
+          />
+          <q-fab-action
+            label-position="right"
+            color="primary"
+            icon="add"
+            label="Crear categoría"
+            :to="'news/categories/create'"
+          />
+        </q-fab>
+      </q-page-sticky>
+
   </q-page>
 </template>
 

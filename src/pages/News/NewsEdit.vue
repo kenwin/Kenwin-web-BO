@@ -40,6 +40,12 @@
           </q-item-section>
         </q-item>
         <q-item>
+            <q-item-section>
+              <q-select v-model="newsData.categories" filled multiple :options="categoriesList" label="Categorías"
+                option-value="id" option-label="nombre" />
+            </q-item-section>
+          </q-item>
+        <q-item>
           <q-item-section>
             <q-input
               @update:model-value="
@@ -80,6 +86,7 @@
 <script>
 import { computed } from "vue";
 import { useNews } from "stores/news";
+import { useCategories } from "stores/categories";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -90,12 +97,14 @@ export default {
   setup() {
     const store = useNews();
     const router = useRouter();
+    const categoriesList = computed(() => useCategories().getCategoriesList);
     const loading = computed(() => store.getLoading);
 
     return {
       store,
       router,
-      loading,
+      loading, 
+      categoriesList,
       file: ref(null),
       editor: ClassicEditor,
       editorConfig: {
@@ -128,6 +137,10 @@ export default {
       await this.store.getNewsById(news_id);
     },
     async onSubmit() {
+
+      const categoryIds = this.newsData.categories.map(category => category.id);
+      this.newsData.categories = categoryIds;
+
       await this.store.editNews(this.news_id).then(() => {
         this.router.push({ path: "/news" });
       });
