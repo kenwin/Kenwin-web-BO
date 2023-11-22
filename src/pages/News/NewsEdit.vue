@@ -45,6 +45,11 @@
                 option-value="id" option-label="nombre" />
             </q-item-section>
           </q-item>
+          <q-item>
+            <q-item-section>
+          <q-checkbox size="lg" val="lg" v-model="newsData.destacada" label="Destacada (ésta acción reemplazará la actual noticia destacada)" />
+        </q-item-section>
+          </q-item>
         <q-item>
           <q-item-section>
             <q-input
@@ -103,7 +108,7 @@ export default {
     return {
       store,
       router,
-      loading, 
+      loading,
       categoriesList,
       file: ref(null),
       editor: ClassicEditor,

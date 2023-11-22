@@ -38,6 +38,22 @@
         <q-item>
           <q-item-section>
             <div class="text-h6">
+            <b>Categorías: </b>
+            <template v-if="newsSelected.categories && newsSelected.categories.length">
+              <span v-for="(category, index) in newsSelected.categories" :key="index">
+                {{ category.nombre }}
+                <span v-if="index < newsSelected.categories.length - 1">, </span>
+              </span>
+            </template>
+            <template v-else>
+              No hay categorías asociadas.
+            </template>
+          </div>
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section>
+            <div class="text-h6">
               <b>Imagen de portada:</b> {{ newsSelected.imagen_portada || " " }}
             </div>
             <div class="q-pa-md">

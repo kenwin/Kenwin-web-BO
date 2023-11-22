@@ -38,6 +38,11 @@
           </q-item-section>
         </q-item>
         <q-item>
+            <q-item-section>
+          <q-checkbox size="lg" val="lg" v-model="form.destacada" label="Destacada (ésta acción reemplazará la actual noticia destacada)" />
+        </q-item-section>
+          </q-item>
+        <q-item>
           <q-item-section>
             <q-input @update:model-value="(val) => {
                 form.image = val[0];
@@ -100,6 +105,7 @@ export default {
         titulo: "",
         subtitulo: "",
         categories: [],
+        destacada: false,
         cuerpo: "<p>Cuerpo de la noticia</p>",
         autor: "",
         image: ref(null),
