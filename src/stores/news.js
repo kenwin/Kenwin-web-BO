@@ -106,6 +106,9 @@ export const useNews = defineStore("news", {
       if (data.destacada) {
         formData.set("destacada", data.destacada);
       }
+      if (data.idioma) {
+        formData.set("idioma", data.idioma);
+      }
       if (data.cuerpo) {
         formData.set("cuerpo", data.cuerpo);
       }
@@ -170,6 +173,9 @@ export const useNews = defineStore("news", {
       }
       if (this.news) {
         formData.set("destacada", this.news.destacada);
+      }
+      if (this.news) {
+        formData.set("idioma", this.news.idioma);
       }
       if (this.news) {
         formData.set("cuerpo", this.news.cuerpo);

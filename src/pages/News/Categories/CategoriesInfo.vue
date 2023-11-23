@@ -54,6 +54,9 @@
                     <q-item clickable :to="'/news/info/' + noticia.id">
                       <q-item-section>Ver mas</q-item-section>
                     </q-item>
+                    <q-item clickable :to="'/news/edit/' + noticia.id">
+                      <q-item-section>Editar</q-item-section>
+                    </q-item>
                     <q-item clickable @click="deleteNews(noticia.id)">
                       <q-item-section>Borrar</q-item-section>
                     </q-item>
@@ -65,15 +68,6 @@
         </q-list>
       </div>
     </div>
-
-    <q-list>
-      <q-item color="primary" clickable :to="'/categorias/edit/' + categorySelected.id">
-        <q-item-section>Editar categoría</q-item-section>
-      </q-item>
-      <q-item color="primary" clickable @click="removeCategory(categorySelected.id)">
-        <q-item-section>Borrar categoría</q-item-section>
-      </q-item>
-    </q-list>
   </q-page>
 </template>
 

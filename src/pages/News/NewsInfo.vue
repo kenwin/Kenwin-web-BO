@@ -9,16 +9,24 @@
           <q-item-section avatar>
             <q-btn outline round color="primary" icon="west" to="/news" />
           </q-item-section>
-          <q-item-section
-            ><div class="text-h5">Informacion de noticia</div></q-item-section
-          >
+          <q-item-section>
+            <div class="text-h5">Informacion de noticia</div>
+          </q-item-section>
         </q-item>
         <q-separator />
       </div>
       <div class="col-12">
         <q-item>
           <q-item-section>
-            <div class="text-h6"><b>Titulo:</b> {{ newsSelected.titulo }}</div>
+            <div class="text-h6"><b>Titulo:</b> {{ newsSelected.titulo }} <q-chip square v-if="newsSelected.destacada" color="primary" text-color="white"
+                icon="star">
+                DESTACADA
+              </q-chip>
+              <q-chip color="primary" text-color="white"
+                  icon="visibility">
+                  {{ newsSelected.vistas }}
+                </q-chip>
+            </div>
           </q-item-section>
         </q-item>
         <q-item>
@@ -38,19 +46,31 @@
         <q-item>
           <q-item-section>
             <div class="text-h6">
-            <b>Categorías: </b>
-            <template v-if="newsSelected.categories && newsSelected.categories.length">
-              <span v-for="(category, index) in newsSelected.categories" :key="index">
-                {{ category.nombre }}
-                <span v-if="index < newsSelected.categories.length - 1">, </span>
-              </span>
-            </template>
-            <template v-else>
-              No hay categorías asociadas.
-            </template>
-          </div>
+              <b>Categorías: </b>
+              <template v-if="newsSelected.categories && newsSelected.categories.length">
+                <span v-for="(category, index) in newsSelected.categories" :key="index">
+                  {{ category.nombre }}
+                  <span v-if="index < newsSelected.categories.length - 1">, </span>
+                </span>
+              </template>
+              <template v-else>
+                No hay categorías asociadas.
+              </template>
+            </div>
           </q-item-section>
         </q-item>
+        <q-item>
+            <q-item-section>
+              <div class="text-h6"><b>Idioma:</b> 
+                <template v-if="newsSelected.idioma == 'esp'">
+                  Español
+                </template>
+                <template v-else>
+                  Portugués
+                </template>
+              </div>
+            </q-item-section>
+          </q-item>
         <q-item>
           <q-item-section>
             <div class="text-h6">
@@ -58,11 +78,8 @@
             </div>
             <div class="q-pa-md">
               <div class="q-gutter-md row">
-                <q-img
-                  :src="imgUrl + newsSelected.imagen_portada"
-                  spinner-color="white"
-                  style="max-width: 70%; height: 350px"
-                />
+                <q-img :src="imgUrl + newsSelected.imagen_portada" spinner-color="white"
+                  style="max-width: 70%; height: 350px" />
               </div>
             </div>
           </q-item-section>
@@ -80,14 +97,6 @@
             <div class="text-h7" v-html="newsSelected.cuerpo"></div>
           </q-item-section>
         </q-item>
-        <q-list>
-          <q-item color="primary" clickable :to="'/news/edit/' + newsSelected.id">
-            <q-item-section>Editar noticia</q-item-section>
-          </q-item>
-          <q-item color="primary" clickable @click="removeNews(newsSelected.id)">
-            <q-item-section>Borrar noticia</q-item-section>
-          </q-item>
-        </q-list>
       </div>
     </div>
   </q-page>

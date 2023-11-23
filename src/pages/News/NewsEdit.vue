@@ -50,6 +50,12 @@
           <q-checkbox size="lg" val="lg" v-model="newsData.destacada" label="Destacada (ésta acción reemplazará la actual noticia destacada)" />
         </q-item-section>
           </q-item>
+          <q-item>
+              <q-item-section>
+                <q-select v-model="newsData.idioma" filled :options="idiomas" label="Idioma"
+                  option-value="id" option-label="nombre" />
+              </q-item-section>
+            </q-item>
         <q-item>
           <q-item-section>
             <q-input
@@ -110,6 +116,16 @@ export default {
       router,
       loading,
       categoriesList,
+      idiomas: [
+        {
+          id: 'esp',
+          nombre: 'Español'
+        },
+        {
+          id: 'por',
+          nombre: 'Portugués'
+        }
+      ],
       file: ref(null),
       editor: ClassicEditor,
       editorConfig: {
@@ -142,6 +158,9 @@ export default {
       await this.store.getNewsById(news_id);
     },
     async onSubmit() {
+      if (this.newsData.idioma && this.newsData.idioma.id) {
+        this.newsData.idioma = this.newsData.idioma.id;
+      }
 
       const categoryIds = this.newsData.categories.map(category => category.id);
       this.newsData.categories = categoryIds;

@@ -42,6 +42,12 @@
           <q-checkbox size="lg" val="lg" v-model="form.destacada" label="Destacada (ésta acción reemplazará la actual noticia destacada)" />
         </q-item-section>
           </q-item>
+          <q-item>
+            <q-item-section>
+              <q-select v-model="form.idioma" filled :options="idiomas" label="Idioma"
+                option-value="id" option-label="nombre" />
+            </q-item-section>
+          </q-item>
         <q-item>
           <q-item-section>
             <q-input @update:model-value="(val) => {
@@ -91,6 +97,16 @@ export default {
       router,
       loading,
       categoriesList,
+      idiomas: [
+        {
+          id: 'esp',
+          nombre: 'Español'
+        },
+        {
+          id: 'por',
+          nombre: 'Portugués'
+        }
+      ],
       file: ref(null),
       editor: ClassicEditor,
       editorConfig: {
@@ -105,6 +121,7 @@ export default {
         titulo: "",
         subtitulo: "",
         categories: [],
+        idioma: "",
         destacada: false,
         cuerpo: "<p>Cuerpo de la noticia</p>",
         autor: "",
@@ -115,6 +132,7 @@ export default {
   mounted() { },
   methods: {
     async onSubmit() {
+      this.form.idioma = this.form.idioma.id;
       const categoryIds = this.form.categories.map(category => category.id);
       this.form.categories = categoryIds;
 

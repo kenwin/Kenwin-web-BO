@@ -7,7 +7,7 @@
       <div class="col-12 q-gutter-sm">
         <q-item>
           <q-item-section avatar>
-            <q-btn outline round color="primary" icon="west" to="/categories" />
+            <q-btn outline round color="primary" icon="west" to="/news" />
           </q-item-section>
           <q-item-section
             ><div class="text-h5">Editar categoría</div></q-item-section
