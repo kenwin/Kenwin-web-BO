@@ -100,11 +100,15 @@ export const useNews = defineStore("news", {
       if (data.subtitulo) {
         formData.set("subtitulo", data.subtitulo);
       }
+      if (data.keywords) {
+        formData.set("keywords", data.keywords);
+      }
       if (data.categories) {
         formData.set("categories", data.categories);
       }
-      if (data.destacada) {
-        formData.set("destacada", data.destacada);
+      formData.set("destacada", data.destacada != "" ? data.destacada : null);
+      if (data.fecha_alta) {
+        formData.set("fecha_alta", data.fecha_alta);
       }
       if (data.idioma) {
         formData.set("idioma", data.idioma);
@@ -117,6 +121,9 @@ export const useNews = defineStore("news", {
       }
       if (data.image) {
         formData.set("image", data.image);
+      }
+      if (data.video) {
+        formData.set("video", data.video);
       }
 
       const config = {
@@ -169,10 +176,16 @@ export const useNews = defineStore("news", {
         formData.set("subtitulo", this.news.subtitulo);
       }
       if (this.news) {
+        formData.set("keywords", this.news.keywords);
+      }
+      if (this.news) {
         formData.set("categories", this.news.categories);
       }
       if (this.news) {
         formData.set("destacada", this.news.destacada);
+      }
+      if (this.news) {
+        formData.set("fecha_alta", this.news.fecha_alta);
       }
       if (this.news) {
         formData.set("idioma", this.news.idioma);
@@ -185,6 +198,9 @@ export const useNews = defineStore("news", {
       }
       if (this.news && this.news.image) {
         formData.set("image", this.news.image);
+      }
+      if (this.news && this.news.video) {
+        formData.set("video", this.news.video);
       }
 
       try {

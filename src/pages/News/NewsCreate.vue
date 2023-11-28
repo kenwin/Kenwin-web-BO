@@ -32,30 +32,63 @@
           </q-item-section>
         </q-item>
         <q-item>
+            <q-item-section>
+              <q-input v-model="form.keywords" filled label="Keywords" placeholder="Ej: kenwin, soluciones, people, etc" />
+            </q-item-section>
+          </q-item>
+        <q-item>
           <q-item-section>
             <q-select v-model="form.categories" filled multiple :options="categoriesList" label="Categorías"
               option-value="id" option-label="nombre" />
           </q-item-section>
         </q-item>
         <q-item>
-            <q-item-section>
-          <q-checkbox size="lg" val="lg" v-model="form.destacada" label="Destacada (ésta acción reemplazará la actual noticia destacada)" />
-        </q-item-section>
-          </q-item>
-          <q-item>
-            <q-item-section>
-              <q-select v-model="form.idioma" filled :options="idiomas" label="Idioma"
-                option-value="id" option-label="nombre" />
-            </q-item-section>
-          </q-item>
+          <q-item-section>
+            <q-checkbox size="lg" val="lg" v-model="form.destacada"
+              label="Destacada (ésta acción reemplazará la actual noticia destacada)" />
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section>
+
+            <q-input filled v-model="form.fecha_alta" label="Fecha de alta" style="max-width: 300px">
+              <template v-slot:prepend>
+                <q-icon name="event" class="cursor-pointer">
+                  <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                    <q-date ref="datePicker" v-model="form.fecha_alta" mask="DD/MM/YYYY" :locale="myLocale">
+                      <div class="row items-center justify-end">
+                        <q-btn v-close-popup label="Cerrar" color="primary" flat />
+                      </div>
+                    </q-date>
+                  </q-popup-proxy>
+                </q-icon>
+              </template>
+            </q-input>
+          </q-item-section>
+        </q-item>
+
+        <q-item>
+          <q-item-section>
+            <q-select v-model="form.idioma" filled :options="idiomas" label="Idioma" option-value="id"
+              option-label="nombre" />
+          </q-item-section>
+        </q-item>
         <q-item>
           <q-item-section>
             <q-input @update:model-value="(val) => {
-                form.image = val[0];
-              }
+              form.image = val[0];
+            }
               " filled type="file" hint="Imagen de portada" />
           </q-item-section>
         </q-item>
+        <q-item>
+            <q-item-section>
+              <q-input @update:model-value="(val) => {
+                form.video = val[0];
+              }
+                " filled type="file" hint="Subir video" />
+            </q-item-section>
+          </q-item>
         <q-item>
           <q-item-section>
             <ckeditor :editor="editor" v-model="form.cuerpo" :config="editorConfig"></ckeditor>
@@ -112,6 +145,15 @@ export default {
       editorConfig: {
         // The configuration of the editor.
       },
+      myLocale: {
+        days: 'Domingo_Lunes_Martes_Miércoles_Jueves_Viernes_Sábado'.split('_'),
+        daysShort: 'Dom_Lun_Mar_Mié_Jue_Vie_Sáb'.split('_'),
+        months: 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre'.split('_'),
+        monthsShort: 'Ene_Feb_Mar_Abr_May_Jun_Jul_Ago_Sep_Oct_Nov_Dic'.split('_'),
+        firstDayOfWeek: 1,
+        format24h: true,
+        pluralDay: 'días'
+      }
     };
   },
   data() {
@@ -120,12 +162,15 @@ export default {
         epigrafe: "",
         titulo: "",
         subtitulo: "",
+        keywords: "",
         categories: [],
         idioma: "",
         destacada: false,
+        fecha_alta: "",
         cuerpo: "<p>Cuerpo de la noticia</p>",
         autor: "",
         image: ref(null),
+        video: ref(null)
       },
     };
   },

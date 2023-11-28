@@ -37,6 +37,13 @@
           </q-item-section>
         </q-item>
         <q-item>
+            <q-item-section>
+              <div class="text-h6">
+                <b>Keywords:</b> {{ newsSelected.keywords || " " }}
+              </div>
+            </q-item-section>
+          </q-item>
+        <q-item>
           <q-item-section>
             <div class="text-h6">
               <b>Epigrafe:</b> {{ newsSelected.epigrafe || " " }}
@@ -85,6 +92,19 @@
           </q-item-section>
         </q-item>
         <q-item>
+            <q-item-section>
+              <div class="text-h6">
+                <b>Video:</b> {{ newsSelected.video || " " }}
+              </div>
+              <div class="q-pa-md">
+                <div class="q-gutter-md row">
+                  <q-video :src="videoUrl + newsSelected.video" spinner-color="white"
+                    style="max-width: 70%; height: 350px" />
+                </div>
+              </div>
+            </q-item-section>
+          </q-item>
+        <q-item>
           <q-item-section>
             <div class="text-h6">
               <b>Autor:</b> {{ newsSelected.autor || " " }}
@@ -115,6 +135,7 @@ export default {
     const router = useRouter();
     const newsSelected = computed(() => store.getNews);
     const loading = computed(() => store.getLoading);
+    console.log(process.env.NODE_ENV)
 
     return {
       store,
@@ -125,7 +146,10 @@ export default {
   },
   computed: {
     imgUrl() {
-      return "http://localhost:8000/images/news_images/";
+      return process.env.NODE_ENV == 'development' ? "http://localhost:8000/images/news_images/" : "https://api2023.kenwin.net/images/news_images/";
+    },
+    videoUrl() {
+      return process.env.NODE_ENV == 'development' ? "http://localhost:8000/storage/app/public/news_videos/" : "https://api2023.kenwin.net/storage/news_videos/";
     },
   },
   mounted() {

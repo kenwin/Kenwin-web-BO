@@ -50,6 +50,9 @@
               option-label="name"
             />
           </q-item-section>
+          <q-item-section v-if="sectionError">
+            <span class="text-negative">Por favor, seleccione una sección.</span>
+          </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
@@ -107,6 +110,7 @@ export default {
         section: null,
         data: null,
       },
+      sectionError: false,
     };
   },
   async mounted() {
@@ -114,6 +118,13 @@ export default {
   },
   methods: {
     async onSubmit() {
+      if (!this.resource.section) {
+        this.sectionError = true;
+        return;
+      }
+
+      this.sectionError = false;
+
       await this.store.createResource(this.resource).then(() => {
         this.router.push({ path: "/downloads" });
       });
