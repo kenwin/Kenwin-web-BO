@@ -129,20 +129,19 @@ export default {
     const newsSelected = computed(() => store.getNews);
     const loading = computed(() => store.getLoading);
 
+    const apiUrl = process.env.API_URL.replace(/['"]+/g, '');
+
+    const imgUrl = computed(() => apiUrl + "/images/news_images/");
+    const videoUrl = computed(() => apiUrl + "/storage/news_videos/");
+
     return {
       store,
       router,
       newsSelected,
       loading,
+      imgUrl,
+      videoUrl,
     };
-  },
-  computed: {
-    imgUrl() {
-      return "http://localhost:8000/images/news_images/";
-    },
-    videoUrl() {
-      return "http://localhost:8000/storage/news_videos/";
-    },
   },
   mounted() {
     console.log(process.env.API_URL);
