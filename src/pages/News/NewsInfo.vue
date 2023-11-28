@@ -128,20 +128,22 @@ export default {
     const router = useRouter();
     const newsSelected = computed(() => store.getNews);
     const loading = computed(() => store.getLoading);
-
-    const apiUrl = process.env.API_URL.replace(/['"]+/g, '');
-
-    const imgUrl = computed(() => apiUrl + "/images/news_images/");
-    const videoUrl = computed(() => apiUrl + "/storage/news_videos/");
+    console.log(process.env.NODE_ENV)
 
     return {
       store,
       router,
       newsSelected,
       loading,
-      imgUrl,
-      videoUrl,
     };
+  },
+  computed: {
+    imgUrl() {
+      return process.env.NODE_ENV == 'development' ? "http://localhost:8000/images/news_images/" : "https://api2023.kenwin.net/images/news_images/";
+    },
+    videoUrl() {
+      return process.env.NODE_ENV == 'development' ? "http://localhost:8000/storage/news_videos/" : "https://api2023.kenwin.net/storage/news_videos/";
+    },
   },
   mounted() {
     console.log(process.env.API_URL);
