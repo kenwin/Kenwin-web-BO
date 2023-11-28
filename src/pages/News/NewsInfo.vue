@@ -85,6 +85,19 @@
           </q-item-section>
         </q-item>
         <q-item>
+            <q-item-section>
+              <div class="text-h6">
+                <b>Video:</b> {{ newsSelected.video || " " }}
+              </div>
+              <div class="q-pa-md">
+                <div class="q-gutter-md row">
+                  <q-video :src="videoUrl + newsSelected.video" spinner-color="white"
+                    style="max-width: 70%; height: 350px" />
+                </div>
+              </div>
+            </q-item-section>
+          </q-item>
+        <q-item>
           <q-item-section>
             <div class="text-h6">
               <b>Autor:</b> {{ newsSelected.autor || " " }}
@@ -126,6 +139,9 @@ export default {
   computed: {
     imgUrl() {
       return "http://localhost:8000/images/news_images/";
+    },
+    videoUrl() {
+      return "http://localhost:8000/storage/news_videos/";
     },
   },
   mounted() {

@@ -9,29 +9,21 @@
           <q-item-section avatar>
             <q-btn outline round color="primary" icon="west" to="/news" />
           </q-item-section>
-          <q-item-section
-            ><div class="text-h5">Editar noticia</div></q-item-section
-          >
+          <q-item-section>
+            <div class="text-h5">Editar noticia</div>
+          </q-item-section>
         </q-item>
         <q-separator />
       </div>
       <div class="col-12">
         <q-item>
           <q-item-section>
-            <q-input
-              v-model="newsData.epigrafe"
-              filled
-              label="Epigrafe (opcional)"
-            />
+            <q-input v-model="newsData.epigrafe" filled label="Epigrafe (opcional)" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <q-input
-              v-model="newsData.titulo"
-              filled
-              label="Titulo (Usado para generar el Slug)"
-            />
+            <q-input v-model="newsData.titulo" filled label="Titulo (Usado para generar el Slug)" />
           </q-item-section>
         </q-item>
         <q-item>
@@ -40,55 +32,73 @@
           </q-item-section>
         </q-item>
         <q-item>
+          <q-item-section>
+            <q-select v-model="newsData.categories" filled multiple :options="categoriesList" label="Categorías"
+              option-value="id" option-label="nombre" />
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section>
+            <q-checkbox size="lg" val="lg" v-model="newsData.destacada"
+              label="Destacada (ésta acción reemplazará la actual noticia destacada)" />
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section>
+
+            <q-input filled v-model="newsData.fecha_alta" label="Fecha de alta" @click="openCalendar"
+              style="max-width: 300px">
+              <template v-slot:prepend>
+                <q-icon name="event" class="cursor-pointer">
+                  <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                    <q-date ref="datePicker" v-model="newsData.fecha_alta" mask="DD/MM/YYYY" :locale="myLocale">
+                      <div class="row items-center justify-end">
+                        <q-btn v-close-popup label="Cerrar" color="primary" flat />
+                      </div>
+                    </q-date>
+                  </q-popup-proxy>
+                </q-icon>
+              </template>
+            </q-input>
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section>
+            <q-select v-model="newsData.idioma" filled :options="idiomas" label="Idioma" option-value="id"
+              option-label="nombre" />
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section>
+            <q-input @update:model-value="(val) => {
+                newsData.image = val[0];
+              }
+              " filled type="file" hint="Imagen de portada" />
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section>
+            <q-input @update:model-value="(val) => {
+              newsData.video = val[0];
+            }
+              " filled type="file" hint="Subir video" />
+          </q-item-section>
+        </q-item>
+          <q-item>
             <q-item-section>
-              <q-select v-model="newsData.categories" filled multiple :options="categoriesList" label="Categorías"
-                option-value="id" option-label="nombre" />
+              <ckeditor :editor="editor" v-model="newsData.cuerpo" :config="editorConfig"></ckeditor>
             </q-item-section>
           </q-item>
           <q-item>
             <q-item-section>
-          <q-checkbox size="lg" val="lg" v-model="newsData.destacada" label="Destacada (ésta acción reemplazará la actual noticia destacada)" />
-        </q-item-section>
+              <q-input v-model="newsData.autor" filled label="Autor" />
+            </q-item-section>
           </q-item>
           <q-item>
-              <q-item-section>
-                <q-select v-model="newsData.idioma" filled :options="idiomas" label="Idioma"
-                  option-value="id" option-label="nombre" />
-              </q-item-section>
-            </q-item>
-        <q-item>
-          <q-item-section>
-            <q-input
-              @update:model-value="
-                (val) => {
-                  newsData.image = val[0];
-                }
-              "
-              filled
-              type="file"
-              hint="Imagen de portada"
-            />
-          </q-item-section>
-        </q-item>
-        <q-item>
-          <q-item-section>
-            <ckeditor
-              :editor="editor"
-              v-model="newsData.cuerpo"
-              :config="editorConfig"
-            ></ckeditor>
-          </q-item-section>
-        </q-item>
-        <q-item>
-          <q-item-section>
-            <q-input v-model="newsData.autor" filled label="Autor" />
-          </q-item-section>
-        </q-item>
-        <q-item>
-          <q-item-section>
-            <q-btn @click="onSubmit()" color="green" label="Guardar noticia" />
-          </q-item-section>
-        </q-item>
+            <q-item-section>
+              <q-btn @click="onSubmit()" color="green" label="Guardar noticia" />
+            </q-item-section>
+          </q-item>
       </div>
     </div>
   </q-page>
@@ -101,6 +111,7 @@ import { useCategories } from "stores/categories";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import moment from "moment";
 
 export default {
   name: "NewsEdit",
@@ -148,7 +159,9 @@ export default {
   },
   mounted() {
     if (this.news_id) {
-      this.getNews(this.news_id);
+      this.getNews(this.news_id).then(() => {
+        this.newsData.fecha_alta = moment(this.newsData.fecha_alta).format('DD/MM/YYYY');
+      });
     } else {
       this.router.push({ path: "/news" });
     }
