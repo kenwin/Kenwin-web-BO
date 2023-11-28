@@ -32,6 +32,11 @@
           </q-item-section>
         </q-item>
         <q-item>
+              <q-item-section>
+                <q-input v-model="newsData.keywords" filled label="Keywords" placeholder="Ej: kenwin, soluciones, people, etc" />
+              </q-item-section>
+            </q-item>
+        <q-item>
           <q-item-section>
             <q-select v-model="newsData.categories" filled multiple :options="categoriesList" label="Categorías"
               option-value="id" option-label="nombre" />

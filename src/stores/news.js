@@ -100,6 +100,9 @@ export const useNews = defineStore("news", {
       if (data.subtitulo) {
         formData.set("subtitulo", data.subtitulo);
       }
+      if (data.keywords) {
+        formData.set("keywords", data.keywords);
+      }
       if (data.categories) {
         formData.set("categories", data.categories);
       }
@@ -171,6 +174,9 @@ export const useNews = defineStore("news", {
       }
       if (this.news) {
         formData.set("subtitulo", this.news.subtitulo);
+      }
+      if (this.news) {
+        formData.set("keywords", this.news.keywords);
       }
       if (this.news) {
         formData.set("categories", this.news.categories);

@@ -32,6 +32,11 @@
           </q-item-section>
         </q-item>
         <q-item>
+            <q-item-section>
+              <q-input v-model="form.keywords" filled label="Keywords" placeholder="Ej: kenwin, soluciones, people, etc" />
+            </q-item-section>
+          </q-item>
+        <q-item>
           <q-item-section>
             <q-select v-model="form.categories" filled multiple :options="categoriesList" label="Categorías"
               option-value="id" option-label="nombre" />
@@ -157,6 +162,7 @@ export default {
         epigrafe: "",
         titulo: "",
         subtitulo: "",
+        keywords: "",
         categories: [],
         idioma: "",
         destacada: false,

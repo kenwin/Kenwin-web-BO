@@ -37,6 +37,13 @@
           </q-item-section>
         </q-item>
         <q-item>
+            <q-item-section>
+              <div class="text-h6">
+                <b>Keywords:</b> {{ newsSelected.keywords || " " }}
+              </div>
+            </q-item-section>
+          </q-item>
+        <q-item>
           <q-item-section>
             <div class="text-h6">
               <b>Epigrafe:</b> {{ newsSelected.epigrafe || " " }}
