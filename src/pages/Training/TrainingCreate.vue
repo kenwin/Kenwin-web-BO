@@ -23,12 +23,28 @@
         </q-item>
         <q-item>
           <q-item-section>
-            <q-input v-model="form.date_start" filled label="Fecha de inicio" />
+            <q-input v-model="form.date_start" filled label="Fecha de inicio">
+              <template v-slot:append>
+                <q-icon name="event" class="cursor-pointer">
+                  <q-popup-proxy>
+                    <q-date v-model="form.date_start" mask="DD/MM/YYYY"></q-date>
+                  </q-popup-proxy>
+                </q-icon>
+              </template>
+            </q-input>
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <q-input v-model="form.date_end" filled label="Fecha de fin" />
+            <q-input v-model="form.date_end" filled label="Fecha de fin">
+              <template v-slot:append>
+                <q-icon name="event" class="cursor-pointer">
+                  <q-popup-proxy>
+                    <q-date v-model="form.date_end" mask="DD/MM/YYYY"></q-date>
+                  </q-popup-proxy>
+                </q-icon>
+              </template>
+            </q-input>
           </q-item-section>
         </q-item>
         <q-item>
@@ -67,8 +83,8 @@
 import { computed } from "vue";
 import { useTraining } from "stores/training";
 import { useRouter } from "vue-router";
-import { ref } from "vue";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import moment from "moment";
 
 export default {
   name: "NewsCreate",

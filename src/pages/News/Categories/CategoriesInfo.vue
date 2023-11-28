@@ -18,19 +18,22 @@
       <div class="col-12">
         <q-item>
           <q-item-section>
-            <div class="text-h6"><b>Titulo:</b> {{ categorySelected.nombre }}</div>
+            <div class="text-h6">
+              <b>Titulo:</b> {{ categorySelected.nombre }}
+            </div>
           </q-item-section>
         </q-item>
       </div>
       <div class="col-12">
         <q-item>
           <q-item-section>
-            <div class="text-h6"><b>Creado:</b> {{ formatDate(categorySelected.created_at) }}</div>
+            <div class="text-h6">
+              <b>Creado:</b> {{ formatDate(categorySelected.created_at) }}
+            </div>
           </q-item-section>
         </q-item>
       </div>
       <div class="col-12">
-
         <q-list bordered separator>
           <q-item v-for="(noticia, key) in categorySelected.news" :key="key">
             <q-item-section avatar top>
@@ -106,7 +109,7 @@ export default {
       await this.store.getCategoriesById(category_id);
     },
     formatDate(date) {
-      return moment(String(date)).format("MM/DD/YYYY hh:mm");
+      return moment(String(date)).format("DD/MM/YYYY hh:mm");
     },
     async removeCategory(section_id) {
       await this.store.deleteCategory(section_id);
