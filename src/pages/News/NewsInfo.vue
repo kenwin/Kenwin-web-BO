@@ -142,7 +142,7 @@ export default {
       return process.env.NODE_ENV == 'development' ? "http://localhost:8000/images/news_images/" : "https://api2023.kenwin.net/images/news_images/";
     },
     videoUrl() {
-      return process.env.NODE_ENV == 'development' ? "http://localhost:8000/storage/news_videos/" : "https://api2023.kenwin.net/storage/news_videos/";
+      return process.env.NODE_ENV == 'development' ? "http://localhost:8000/storage/app/public/news_videos/" : "https://api2023.kenwin.net/storage/news_videos/";
     },
   },
   mounted() {
