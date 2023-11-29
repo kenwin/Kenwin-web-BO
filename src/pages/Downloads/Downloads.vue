@@ -115,7 +115,7 @@ export default {
       await this.store.getApiDownloads();
     },
     formatDate(date) {
-      return moment(String(date)).format("MM/DD/YYYY hh:mm");
+      return moment(String(date)).format("DD/MM/YYYY hh:mm");
     },
   },
 };

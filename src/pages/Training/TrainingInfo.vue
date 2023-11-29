@@ -28,14 +28,16 @@
         <q-item>
           <q-item-section>
             <div class="text-h6">
-              <b>Fecha de inicio:</b> {{ trainingSelected.date_start || " " }}
+              <b>Fecha de inicio:</b>
+              {{ formatDate(trainingSelected.date_start) || " " }}
             </div>
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
             <div class="text-h6">
-              <b>Fecha de fin:</b> {{ trainingSelected.date_end || " " }}
+              <b>Fecha de fin:</b>
+              {{ formatDate(trainingSelected.date_end) || " " }}
             </div>
           </q-item-section>
         </q-item>
@@ -49,9 +51,8 @@
         </q-item>
         <q-item>
           <q-item-section>
-            <div class="text-h7">
-              <b>Descripcion:</b> {{ trainingSelected.description }}
-            </div>
+            <div class="text-h6"><b>Descripcion:</b></div>
+            <div class="text-h7" v-html="trainingSelected.description"></div>
           </q-item-section>
         </q-item>
       </div>
@@ -63,6 +64,7 @@
 import { computed, ref } from "vue";
 import { useTraining } from "stores/training";
 import { useRouter } from "vue-router";
+import moment from "moment";
 
 export default {
   name: "TrainingInfo",
@@ -95,6 +97,9 @@ export default {
   methods: {
     async getTraining(training_id) {
       await this.store.getTrainingById(training_id);
+    },
+    formatDate(date) {
+      return moment(String(date)).format("DD/MM/YYYY hh:mm");
     },
   },
 };
