@@ -26,6 +26,9 @@
               label="Titulo del recurso"
             />
           </q-item-section>
+          <q-item-section v-if="nameError">
+            <span class="text-negative">Por favor, ingrese un título para el recurso.</span>
+          </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
@@ -37,6 +40,9 @@
               option-value="id"
               option-label="label"
             />
+          </q-item-section>
+          <q-item-section v-if="publicError">
+            <span class="text-negative">Por favor, seleccione la visibilidad del recurso.</span>
           </q-item-section>
         </q-item>
         <q-item>
@@ -66,6 +72,9 @@
               type="file"
               hint="Recurso para descargar"
             />
+          </q-item-section>
+          <q-item-section v-if="dataError">
+            <span class="text-negative">Por favor, adjunte un archivo para el recurso.</span>
           </q-item-section>
         </q-item>
         <q-item>
@@ -111,6 +120,9 @@ export default {
         data: null,
       },
       sectionError: false,
+      nameError: false,
+      publicError: false,
+      dataError: false,
     };
   },
   async mounted() {
@@ -118,8 +130,32 @@ export default {
   },
   methods: {
     async onSubmit() {
+
+      if (!this.resource.name) {
+        this.nameError = true;
+      } else {
+        this.nameError = false;
+      }
+
+      if (!this.resource.public) {
+        this.publicError = true;
+      } else {
+        this.publicError = false;
+      }
+
+      if (!this.resource.data) {
+        this.dataError = true;
+      } else {
+        this.dataError = false;
+      }
+
       if (!this.resource.section) {
         this.sectionError = true;
+      } else {
+        this.sectionError = false;
+      }
+
+      if (this.nameError || this.publicError || this.dataError || this.sectionError) {
         return;
       }
 

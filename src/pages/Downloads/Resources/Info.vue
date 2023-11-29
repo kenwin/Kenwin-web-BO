@@ -9,11 +9,11 @@
           <q-item-section avatar>
             <q-btn outline round color="primary" icon="west" to="/downloads" />
           </q-item-section>
-          <q-item-section
-            ><div class="text-h5">
+          <q-item-section>
+            <div class="text-h5">
               Informacion del recurso para descargar
-            </div></q-item-section
-          >
+            </div>
+          </q-item-section>
         </q-item>
         <q-separator />
       </div>
@@ -35,7 +35,13 @@
         </q-item>
         <q-item>
           <q-item-section>
-            <div class="text-h6"><b>URL:</b> {{ resourceSelected.url }}</div>
+            <div class="text-h6"><b>URL:</b> <a target="_blank"
+                :href="baseUrl + '/api/downloads/get_url/' + resourceSelected.id">{{ resourceSelected.url }}</a></div>
+            <div v-if="resourceSelected.image">
+              <p class="text-h6"><b>Vista previa:</b></p>
+              <img width="500" :src="'data:' + resourceSelected.mime + ';base64,' + resourceSelected.code"
+                :alt="resourceSelected.filename" />
+            </div>
           </q-item-section>
         </q-item>
       </div>
@@ -64,6 +70,11 @@ export default {
       resourceSelected,
       loading,
     };
+  },
+  computed: {
+    baseUrl() {
+      return process.env.NODE_ENV == 'development' ? "http://localhost:8000" : "https://api2023.kenwin.net";
+    }
   },
   mounted() {
     if (this.download_id) {
