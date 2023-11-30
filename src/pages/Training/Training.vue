@@ -56,7 +56,7 @@
         </q-list>
       </div>
     </div>
-    <q-page-sticky position="bottom-right" :offset="[18, 18]">
+    <q-page-sticky position="bottom-right" :offset="[70, 18]">
       <q-btn :to="'training/create'" fab icon="add" color="green" />
     </q-page-sticky>
   </q-page>
