@@ -140,6 +140,9 @@ export const useDownloads = defineStore("downloads", {
       if (data.active) {
         formData.set("active", data.active == "Activo" ? 1 : 0);
       }
+      if (data.idioma) {
+        formData.set("idioma", data.idioma);
+      }
 
       try {
         await api
@@ -179,6 +182,9 @@ export const useDownloads = defineStore("downloads", {
       }
       if (this.section) {
         formData.set("active", this.section.active == "Activo" ? 1 : 0);
+      }
+      if (this.section) {
+        formData.set("idioma", this.section.idioma);
       }
 
       try {

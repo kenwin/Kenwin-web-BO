@@ -37,6 +37,12 @@
           </q-item-section>
         </q-item>
         <q-item>
+            <q-item-section>
+              <q-select v-model="sectionData.idioma" filled :options="idiomas" label="Idioma" option-value="id"
+                option-label="nombre" />
+            </q-item-section>
+          </q-item>
+        <q-item>
           <q-item-section>
             <q-btn @click="onSubmit()" color="green" label="Crear sección" />
           </q-item-section>
@@ -64,6 +70,16 @@ export default {
       router,
       loading,
       options: ["Activo", "Inactivo"],
+      idiomas: [
+        {
+          id: 'esp',
+          nombre: 'Español'
+        },
+        {
+          id: 'por',
+          nombre: 'Portugués'
+        }
+      ]
     };
   },
   data() {
@@ -92,6 +108,11 @@ export default {
       await this.store.getSectionById(section_id);
     },
     async onSubmit() {
+
+      if (this.sectionData.idioma && this.sectionData.idioma.id) {
+        this.sectionData.idioma = this.sectionData.idioma.id;
+      }
+
       await this.store.updateSection(this.section_id).then(() => {
         this.router.push({ path: "/downloads" });
       });
