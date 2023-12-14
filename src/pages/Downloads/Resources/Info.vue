@@ -42,6 +42,13 @@
               <img width="500" :src="'data:' + resourceSelected.mime + ';base64,' + resourceSelected.code"
                 :alt="resourceSelected.filename" />
             </div>
+            <div v-if="resourceSelected.video">
+              <p class="text-h6"><b>Vista previa del video:</b></p>
+              <video width="500" controls>
+                <source :src="baseUrl + '/api/downloads/get_url/' + resourceSelected.id" :type="resourceSelected.mime">
+                Tu navegador no soporta el elemento de video.
+              </video>
+            </div>
           </q-item-section>
         </q-item>
       </div>
