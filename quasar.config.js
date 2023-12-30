@@ -11,6 +11,27 @@
 const { configure } = require("quasar/wrappers");
 const env = require("quasar-dotenv").config();
 
+const path = require('node:path')
+
+build: {
+  chainWebpack: chain => {
+    chain.module
+      .rule('i18n-resource')
+        .test(/\.(json5?|ya?ml)$/)
+          .include.add(path.resolve(__dirname, './src/i18n'))
+          .end()
+        .type('javascript/auto')
+        .use('i18n-resource')
+          .loader('@intlify/vue-i18n-loader')
+    chain.module
+      .rule('i18n')
+        .resourceQuery(/blockType=i18n/)
+        .type('javascript/auto')
+        .use('i18n')
+          .loader('@intlify/vue-i18n-loader')
+  }
+}
+
 module.exports = configure(function (/* ctx */) {
   return {
     eslint: {
@@ -28,7 +49,7 @@ module.exports = configure(function (/* ctx */) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli/boot-files
-    boot: ["axios", "pinia", "textEditor"],
+    boot: ["axios", "pinia", "textEditor", "i18n"],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
     css: ["app.scss"],
