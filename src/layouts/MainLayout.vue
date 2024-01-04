@@ -12,13 +12,13 @@
         />
 
         <q-toolbar-title> Kenwin Backoffice </q-toolbar-title>
-        <q-btn @click="logout()" stretch flat label="Cerrar sesion" />
+        <q-btn @click="logout()" stretch flat :label="$t('logout')" />
       </q-toolbar>
     </q-header>
 
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
       <q-list>
-        <q-item-label header> Administración </q-item-label>
+        <q-item-label header> {{ $t('administration') }} </q-item-label>
 
         <EssentialLink
           v-for="link in essentialLinks"
@@ -35,39 +35,39 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, onBeforeMount } from "vue";
 import EssentialLink from "components/EssentialLink.vue";
 import { useAuth } from "stores/auth";
 import { useRouter } from "vue-router";
 
 const linksList = [
   {
-    title: "Home",
-    caption: "Pagina principal",
+    title: "home.title",
+    caption: "home.caption",
     icon: "home",
     link: "/",
   },
   {
-    title: "Contacto",
-    caption: "Formularios de contacto",
+    title: "contact.title",
+    caption: "contact.caption",
     icon: "record_voice_over",
     link: "/contact_forms",
   },
   {
-    title: "Noticias",
-    caption: "Listado de noticias",
+    title: "news.title",
+    caption: "news.caption",
     icon: "feed",
     link: "/news",
   },
   {
-    title: "Descargas",
-    caption: "Recursos de descargas",
+    title: "downloads.title",
+    caption: "downloads.caption",
     icon: "download",
     link: "/downloads",
   },
   {
-    title: "Capacitaciones",
-    caption: "Listado de capacitaciones",
+    title: "trainings.title",
+    caption: "trainings.caption",
     icon: "source",
     link: "/training",
   },
@@ -84,6 +84,8 @@ export default defineComponent({
     const leftDrawerOpen = ref(false);
     const store = useAuth();
     const router = useRouter();
+
+    store.$i18n.global.locale = store.getLang;
 
     return {
       store,

@@ -10,7 +10,7 @@
         <div v-else class="column">
           <div class="row">
             <h5 class="text-h5 text-white q-my-md" size="lg">
-              Iniciar Sesión | Kenwin Backoffice
+              {{ $t('newSession') }} | Kenwin Backoffice
             </h5>
           </div>
           <div class="row">
@@ -22,14 +22,14 @@
                     filled
                     v-model="data.email"
                     type="email"
-                    label="email"
+                    label="Email"
                   />
                   <q-input
                     square
                     filled
                     v-model="data.password"
                     type="password"
-                    label="contraseña"
+                    :label="$t('pass')"
                     @keyup.enter="login()"
                   />
                 </q-form>
@@ -81,11 +81,13 @@ export default {
     async login() {
       await this.store.logginUser(this.data);
       if (this.store.getToken) {
+        const lang = this.store.getLang === 'Port' ? 'pt' : 'es';
+        this.store.changeLanguage(lang);
         this.router.push({ path: "/" });
       } else {
         this.$q.notify({
           type: "negative",
-          message: "Email y/o contraseña incorrectos!",
+          message: this.$t('wrongCred')
         });
       }
     },

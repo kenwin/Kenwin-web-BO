@@ -7,11 +7,13 @@ export const useAuth = defineStore("auth", {
     accessToken: null,
     refresh_token: null,
     loading: false,
+    lang: null
   }),
   getters: {
     getToken: (state) => state.accessToken,
     getRefreshToken: (state) => state.refresh_token,
     getLoading: (state) => state.loading,
+    getLang: (state) => state.lang,
   },
   actions: {
     async logginUser(data) {
@@ -39,6 +41,7 @@ export const useAuth = defineStore("auth", {
             if (response.data.success) {
               this.user = response.data.data;
               this.accessToken = response.data.data.token;
+              this.lang = response.data.data.lang
             }
           })
           .catch((error) => {
@@ -53,8 +56,12 @@ export const useAuth = defineStore("auth", {
     logoutUser() {
       this.user = null;
       this.accessToken = null;
+      this.lang = null;
       this.refresh_token = null;
       return;
+    },
+    changeLanguage(lang) {
+      this.lang = lang;
     },
   },
 });

@@ -27,7 +27,8 @@
 
             <q-item-section>
               <q-item-label>
-                <b>Nombre de la seccion: </b> {{ download.name }} |
+                <b>Nombre de la seccion: </b> {{ download.name }}
+                <b>Lenguaje: </b> {{ download.idioma == 'esp' ? 'ESPAÑOL' : 'PORTUGUÉS' }} |
                 <b>Activo: </b> {{ download.active }} |
                 <b>Fecha de creacion: </b>
                 {{ formatDate(download.created_at) }}
