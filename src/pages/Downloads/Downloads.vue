@@ -27,11 +27,18 @@
 
             <q-item-section>
               <q-item-label>
-                <b>Nombre de la seccion: </b> {{ download.name }}
-                <b>Lenguaje: </b> {{ download.idioma == 'esp' ? 'ESPAÑOL' : 'PORTUGUÉS' }} |
-                <b>Activo: </b> {{ download.active }} |
+                <b>Nombre de la seccion: </b> {{ download.name }} |
                 <b>Fecha de creacion: </b>
                 {{ formatDate(download.created_at) }}
+                <q-chip color="primary" text-color="white" class="float-right">
+                  <q-avatar>
+                    <img :src="'icons/' + download.idioma +'.png'">
+                  </q-avatar>
+                  {{ download.idioma == 'esp' ? 'ESP' : 'POR' }}
+                </q-chip>
+                <q-badge :color="download.active ? 'green' : 'red'">
+                  {{ download.active ? 'Activo' : 'Inactivo' }}
+                </q-badge>
               </q-item-label>
             </q-item-section>
 
@@ -56,8 +63,8 @@
         </q-list>
       </div>
     </div>
-    <q-page-sticky position="bottom-right" :offset="[70, 18]">
-      <q-fab v-model="fabLeft" vertical-actions-align="right" color="green" icon="add" direction="up">
+    <q-page-sticky position="top-right" :offset="[25, 8]">
+      <q-fab v-model="fabLeft" vertical-actions-align="right" padding="sm" color="green" icon="add" direction="left">
         <q-fab-action label-position="right" color="primary" icon="download" label="Crear recurso"
           :to="'downloads/resources/create'" />
         <q-fab-action label-position="right" color="primary" icon="download" label="Crear sección"

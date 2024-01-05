@@ -38,7 +38,7 @@ export const useDownloads = defineStore("downloads", {
 
       try {
         await api
-          .get("/api/downloads", getConfig)
+          .get("/api/downloads?thumbs=false", getConfig)
           .then((response) => {
             console.log(response.data);
             this.downloadsList = response.data;

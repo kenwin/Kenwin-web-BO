@@ -10,7 +10,7 @@
         <div v-else class="column">
           <div class="row">
             <h5 class="text-h5 text-white q-my-md" size="lg">
-              {{ $t('newSession') }} | Kenwin Backoffice
+              Iniciar sesión/sessão | Kenwin Backoffice
             </h5>
           </div>
           <div class="row">
@@ -29,7 +29,7 @@
                     filled
                     v-model="data.password"
                     type="password"
-                    :label="$t('pass')"
+                    label="Contraseña/Senha"
                     @keyup.enter="login()"
                   />
                 </q-form>
@@ -40,7 +40,7 @@
                   color="cyan-7"
                   size="lg"
                   class="full-width"
-                  label="Ingresar"
+                  label="Ingresar/Entrar"
                   @click="login()"
                 />
               </q-card-actions>

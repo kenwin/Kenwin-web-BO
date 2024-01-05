@@ -4,14 +4,16 @@ import { useAuth } from "stores/auth";
 
 export default ({ app }) => {
   const store = useAuth(); 
+  const defaultLocale = 'es';
+  const locale = store.lang === 'Port' ? 'pt' : 'es';
   const i18n = createI18n({
-    locale: store.lang === 'Port' ? 'pt' : 'es',
+    locale: locale || defaultLocale,
     globalInjection: true,
     messages
   });
 
   store.$i18n = i18n;
-  i18n.global.locale = store.lang === 'Port' ? 'pt' : 'es';
+  i18n.global.locale = locale
 
   app.use(i18n);
 }
