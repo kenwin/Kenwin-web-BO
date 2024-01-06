@@ -32,7 +32,7 @@
                 {{ formatDate(download.created_at) }}
                 <q-chip color="primary" text-color="white" class="float-right">
                   <q-avatar>
-                    <img :src="'icons/' + download.idioma +'.png'">
+                    <img :src="'icons/' + download.idioma + '.png'">
                   </q-avatar>
                   {{ download.idioma == 'esp' ? 'ESP' : 'POR' }}
                 </q-chip>
@@ -47,13 +47,22 @@
                 <q-menu cover auto-close>
                   <q-list>
                     <q-item clickable :to="'/downloads/sections/info/' + download.id">
-                      <q-item-section>Ver mas</q-item-section>
+                      <q-item-section>
+                        <q-icon name='visibility' size='xs'/>
+                      </q-item-section>
+                      <q-item-section>{{ $t('show') }}</q-item-section>
                     </q-item>
                     <q-item clickable :to="'/downloads/sections/edit/' + download.id">
-                      <q-item-section>Editar</q-item-section>
+                      <q-item-section>
+                        <q-icon name='edit' size='xs'/>
+                      </q-item-section>
+                      <q-item-section>{{ $t('edit') }}</q-item-section>
                     </q-item>
                     <q-item clickable @click="deleteSection(download.id)">
-                      <q-item-section>Borrar</q-item-section>
+                      <q-item-section>
+                        <q-icon name='delete' size='xs'/>
+                      </q-item-section>
+                      <q-item-section>{{ $t('delete') }}</q-item-section>
                     </q-item>
                   </q-list>
                 </q-menu>

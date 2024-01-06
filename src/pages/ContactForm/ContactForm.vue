@@ -17,7 +17,7 @@
           </q-item-section>
           <q-item-section
             ><div class="text-h5">
-              Formulario de contacto - {{ formSelected.name }}
+              {{ $t('contact.caption')}} - {{ formSelected.name }}
             </div></q-item-section
           >
         </q-item>
@@ -27,7 +27,7 @@
         <q-item>
           <q-item-section>
             <div class="text-h6">
-              <b>Nombre:</b> {{ formSelected.name }}
+              <b>{{ $t('name')}}:</b> {{ formSelected.name }}
               {{ formSelected.last_name }}
             </div>
           </q-item-section>
@@ -35,14 +35,14 @@
         <q-item>
           <q-item-section>
             <div class="text-h6">
-              <b>Empresa:</b> {{ formSelected.company || " " }}
+              <b>{{ $t('company')}}:</b> {{ formSelected.company || " " }}
             </div>
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
             <div class="text-h6">
-              <b>Pais:</b> {{ formSelected.country || " " }}
+              <b>{{ $t('country')}}:</b> {{ formSelected.country || " " }}
             </div>
           </q-item-section>
         </q-item>
@@ -56,14 +56,14 @@
         <q-item>
           <q-item-section>
             <div class="text-h6">
-              <b>Telefono:</b> {{ formSelected.phone || " " }}
+              <b>{{ $t('phone')}}:</b> {{ formSelected.phone || " " }}
             </div>
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
             <div class="text-h7">
-              <b>Mensaje:</b> {{ formSelected.message }}
+              <b>{{ $t('message')}}:</b> {{ formSelected.message }}
             </div>
           </q-item-section>
         </q-item>

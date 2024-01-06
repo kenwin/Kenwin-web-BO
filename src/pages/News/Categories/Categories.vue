@@ -39,13 +39,22 @@
                 <q-menu cover auto-close>
                   <q-list>
                     <q-item clickable :to="'/categorias/' + category.id">
-                      <q-item-section>Ver mas</q-item-section>
+                      <q-item-section>
+                        <q-icon name='visibility' size='xs'/>
+                      </q-item-section>
+                      <q-item-section>{{ $t('show') }}</q-item-section>
                     </q-item>
                     <q-item clickable :to="'/categorias/edit/' + category.id">
-                      <q-item-section>Editar</q-item-section>
+                      <q-item-section>
+                        <q-icon name='edit' size='xs'/>
+                      </q-item-section>
+                      <q-item-section>{{ $t('edit') }}</q-item-section>
                     </q-item>
                     <q-item clickable @click="removeCategory(category.id)">
-                      <q-item-section>Borrar</q-item-section>
+                      <q-item-section>
+                        <q-icon name='delete' size='xs'/>
+                      </q-item-section>
+                      <q-item-section>{{ $t('delete') }}</q-item-section>
                     </q-item>
                   </q-list>
                 </q-menu>
@@ -95,14 +104,25 @@
               <q-btn color="grey-7" round flat icon="more_vert">
                 <q-menu cover auto-close>
                   <q-list>
-                    <q-item clickable :to="'/news/info/' + news.id">
-                      <q-item-section>Ver mas</q-item-section>
+                    <q-item clickable icon='logout' :to="'/news/info/' + news.id">
+                      <q-item-section>
+                        <q-icon name='visibility' size='xs'/>
+                      </q-item-section>
+                      <q-item-section>
+                        {{ $t('show') }}
+                      </q-item-section>
                     </q-item>
                     <q-item clickable :to="'/news/edit/' + news.id">
-                      <q-item-section>Editar</q-item-section>
+                      <q-item-section>
+                        <q-icon name='edit' size='xs'/>
+                      </q-item-section>
+                      <q-item-section>{{ $t('edit') }}</q-item-section>
                     </q-item>
                     <q-item clickable @click="removeNews(news.id)">
-                      <q-item-section>Borrar</q-item-section>
+                      <q-item-section>
+                        <q-icon name='delete' size='xs'/>
+                      </q-item-section>
+                      <q-item-section>{{ $t('delete') }}</q-item-section>
                     </q-item>
                   </q-list>
                 </q-menu>
@@ -113,8 +133,8 @@
       </div>
     </div>
 
-    <q-page-sticky position="bottom-right" :offset="[70, 18]">
-      <q-fab v-model="fabLeft" vertical-actions-align="right" color="green" icon="add" direction="up">
+    <q-page-sticky position="top-right" :offset="[25, 8]">
+      <q-fab v-model="fabLeft" vertical-actions-align="right" padding="sm" color="green" icon="add" direction="left">
         <q-fab-action label-position="right" color="primary" icon="add" label="Crear noticia" :to="'news/create'" />
         <q-fab-action label-position="right" color="primary" icon="add" label="Crear categoría"
           :to="'categorias/create'" />

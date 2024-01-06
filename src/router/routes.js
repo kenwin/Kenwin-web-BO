@@ -133,6 +133,12 @@ const routes = [
         meta: { requiresAuth: true },
         component: () => import("src/pages/Training/TrainingCreate.vue"),
       },
+      {
+        path: "config",
+        name: "config",
+        meta: { requiresAuth: true },
+        component: () => import("src/pages/Config/Index.vue"),
+      },
     ],
   },
 

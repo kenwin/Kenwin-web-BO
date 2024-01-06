@@ -12,7 +12,8 @@
         />
 
         <q-toolbar-title> Kenwin Backoffice </q-toolbar-title>
-        <q-btn @click="logout()" stretch flat :label="$t('logout')" />
+        <q-btn :to="'config'" stretch flat icon="settings" :label="$t('config')" />
+        <q-btn @click="logout()" stretch flat icon="logout" :label="$t('logout')" />
       </q-toolbar>
     </q-header>
 

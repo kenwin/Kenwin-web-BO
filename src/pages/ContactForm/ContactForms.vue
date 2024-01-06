@@ -2,7 +2,7 @@
   <q-page>
     <div class="row q-pa-sm">
       <div class="col-12">
-        <p class="text-h5">Formularios de contacto</p>
+        <p class="text-h5">{{ $t('contact.caption')}}</p>
       </div>
       <div v-if="contactFormList.length == 0" class="col-12">
         <q-list bordered separator>
@@ -27,12 +27,12 @@
 
             <q-item-section>
               <q-item-label>
-                <b>Nombre: </b> {{ form.name }} {{ form.last_name }} |
+                <b>{{ $t('name')}}: </b> {{ form.name }} {{ form.last_name }} |
                 <b>Email: </b> {{ form.email }} | <b>Telefono: </b
                 >{{ form.phone }} | <b>Pais: </b>{{ form.country }}
               </q-item-label>
               <q-item-label caption>
-                <b>Mensaje: </b> {{ form.message }}
+                <b>{{ $t('message')}}: </b> {{ form.message }}
               </q-item-label>
             </q-item-section>
 

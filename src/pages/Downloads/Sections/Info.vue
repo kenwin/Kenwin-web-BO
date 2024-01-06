@@ -9,11 +9,11 @@
           <q-item-section avatar>
             <q-btn outline round color="primary" icon="west" to="/downloads" />
           </q-item-section>
-          <q-item-section
-            ><div class="text-h5">
+          <q-item-section>
+            <div class="text-h5">
               Informacion de la seccion de descarga
-            </div></q-item-section
-          >
+            </div>
+          </q-item-section>
         </q-item>
         <q-separator />
       </div>
@@ -29,10 +29,7 @@
           <b>Recursos de la sección:</b>
         </div>
         <q-list bordered separator>
-          <q-item
-            v-for="(resource, key) in downloadSelected.resources"
-            :key="key"
-          >
+          <q-item v-for="(resource, key) in downloadSelected.resources" :key="key">
             <q-item-section avatar top>
               <q-avatar icon="download" color="primary" text-color="white" />
             </q-item-section>
@@ -49,17 +46,17 @@
               <q-btn color="grey-7" round flat icon="more_vert">
                 <q-menu cover auto-close>
                   <q-list>
-                    <q-item
-                      clickable
-                      :to="'/downloads/resources/info/' + resource.id"
-                    >
-                      <q-item-section>Ver mas</q-item-section>
+                    <q-item clickable :to="'/downloads/resources/info/' + resource.id">
+                      <q-item-section>
+                        <q-icon name='visibility' size='xs'/>
+                      </q-item-section>
+                      <q-item-section>{{ $t('show') }}</q-item-section>
                     </q-item>
-                    <q-item
-                      clickable
-                      @click="deleteResource(resource.id, resource.id_folder)"
-                    >
-                      <q-item-section>Borrar</q-item-section>
+                    <q-item clickable @click="deleteResource(resource.id, resource.id_folder)">
+                      <q-item-section>
+                        <q-icon name='delete' size='xs'/>
+                      </q-item-section>
+                      <q-item-section>{{ $t('delete') }}</q-item-section>
                     </q-item>
                   </q-list>
                 </q-menu>

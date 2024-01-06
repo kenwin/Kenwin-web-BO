@@ -40,13 +40,22 @@
                 <q-menu cover auto-close>
                   <q-list>
                     <q-item clickable :to="'/news/info/' + news.id">
-                      <q-item-section>Ver mas</q-item-section>
+                      <q-item-section>
+                        <q-icon name='visibility' size='xs'/>
+                      </q-item-section>
+                      <q-item-section>{{ $t('show') }}</q-item-section>
                     </q-item>
                     <q-item clickable :to="'/news/edit/' + news.id">
-                      <q-item-section>Editar</q-item-section>
+                      <q-item-section>
+                        <q-icon name='delete' size='xs'/>
+                      </q-item-section>
+                      <q-item-section>{{ $t('edit') }}</q-item-section>
                     </q-item>
                     <q-item clickable @click="deleteNews(news.id)">
-                      <q-item-section>Borrar</q-item-section>
+                      <q-item-section>
+                        <q-icon name='delete' size='xs'/>
+                      </q-item-section>
+                      <q-item-section>{{ $t('delete') }}</q-item-section>
                     </q-item>
                   </q-list>
                 </q-menu>
@@ -57,8 +66,8 @@
       </div>
     </div>
 
-    <q-page-sticky position="bottom-right" :offset="[70, 18]">
-      <q-fab v-model="fabLeft" vertical-actions-align="right" color="green" icon="add" direction="up">
+    <q-page-sticky position="top-right" :offset="[25, 8]">
+      <q-fab v-model="fabLeft" padding="sm" vertical-actions-align="right" color="green" icon="add" direction="left">
         <q-fab-action label-position="right" color="primary" icon="add" label="Crear noticia" :to="'news/create'" />
         <q-fab-action label-position="right" color="primary" icon="add" label="Crear categoría"
           :to="'news/categories/create'" />

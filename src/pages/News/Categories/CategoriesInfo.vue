@@ -55,13 +55,22 @@
                 <q-menu cover auto-close>
                   <q-list>
                     <q-item clickable :to="'/news/info/' + noticia.id">
-                      <q-item-section>Ver mas</q-item-section>
+                      <q-item-section>
+                        <q-icon name='visibility' size='xs'/>
+                      </q-item-section>
+                      <q-item-section>{{ $t('show') }}</q-item-section>
                     </q-item>
                     <q-item clickable :to="'/news/edit/' + noticia.id">
-                      <q-item-section>Editar</q-item-section>
+                      <q-item-section>
+                        <q-icon name='edit' size='xs'/>
+                      </q-item-section>
+                      <q-item-section>{{ $t('edit') }}</q-item-section>
                     </q-item>
                     <q-item clickable @click="deleteNews(noticia.id)">
-                      <q-item-section>Borrar</q-item-section>
+                      <q-item-section>
+                        <q-icon name='delete' size='xs'/>
+                      </q-item-section>
+                      <q-item-section>{{ $t('delete') }}</q-item-section>
                     </q-item>
                   </q-list>
                 </q-menu>

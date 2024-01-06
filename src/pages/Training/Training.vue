@@ -40,13 +40,22 @@
                 <q-menu cover auto-close>
                   <q-list>
                     <q-item clickable :to="'/training/info/' + training.id">
-                      <q-item-section>Ver mas</q-item-section>
+                      <q-item-section>
+                        <q-icon name='visibility' size='xs'/>
+                      </q-item-section>
+                      <q-item-section>{{ $t('show') }}</q-item-section>
                     </q-item>
                     <q-item clickable :to="'/training/edit/' + training.id">
-                      <q-item-section>Editar</q-item-section>
+                      <q-item-section>
+                        <q-icon name='edit' size='xs'/>
+                      </q-item-section>
+                      <q-item-section>{{ $t('edit') }}</q-item-section>
                     </q-item>
                     <q-item clickable @click="deleteTraining(training.id)">
-                      <q-item-section>Borrar</q-item-section>
+                      <q-item-section>
+                        <q-icon name='delete' size='xs'/>
+                      </q-item-section>
+                      <q-item-section>{{ $t('delete') }}</q-item-section>
                     </q-item>
                   </q-list>
                 </q-menu>
@@ -56,8 +65,8 @@
         </q-list>
       </div>
     </div>
-    <q-page-sticky position="bottom-right" :offset="[70, 18]">
-      <q-btn :to="'training/create'" fab icon="add" color="green" />
+    <q-page-sticky position="top-right" :offset="[25, 8]">
+      <q-btn :to="'training/create'" padding="sm" fab icon="add" color="green" />
     </q-page-sticky>
   </q-page>
 </template>

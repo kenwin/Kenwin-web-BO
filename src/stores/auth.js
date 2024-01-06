@@ -14,6 +14,7 @@ export const useAuth = defineStore("auth", {
     getRefreshToken: (state) => state.refresh_token,
     getLoading: (state) => state.loading,
     getLang: (state) => state.lang,
+    getUser: (state) => state.user,
   },
   actions: {
     async logginUser(data) {
@@ -63,5 +64,38 @@ export const useAuth = defineStore("auth", {
     changeLanguage(lang) {
       this.lang = lang;
     },
+    async updateLanguage(user_id, lang) {
+      if (lang === "") {
+        console.log("Error");
+        return;
+      }
+
+      const formData = new FormData();
+
+      const config = {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      };
+
+      formData.set("lang", lang);
+      formData.set("id", user_id);
+
+      try {
+        const response = await api.post("/api/user/update", formData, config);
+
+        if (response.data.success) {
+          return true;
+        } else {
+          return false;
+        }
+      } catch (error) {
+        console.error("Error during updateLanguage:", error);
+        return false;
+      } finally {
+        this.loading = false;
+      }
+    },
+
   },
 });
