@@ -92,7 +92,6 @@ export default defineComponent({
 
         if (result) {
           var idioma = this.idioma.id == 'Port' ? 'pt' : 'es';
-          alert(idioma)
           this.store.$i18n.global.locale = this.idioma.id === 'Port' ? 'pt' : 'es';
 
           Notify.create({
