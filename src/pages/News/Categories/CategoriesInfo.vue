@@ -10,7 +10,7 @@
             <q-btn outline round color="primary" icon="west" to="/news" />
           </q-item-section>
           <q-item-section>
-            <div class="text-h5">Informacion de categoría</div>
+            <div class="text-h5">{{ $t('categoryInfo') }}</div>
           </q-item-section>
         </q-item>
         <q-separator />
@@ -19,7 +19,7 @@
         <q-item>
           <q-item-section>
             <div class="text-h6">
-              <b>Titulo:</b> {{ categorySelected.nombre }}
+              <b>{{ $t('title') }}:</b> {{ categorySelected.nombre }}
             </div>
           </q-item-section>
         </q-item>
@@ -28,7 +28,7 @@
         <q-item>
           <q-item-section>
             <div class="text-h6">
-              <b>Creado:</b> {{ formatDate(categorySelected.created_at) }}
+              <b>{{ $t('created') }}:</b> {{ formatDate(categorySelected.created_at) }}
             </div>
           </q-item-section>
         </q-item>
@@ -42,11 +42,11 @@
 
             <q-item-section>
               <q-item-label>
-                <b>Titulo: </b> {{ noticia.titulo }} | <b>Autor: </b>
+                <b>{{ $t('title') }}: </b> {{ noticia.titulo }} | <b>{{ $t('author') }}: </b>
                 {{ noticia.autor }}
               </q-item-label>
               <q-item-label caption lines="3">
-                <b>Cuerpo: </b> {{ noticia.cuerpo }}
+                <b>{{ $t('body') }}: </b> {{ noticia.cuerpo }}
               </q-item-label>
             </q-item-section>
 

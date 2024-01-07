@@ -28,8 +28,8 @@
             <q-item-section>
               <q-item-label>
                 <b>{{ $t('name')}}: </b> {{ form.name }} {{ form.last_name }} |
-                <b>Email: </b> {{ form.email }} | <b>Telefono: </b
-                >{{ form.phone }} | <b>Pais: </b>{{ form.country }}
+                <b>Email: </b> {{ form.email }} | <b>{{ $t('phone')}}: </b
+                >{{ form.phone }} | <b>{{ $t('country')}}: </b>{{ form.country }}
               </q-item-label>
               <q-item-label caption>
                 <b>{{ $t('message')}}: </b> {{ form.message }}

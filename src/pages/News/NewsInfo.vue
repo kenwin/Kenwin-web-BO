@@ -10,7 +10,7 @@
             <q-btn outline round color="primary" icon="west" to="/news" />
           </q-item-section>
           <q-item-section>
-            <div class="text-h5">Informacion de noticia</div>
+            <div class="text-h5">{{$t('newsInfo')}}</div>
           </q-item-section>
         </q-item>
         <q-separator />
@@ -18,9 +18,9 @@
       <div class="col-12">
         <q-item>
           <q-item-section>
-            <div class="text-h6"><b>Titulo:</b> {{ newsSelected.titulo }} <q-chip square v-if="newsSelected.destacada" color="primary" text-color="white"
+            <div class="text-h6"><b>{{$t('title')}}:</b> {{ newsSelected.titulo }} <q-chip square v-if="newsSelected.destacada" color="primary" text-color="white"
                 icon="star">
-                DESTACADA
+                {{$t('starredCaps')}}
               </q-chip>
               <q-chip color="primary" text-color="white"
                   icon="visibility">
@@ -32,7 +32,7 @@
         <q-item>
           <q-item-section>
             <div class="text-h6">
-              <b>Subtitulo:</b> {{ newsSelected.subtitulo || " " }}
+              <b>{{$t('subtitle')}}:</b> {{ newsSelected.subtitulo || " " }}
             </div>
           </q-item-section>
         </q-item>
@@ -46,14 +46,14 @@
         <q-item>
           <q-item-section>
             <div class="text-h6">
-              <b>Epigrafe:</b> {{ newsSelected.epigrafe || " " }}
+              <b>{{$t('epigrafeShort')}}:</b> {{ newsSelected.epigrafe || " " }}
             </div>
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
             <div class="text-h6">
-              <b>Categorías: </b>
+              <b>{{$t('categories')}}: </b>
               <template v-if="newsSelected.categories && newsSelected.categories.length">
                 <span v-for="(category, index) in newsSelected.categories" :key="index">
                   {{ category.nombre }}
@@ -61,14 +61,14 @@
                 </span>
               </template>
               <template v-else>
-                No hay categorías asociadas.
+                {{ $t('noCategories') }}
               </template>
             </div>
           </q-item-section>
         </q-item>
         <q-item>
             <q-item-section>
-              <div class="text-h6"><b>Idioma:</b> 
+              <div class="text-h6"><b>{{$t('lang')}}:</b>
                 <template v-if="newsSelected.idioma == 'esp'">
                   Español
                 </template>
@@ -81,7 +81,7 @@
         <q-item>
           <q-item-section>
             <div class="text-h6">
-              <b>Imagen de portada:</b> {{ newsSelected.imagen_portada || " " }}
+              <b>{{$t('coverImage')}}:</b> {{ newsSelected.imagen_portada || " " }}
             </div>
             <div class="q-pa-md">
               <div class="q-gutter-md row">
@@ -107,13 +107,13 @@
         <q-item>
           <q-item-section>
             <div class="text-h6">
-              <b>Autor:</b> {{ newsSelected.autor || " " }}
+              <b>{{$t('author')}}:</b> {{ newsSelected.autor || " " }}
             </div>
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <div class="text-h6"><b>Cuerpo:</b></div>
+            <div class="text-h6"><b>{{$t('body')}}:</b></div>
             <div class="text-h7" v-html="newsSelected.cuerpo"></div>
           </q-item-section>
         </q-item>

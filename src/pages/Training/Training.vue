@@ -2,7 +2,7 @@
   <q-page>
     <div class="row q-pa-sm">
       <div class="col-12">
-        <p class="text-h5">Listado de capacitaciones</p>
+        <p class="text-h5">{{ $t('trainingList') }}</p>
       </div>
       <div v-if="trainingList.length == 0" class="col-12">
         <q-list bordered separator>
@@ -27,11 +27,11 @@
 
             <q-item-section>
               <q-item-label>
-                <b>Nombre: </b> {{ training.name }} | <b>Fecha de creacion: </b>
+                <b>{{ $t('name') }}: </b> {{ training.name }} | <b>{{ $t('creationDate') }}: </b>
                 {{ formatDate(training.created_at) }}
               </q-item-label>
               <q-item-label caption lines="3">
-                <b>Descripcion: </b> {{ training.description }}
+                <b>{{ $t('description') }}: </b> {{ training.description }}
               </q-item-label>
             </q-item-section>
 

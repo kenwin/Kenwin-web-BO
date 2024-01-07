@@ -11,7 +11,7 @@
           </q-item-section>
           <q-item-section
             ><div class="text-h5">
-              Crear recurso de descarga
+              {{ $t('createDownload')}}
             </div></q-item-section
           >
         </q-item>
@@ -23,11 +23,11 @@
             <q-input
               v-model="resource.name"
               filled
-              label="Titulo del recurso"
+              :label="$t('resourceTitle')"
             />
           </q-item-section>
           <q-item-section v-if="nameError">
-            <span class="text-negative">Por favor, ingrese un título para el recurso.</span>
+            <span class="text-negative">{{ $t('resourceTitleHelp') }}</span>
           </q-item-section>
         </q-item>
         <q-item>
@@ -36,13 +36,13 @@
               v-model="resource.public"
               filled
               :options="optionsPublic"
-              label="Recurso publico"
+              :label="$t('publicResource')"
               option-value="id"
               option-label="label"
             />
           </q-item-section>
           <q-item-section v-if="publicError">
-            <span class="text-negative">Por favor, seleccione la visibilidad del recurso.</span>
+            <span class="text-negative">{{ $t('resourceVisibility') }}</span>
           </q-item-section>
         </q-item>
         <q-item>
@@ -51,13 +51,13 @@
               v-model="resource.section"
               filled
               :options="downloadsList"
-              label="Sección del recurso"
+              :label="$t('resourceSection')"
               option-value="id"
               option-label="name"
             />
           </q-item-section>
           <q-item-section v-if="sectionError">
-            <span class="text-negative">Por favor, seleccione una sección.</span>
+            <span class="text-negative">{{$t('sectionSelectHelp')}}</span>
           </q-item-section>
         </q-item>
         <q-item>
@@ -70,16 +70,16 @@
               "
               filled
               type="file"
-              hint="Recurso para descargar"
+              :hint="$t('resourceDownload')"
             />
           </q-item-section>
           <q-item-section v-if="dataError">
-            <span class="text-negative">Por favor, adjunte un archivo para el recurso.</span>
+            <span class="text-negative">{{ $t('fileResource') }}</span>
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <q-btn @click="onSubmit()" color="green" label="Crear recurso" />
+            <q-btn @click="onSubmit()" color="green" :label="$t('resourceCreate')" />
           </q-item-section>
         </q-item>
       </div>

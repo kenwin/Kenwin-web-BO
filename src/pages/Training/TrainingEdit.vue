@@ -10,7 +10,7 @@
             <q-btn outline round color="primary" icon="west" to="/training" />
           </q-item-section>
           <q-item-section
-            ><div class="text-h5">Editar capacitacion</div></q-item-section
+            ><div class="text-h5">{{$t('trainingUpdate')}}</div></q-item-section
           >
         </q-item>
         <q-separator />
@@ -18,7 +18,7 @@
       <div class="col-12">
         <q-item>
           <q-item-section>
-            <q-input v-model="trainingData.name" filled label="Nombre" />
+            <q-input v-model="trainingData.name" filled :label="$t('name')" />
           </q-item-section>
         </q-item>
         <q-item>
@@ -26,7 +26,7 @@
             <q-input
               v-model="trainingData.date_start"
               filled
-              label="Fecha de inicio"
+              :label="$t('startDate')"
             >
               <template v-slot:append>
                 <q-icon name="event" class="cursor-pointer">
@@ -39,7 +39,7 @@
                       <div class="row items-center justify-end">
                         <q-btn
                           v-close-popup
-                          label="Cerrar"
+                          :label="$t('close')"
                           color="primary"
                           flat
                         />
@@ -56,7 +56,7 @@
             <q-input
               v-model="trainingData.date_end"
               filled
-              label="Fecha de fin"
+              :label="$t('endDate')"
             >
               <template v-slot:append>
                 <q-icon name="event" class="cursor-pointer">
@@ -69,7 +69,7 @@
                       <div class="row items-center justify-end">
                         <q-btn
                           v-close-popup
-                          label="Cerrar"
+                          :label="$t('close')"
                           color="primary"
                           flat
                         />
@@ -86,7 +86,7 @@
             <q-input
               v-model="trainingData.duration_description"
               filled
-              label="Descripcion de la duracion"
+              :label="$t('durationDescription')"
             />
           </q-item-section>
         </q-item>
@@ -104,7 +104,7 @@
             <q-btn
               @click="onSubmit()"
               color="green"
-              label="Guardar capacitacion"
+              :label="$t('trainingUpdate')"
             />
           </q-item-section>
         </q-item>

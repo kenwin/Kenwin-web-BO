@@ -2,7 +2,7 @@
   <q-page>
     <div class="row q-pa-sm">
       <div class="col-12">
-        <p class="text-h5">Listado de noticias</p>
+        <p class="text-h5">{{ $t('newsList') }}</p>
       </div>
       <div v-if="newsList.length == 0" class="col-12">
         <q-list bordered separator>
@@ -27,11 +27,11 @@
 
             <q-item-section>
               <q-item-label>
-                <b>Titulo: </b> {{ news.titulo }} | <b>Autor: </b>
+                <b>{{ $t('title') }}: </b> {{ news.titulo }} | <b>{{ $t('author') }}: </b>
                 {{ news.autor }}
               </q-item-label>
               <q-item-label caption lines="3">
-                <b>Cuerpo: </b> {{ news.cuerpo }}
+                <b>{{ $t('body') }}: </b> {{ news.cuerpo }}
               </q-item-label>
             </q-item-section>
 
@@ -68,8 +68,8 @@
 
     <q-page-sticky position="top-right" :offset="[25, 8]">
       <q-fab v-model="fabLeft" padding="sm" vertical-actions-align="right" color="green" icon="add" direction="left">
-        <q-fab-action label-position="right" color="primary" icon="add" label="Crear noticia" :to="'news/create'" />
-        <q-fab-action label-position="right" color="primary" icon="add" label="Crear categoría"
+        <q-fab-action label-position="right" color="primary" icon="add" :label="$t('categoryCreate')" :to="'news/create'" />
+        <q-fab-action label-position="right" color="primary" icon="add" :label="$t('newsCreate')"
           :to="'news/categories/create'" />
       </q-fab>
     </q-page-sticky>

@@ -2,7 +2,7 @@
   <q-page>
     <div class="row q-pa-sm">
       <div class="col-12">
-        <p class="text-h5">Listado de categorías de noticias</p>
+        <p class="text-h5">{{$t('categoryList')}}</p>
       </div>
       <div v-if="categoriesList.length == 0" class="col-12">
         <q-list bordered separator>
@@ -27,10 +27,10 @@
 
             <q-item-section>
               <q-item-label>
-                <b>Nombre de la categoría: </b> {{ category.nombre }} |
-                <b>Fecha de creacion: </b>
+                <b>{{$t('categoryName')}}: </b> {{ category.nombre }} |
+                <b>{{$t('creationDate')}}: </b>
                 {{ formatDate(category.created_at) }}
-                <b>Cantidad de noticias: </b> {{ category.news.length }}
+                <b>{{$t('newsQuantity')}}: </b> {{ category.news.length }}
               </q-item-label>
             </q-item-section>
 
@@ -67,7 +67,7 @@
 
     <div class="row q-pa-sm">
       <div class="col-12">
-        <p class="text-h5">Listado de noticias</p>
+        <p class="text-h5">{{$t('newsList')}}</p>
       </div>
       <div v-if="newsList.length == 0" class="col-12">
         <q-list bordered separator>
@@ -92,11 +92,11 @@
 
             <q-item-section>
               <q-item-label>
-                <b>Titulo: </b> {{ news.titulo }} | <b>Autor: </b>
+                <b>{{$t('title')}}: </b> {{ news.titulo }} | <b>{{$t('author')}}: </b>
                 {{ news.autor }}
               </q-item-label>
               <q-item-label caption lines="3">
-                <b>Cuerpo: </b> {{ news.cuerpo }}
+                <b>{{$t('body')}}: </b> {{ news.cuerpo }}
               </q-item-label>
             </q-item-section>
 

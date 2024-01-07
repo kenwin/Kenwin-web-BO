@@ -11,7 +11,7 @@
           </q-item-section>
           <q-item-section
             ><div class="text-h5">
-              Informacion de la capacitacion
+              {{$t('trainingInfo')}}
             </div></q-item-section
           >
         </q-item>
@@ -21,14 +21,14 @@
         <q-item>
           <q-item-section>
             <div class="text-h6">
-              <b>Nombre:</b> {{ trainingSelected.name }}
+              <b>{{ $t('name') }}:</b> {{ trainingSelected.name }}
             </div>
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
             <div class="text-h6">
-              <b>Fecha de inicio:</b>
+              <b>{{ $t('startDate') }}:</b>
               {{ formatDate(trainingSelected.date_start) || " " }}
             </div>
           </q-item-section>
@@ -36,7 +36,7 @@
         <q-item>
           <q-item-section>
             <div class="text-h6">
-              <b>Fecha de fin:</b>
+              <b>{{ $t('endDate') }}:</b>
               {{ formatDate(trainingSelected.date_end) || " " }}
             </div>
           </q-item-section>
@@ -44,14 +44,14 @@
         <q-item>
           <q-item-section>
             <div class="text-h6">
-              <b>Descripcion de la duracion:</b>
+              <b>{{ $t('durationDescription') }}:</b>
               {{ trainingSelected.duration_description || " " }}
             </div>
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <div class="text-h6"><b>Descripcion:</b></div>
+            <div class="text-h6"><b>{{ $t('description') }}:</b></div>
             <div class="text-h7" v-html="trainingSelected.description"></div>
           </q-item-section>
         </q-item>

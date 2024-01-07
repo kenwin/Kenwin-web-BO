@@ -11,7 +11,7 @@
           </q-item-section>
           <q-item-section>
             <div class="text-h5">
-              Informacion de la seccion de descarga
+              {{$t('sectionInfo')}}
             </div>
           </q-item-section>
         </q-item>
@@ -21,12 +21,12 @@
         <q-item>
           <q-item-section>
             <div class="text-h6">
-              <b>Nombre de la sección:</b> {{ downloadSelected.name }}
+              <b>{{$t('sectionName')}}:</b> {{ downloadSelected.name }}
             </div>
           </q-item-section>
         </q-item>
         <div class="text-h6">
-          <b>Recursos de la sección:</b>
+          <b>{{ $t('sectionResources') }}:</b>
         </div>
         <q-list bordered separator>
           <q-item v-for="(resource, key) in downloadSelected.resources" :key="key">
@@ -35,8 +35,8 @@
             </q-item-section>
             <q-item-section>
               <q-item-label>
-                <b>Nombre del recurso: </b> {{ resource.name }} |
-                <b>Fecha de creacion: </b> {{ formatDate(resource.created_at) }}
+                <b>{{ $t('resourceName') }}: </b> {{ resource.name }} |
+                <b>{{ $t('creationDate') }}: </b> {{ formatDate(resource.created_at) }}
               </q-item-label>
               <q-item-label caption>
                 <b>URL: </b> {{ resource.url }}

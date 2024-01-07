@@ -11,7 +11,7 @@
           </q-item-section>
           <q-item-section>
             <div class="text-h5">
-              Informacion del recurso para descargar
+              {{ $t('resourceInfo') }}
             </div>
           </q-item-section>
         </q-item>
@@ -21,14 +21,14 @@
         <q-item>
           <q-item-section>
             <div class="text-h6">
-              <b>Nombre del recurso:</b> {{ resourceSelected.name }}
+              <b>{{ $t('resourceName') }}:</b> {{ resourceSelected.name }}
             </div>
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
             <div class="text-h6">
-              <b>Fecha de creacion:</b>
+              <b>{{ $t('creationDate') }}:</b>
               {{ formatDate(resourceSelected.created_at) }}
             </div>
           </q-item-section>
@@ -38,15 +38,15 @@
             <div class="text-h6"><b>URL:</b> <a target="_blank"
                 :href="baseUrl + '/api/downloads/get_url/' + resourceSelected.id">{{ resourceSelected.url }}</a></div>
             <div v-if="resourceSelected.image">
-              <p class="text-h6"><b>Vista previa:</b></p>
+              <p class="text-h6"><b>{{$t('preview')}}:</b></p>
               <img width="500" :src="'data:' + resourceSelected.mime + ';base64,' + resourceSelected.code"
                 :alt="resourceSelected.filename" />
             </div>
             <div v-if="resourceSelected.video">
-              <p class="text-h6"><b>Vista previa del video:</b></p>
+              <p class="text-h6"><b>{{$t('videoPreview')}}:</b></p>
               <video width="500" controls>
                 <source :src="baseUrl + '/api/downloads/get_url/' + resourceSelected.id" :type="resourceSelected.mime">
-                Tu navegador no soporta el elemento de video.
+                {{$t('videoNotSupported')}}
               </video>
             </div>
           </q-item-section>

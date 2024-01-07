@@ -11,7 +11,7 @@
           </q-item-section>
           <q-item-section
             ><div class="text-h5">
-              Editar sección de descarga
+              {{ $t('sectionUpdate') }}
             </div></q-item-section
           >
         </q-item>
@@ -23,7 +23,7 @@
             <q-input
               v-model="sectionData.name"
               filled
-              label="Nombre de la sección"
+              :label="$t('sectionName')"
             />
           </q-item-section>
         </q-item>
@@ -32,19 +32,19 @@
             <q-select
               v-model="sectionData.active"
               :options="options"
-              label="Activo"
+              :label="$t('active')"
             />
           </q-item-section>
         </q-item>
         <q-item>
             <q-item-section>
-              <q-select v-model="sectionData.idioma" filled :options="idiomas" label="Idioma" option-value="id"
+              <q-select v-model="sectionData.idioma" filled :options="idiomas" :label="$t('lang')" option-value="id"
                 option-label="nombre" />
             </q-item-section>
           </q-item>
         <q-item>
           <q-item-section>
-            <q-btn @click="onSubmit()" color="green" label="Crear sección" />
+            <q-btn @click="onSubmit()" color="green" :label="$t('sectionUpdate')" />
           </q-item-section>
         </q-item>
       </div>

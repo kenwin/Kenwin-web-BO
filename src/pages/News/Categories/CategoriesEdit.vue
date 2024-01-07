@@ -10,7 +10,7 @@
             <q-btn outline round color="primary" icon="west" to="/news" />
           </q-item-section>
           <q-item-section
-            ><div class="text-h5">Editar categoría</div></q-item-section
+            ><div class="text-h5">{{$t('categoryUpdate')}}</div></q-item-section
           >
         </q-item>
         <q-separator />
@@ -21,13 +21,13 @@
             <q-input
               v-model="categoriesData.nombre"
               filled
-              label="Nombre"
+              :label="$t('name')"
             />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <q-btn @click="onSubmit()" color="green" label="Guardar categoría" />
+            <q-btn @click="onSubmit()" color="green" :label="$t('categoryUpdate')" />
           </q-item-section>
         </q-item>
       </div>

@@ -2,7 +2,7 @@
   <q-page>
     <div class="row q-pa-sm">
       <div class="col-12">
-        <p class="text-h5">Listado de secciones de descargas</p>
+        <p class="text-h5">{{ $t('downloadSectionList') }}</p>
       </div>
       <div v-if="downloadsList.length == 0" class="col-12">
         <q-list bordered separator>
@@ -27,8 +27,8 @@
 
             <q-item-section>
               <q-item-label>
-                <b>Nombre de la seccion: </b> {{ download.name }} |
-                <b>Fecha de creacion: </b>
+                <b>{{$t('sectionName')}}: </b> {{ download.name }} |
+                <b>{{$t('creationDate')}}: </b>
                 {{ formatDate(download.created_at) }}
                 <q-chip color="primary" text-color="white" class="float-right">
                   <q-avatar>

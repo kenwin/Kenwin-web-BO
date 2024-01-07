@@ -10,7 +10,7 @@
             <q-btn outline round color="primary" icon="west" to="/news" />
           </q-item-section>
           <q-item-section>
-            <div class="text-h5">Editar noticia</div>
+            <div class="text-h5">{{$t('newsUpdate')}}</div>
           </q-item-section>
         </q-item>
         <q-separator />
@@ -18,17 +18,17 @@
       <div class="col-12">
         <q-item>
           <q-item-section>
-            <q-input v-model="newsData.epigrafe" filled label="Epigrafe (opcional)" />
+            <q-input v-model="newsData.epigrafe" filled :label="$t('epigrafe')" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <q-input v-model="newsData.titulo" filled label="Titulo (Usado para generar el Slug)" />
+            <q-input v-model="newsData.titulo" filled :label="$t('newsTitle')" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <q-input v-model="newsData.subtitulo" filled label="Subtitulo" />
+            <q-input v-model="newsData.subtitulo" filled :label="$t('subtitle')" />
           </q-item-section>
         </q-item>
         <q-item>
@@ -38,20 +38,20 @@
             </q-item>
         <q-item>
           <q-item-section>
-            <q-select v-model="newsData.categories" filled multiple :options="categoriesList" label="Categorías"
+            <q-select v-model="newsData.categories" filled multiple :options="categoriesList" :label="$t('categories')"
               option-value="id" option-label="nombre" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
             <q-checkbox size="lg" val="lg" v-model="newsData.destacada"
-              label="Destacada (ésta acción reemplazará la actual noticia destacada)" />
+            :label="$t('starred')" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
 
-            <q-input filled v-model="newsData.fecha_alta" label="Fecha de alta" @click="openCalendar"
+            <q-input filled v-model="newsData.fecha_alta" :label="$t('activeDate')" @click="openCalendar"
               style="max-width: 300px">
               <template v-slot:prepend>
                 <q-icon name="event" class="cursor-pointer">
@@ -69,7 +69,7 @@
         </q-item>
         <q-item>
           <q-item-section>
-            <q-select v-model="newsData.idioma" filled :options="idiomas" label="Idioma" option-value="id"
+            <q-select v-model="newsData.idioma" filled :options="idiomas" :label="$t('lang')" option-value="id"
               option-label="nombre" />
           </q-item-section>
         </q-item>
@@ -78,7 +78,7 @@
             <q-input @update:model-value="(val) => {
                 newsData.image = val[0];
               }
-              " filled type="file" hint="Imagen de portada" />
+              " filled type="file" :hint="$t('coverImage')" />
           </q-item-section>
         </q-item>
         <q-item>
@@ -86,7 +86,7 @@
             <q-input @update:model-value="(val) => {
               newsData.video = val[0];
             }
-              " filled type="file" hint="Subir video" />
+              " filled type="file" :hint="$t('videoUpload')" />
           </q-item-section>
         </q-item>
           <q-item>
@@ -96,12 +96,12 @@
           </q-item>
           <q-item>
             <q-item-section>
-              <q-input v-model="newsData.autor" filled label="Autor" />
+              <q-input v-model="newsData.autor" filled :label="$t('author')" />
             </q-item-section>
           </q-item>
           <q-item>
             <q-item-section>
-              <q-btn @click="onSubmit()" color="green" label="Guardar noticia" />
+              <q-btn @click="onSubmit()" color="green" :label="$t('newsUpdate')" />
             </q-item-section>
           </q-item>
       </div>

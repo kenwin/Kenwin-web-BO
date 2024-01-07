@@ -10,7 +10,7 @@
             <q-btn outline round color="primary" icon="west" to="/home" />
           </q-item-section>
           <q-item-section>
-            <div class="text-h5">Mis datos</div>
+            <div class="text-h5">{{ $t('myData') }}</div>
           </q-item-section>
         </q-item>
         <q-separator />
@@ -59,8 +59,6 @@ export default defineComponent({
   setup() {
     const store = useAuth();
 
-    store.$i18n.global.locale = store.getLang;
-
     return {
       store,
 
@@ -93,6 +91,10 @@ export default defineComponent({
         let result = await this.store.updateLanguage(this.user.id, this.idioma.id);
 
         if (result) {
+          var idioma = this.idioma.id == 'Port' ? 'pt' : 'es';
+          alert(idioma)
+          this.store.$i18n.global.locale = this.idioma.id === 'Port' ? 'pt' : 'es';
+
           Notify.create({
             message: this.$t('updateSuccess'),
             color: 'positive',

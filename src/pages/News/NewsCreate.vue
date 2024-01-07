@@ -10,7 +10,7 @@
             <q-btn outline round color="primary" icon="west" to="/news" />
           </q-item-section>
           <q-item-section>
-            <div class="text-h5">Crear noticia</div>
+            <div class="text-h5">{{$t('newsCreate')}}</div>
           </q-item-section>
         </q-item>
         <q-separator />
@@ -21,7 +21,7 @@
             <q-input
               v-model="form.epigrafe"
               filled
-              label="Epigrafe (opcional)"
+              :label="$t('epigrafe')"
             />
           </q-item-section>
         </q-item>
@@ -30,7 +30,7 @@
             <q-input
               v-model="form.titulo"
               filled
-              label="Titulo (Usado para generar el Slug)"
+              :label="$t('newsTitle')"
             />
           </q-item-section>
         </q-item>
@@ -56,7 +56,7 @@
               filled
               multiple
               :options="categoriesList"
-              label="Categorías"
+              :label="$t('categories')"
               option-value="id"
               option-label="nombre"
             />
@@ -68,7 +68,7 @@
               size="lg"
               val="lg"
               v-model="form.destacada"
-              label="Destacada (ésta acción reemplazará la actual noticia destacada)"
+              :label="$t('starred')"
             />
           </q-item-section>
         </q-item>
@@ -77,7 +77,7 @@
             <q-input
               filled
               v-model="form.fecha_alta"
-              label="Fecha de alta"
+              :label="$t('activeDate')"
               style="max-width: 300px"
             >
               <template v-slot:prepend>
@@ -113,7 +113,7 @@
               v-model="form.idioma"
               filled
               :options="idiomas"
-              label="Idioma"
+              :label="$t('lang')"
               option-value="id"
               option-label="nombre"
             />
@@ -129,7 +129,7 @@
               "
               filled
               type="file"
-              hint="Imagen de portada"
+              :hint="$t('coverImage')"
             />
           </q-item-section>
         </q-item>
@@ -143,7 +143,7 @@
               "
               filled
               type="file"
-              hint="Subir video"
+              :hint="$t('videoUpload')"
             />
           </q-item-section>
         </q-item>
@@ -158,12 +158,12 @@
         </q-item>
         <q-item>
           <q-item-section>
-            <q-input v-model="form.autor" filled label="Autor" />
+            <q-input v-model="form.autor" filled :label="$t('author')" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <q-btn @click="onSubmit()" color="green" label="Crear noticia" />
+            <q-btn @click="onSubmit()" color="green" :label="$t('newsCreate')" />
           </q-item-section>
         </q-item>
       </div>
@@ -234,7 +234,7 @@ export default {
         idioma: "",
         destacada: false,
         fecha_alta: "",
-        cuerpo: "<p>Cuerpo de la noticia</p>",
+        cuerpo: "<p>body de la noticia</p>",
         autor: "",
         image: ref(null),
         video: ref(null),

@@ -10,7 +10,7 @@
             <q-btn outline round color="primary" icon="west" to="/training" />
           </q-item-section>
           <q-item-section
-            ><div class="text-h5">Crear capacitacion</div></q-item-section
+            ><div class="text-h5">{{ $t('trainingCreate') }}</div></q-item-section
           >
         </q-item>
         <q-separator />
@@ -18,12 +18,12 @@
       <div class="col-12">
         <q-item>
           <q-item-section>
-            <q-input v-model="form.name" filled label="Nombre" />
+            <q-input v-model="form.name" filled :label="$t('name')" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <q-input v-model="form.date_start" filled label="Fecha de inicio">
+            <q-input v-model="form.date_start" filled :label="$t('startDate')">
               <template v-slot:append>
                 <q-icon name="event" class="cursor-pointer">
                   <q-popup-proxy
@@ -35,7 +35,7 @@
                       <div class="row items-center justify-end">
                         <q-btn
                           v-close-popup
-                          label="Cerrar"
+                          :label="$t('close')"
                           color="primary"
                           flat
                         />
@@ -49,7 +49,7 @@
         </q-item>
         <q-item>
           <q-item-section>
-            <q-input v-model="form.date_end" filled label="Fecha de fin">
+            <q-input v-model="form.date_end" filled :label="$t('endDate')">
               <template v-slot:append>
                 <q-icon name="event" class="cursor-pointer">
                   <q-popup-proxy
@@ -61,7 +61,7 @@
                       <div class="row items-center justify-end">
                         <q-btn
                           v-close-popup
-                          label="Cerrar"
+                          :label="$t('close')"
                           color="primary"
                           flat
                         />
@@ -78,7 +78,7 @@
             <q-input
               v-model="form.duration_description"
               filled
-              label="Descripcion de la duracion"
+              :label="$t('durationDescription')"
             />
           </q-item-section>
         </q-item>
@@ -96,7 +96,7 @@
             <q-btn
               @click="onSubmit()"
               color="green"
-              label="Crear capacitacion"
+              :label="$t('trainingCreate')"
             />
           </q-item-section>
         </q-item>
