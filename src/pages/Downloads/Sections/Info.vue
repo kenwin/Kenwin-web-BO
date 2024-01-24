@@ -42,6 +42,13 @@
                 <b>URL: </b> {{ resource.url }}
               </q-item-label>
             </q-item-section>
+            <q-item-section>
+              <q-item-label>
+                <q-badge class="float-right" :color="resource.public ? 'green' : 'red'">
+                  {{ resource.public ? 'Público' : 'Privado' }}
+                </q-badge>
+              </q-item-label>
+            </q-item-section>
             <q-item-section side>
               <q-btn color="grey-7" round flat icon="more_vert">
                 <q-menu cover auto-close>
@@ -51,6 +58,12 @@
                         <q-icon name='visibility' size='xs'/>
                       </q-item-section>
                       <q-item-section>{{ $t('show') }}</q-item-section>
+                    </q-item>
+                    <q-item clickable @click="editStatus(resource.id, resource.id_folder)">
+                      <q-item-section>
+                        <q-icon name='edit' size='xs'/>
+                      </q-item-section>
+                      <q-item-section>{{ $t(resource.public ? 'changePrivate' : 'changePublic') }}</q-item-section>
                     </q-item>
                     <q-item clickable @click="deleteResource(resource.id, resource.id_folder)">
                       <q-item-section>
@@ -104,6 +117,10 @@ export default {
     },
     async deleteResource(resource_id, folder_id) {
       await this.store.deleteResource(resource_id);
+      await this.store.getDownloadById(folder_id);
+    },
+    async editStatus(resource_id, folder_id) {
+      await this.store.updateStatus(resource_id);
       await this.store.getDownloadById(folder_id);
     },
     formatDate(date) {

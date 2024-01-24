@@ -78,6 +78,8 @@ export default {
   durationDescription: "Descrição da duração",
   trainingUpdate: "Editar treinamento",
   trainingInfo: "Informações de treinamento",
+  changePublic: "Mudar para Público",
+  changePrivate: "Mudar para Privado",
   home: {
     title: 'Home',
     caption: 'Página principal'

@@ -345,5 +345,37 @@ export const useDownloads = defineStore("downloads", {
         this.loading = false;
       }
     },
+    async updateStatus(id) {
+      this.loading = true;
+      const auth = useAuth();
+
+      if (!auth.getToken) {
+        console.log("Null token");
+        return;
+      }
+
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
+          Authorization: "Bearer " + auth.getToken,
+        },
+      };
+
+      try {
+        await api
+          .post("/api/downloads/resource/toggle/" + id, config)
+          .then((response) => {
+            console.log(response);
+            this.loading = false;
+          })
+          .catch((error) => {
+            // handle error
+            console.log(error);
+          });
+      } catch (error) {
+        if (error) throw error;
+        this.loading = false;
+      }
+    }
   },
 });
