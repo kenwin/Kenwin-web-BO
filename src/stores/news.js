@@ -107,6 +107,7 @@ export const useNews = defineStore("news", {
         formData.set("categories", data.categories);
       }
       formData.set("destacada", data.destacada != "" ? data.destacada : null);
+      formData.set("allow_comments", data.allow_comments != "" ? data.allow_comments : null);
       if (data.fecha_alta) {
         formData.set("fecha_alta", data.fecha_alta);
       }
@@ -183,6 +184,9 @@ export const useNews = defineStore("news", {
       }
       if (this.news) {
         formData.set("destacada", this.news.destacada);
+      }
+      if (this.news) {
+        formData.set("allow_comments", this.news.allow_comments);
       }
       if (this.news) {
         formData.set("fecha_alta", this.news.fecha_alta);

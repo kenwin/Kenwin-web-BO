@@ -75,6 +75,12 @@
         </q-item>
         <q-item>
           <q-item-section>
+            <q-checkbox size="lg" val="lg" v-model="newsData.allow_comments"
+            :label="$t('allowComments')" />
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section>
             <q-input @update:model-value="(val) => {
                 newsData.image = val[0];
               }

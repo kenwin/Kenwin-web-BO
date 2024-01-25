@@ -80,6 +80,8 @@ export default {
   trainingInfo: "Informações de treinamento",
   changePublic: "Mudar para Público",
   changePrivate: "Mudar para Privado",
+  disabledComments: "Comentários desativados",
+  allowComments: "Permitir comentários?",
   home: {
     title: 'Home',
     caption: 'Página principal'

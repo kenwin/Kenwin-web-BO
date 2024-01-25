@@ -121,6 +121,16 @@
         </q-item>
         <q-item>
           <q-item-section>
+            <q-checkbox
+              size="lg"
+              val="lg"
+              v-model="form.allow_comments"
+              :label="$t('allowComments')"
+            />
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section>
             <q-input
               @update:model-value="
                 (val) => {
@@ -236,6 +246,7 @@ export default {
         fecha_alta: "",
         cuerpo: "<p>body de la noticia</p>",
         autor: "",
+        allow_comments: true,
         image: ref(null),
         video: ref(null),
       },

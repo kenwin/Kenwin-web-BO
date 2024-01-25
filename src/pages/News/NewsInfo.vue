@@ -26,6 +26,9 @@
                   icon="visibility">
                   {{ newsSelected.vistas }}
                 </q-chip>
+                <q-chip square v-if="newsSelected.destacada" color="danger" text-color="white" icon="forbidden">
+                {{$t('disabledComments')}}
+              </q-chip>
             </div>
           </q-item-section>
         </q-item>
@@ -91,7 +94,7 @@
             </div>
           </q-item-section>
         </q-item>
-        <q-item>
+        <q-item v-if="newsSelected.video">
             <q-item-section>
               <div class="text-h6">
                 <b>Video:</b> {{ newsSelected.video || " " }}
