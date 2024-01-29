@@ -42,7 +42,7 @@ export default {
   sectionCreate: "Criar seção de download",
   sectionUpdate: "Modificar seção de download",
   sectionInfo: "Baixar informações da seção",
-  sectionResources: "Recursos de la sección",
+  sectionResources: "Seção Recursos (arraste para reorganizar a ordem na página inicial)",
   categoryList: "Lista de categorias de notícias",
   categoryInfo: "Informações de categoria",
   categoryName: "Nome da Categoria",
@@ -82,6 +82,8 @@ export default {
   changePrivate: "Mudar para Privado",
   disabledComments: "Comentários desativados",
   allowComments: "Permitir comentários?",
+  textType: "Botão com URL",
+  drop: "Arraste e solte aqui",
   home: {
     title: 'Home',
     caption: 'Página principal'

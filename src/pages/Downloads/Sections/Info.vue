@@ -28,15 +28,34 @@
         <div class="text-h6">
           <b>{{ $t('sectionResources') }}:</b>
         </div>
+        <td>
+          {{$t('drop')}} <q-icon name="keyboard_arrow_down" size="40px" color="primary" />
+
+        </td>
         <q-list bordered separator>
-          <q-item v-for="(resource, key) in downloadSelected.resources" :key="key">
-            <q-item-section avatar top>
-              <q-avatar icon="download" color="primary" text-color="white" />
-            </q-item-section>
+
+          <q-item v-for="(resource, key) in downloadSelected.resources" :key="key" :resource="resource" class="drag"
+    @dragstart="startDrag(resource, key)"
+    @dragover.prevent
+    @drop="handleDrop"
+    :draggable="true"
+    :style="{ opacity: draggingIndex === key ? '0.5' : '1' }"
+    :data-index="key">
+
+    <!-- Nuevo contenedor para el botón de ordenación -->
+      <q-btn icon="swap_vert" flat color="primary" class="drag-handle" />
+
+    <!-- Contenedor del contenido del ítem con borde -->
+      <q-item-section avatar top>
+        <q-avatar icon="download" color="primary" text-color="white" />
+      </q-item-section>
             <q-item-section>
               <q-item-label>
-                <b>{{ $t('resourceName') }}: </b> {{ resource.name }} |
-                <b>{{ $t('creationDate') }}: </b> {{ formatDate(resource.created_at) }}
+                <b>{{ $t('resourceName') }}: </b> {{ resource.name }}
+                <b v-if="resource.created_at">{{ $t('creationDate') }}: {{ formatDate(resource.created_at) }}</b>
+                <q-badge :color="blue">
+                  Prioridad: {{ resource.prioridad }}
+                </q-badge>
               </q-item-label>
               <q-item-label caption>
                 <b>URL: </b> {{ resource.url }}
@@ -102,6 +121,7 @@ export default {
       router,
       downloadSelected,
       loading,
+      draggingIndex: -1,
     };
   },
   mounted() {
@@ -126,6 +146,46 @@ export default {
     formatDate(date) {
       return moment(String(date)).format("DD/MM/YYYY hh:mm");
     },
+
+    startDrag(resource, index) {
+  this.draggingIndex = index;
+  this.initialIndex = index;
+},
+handleDrop(event) {
+  const updatedResources = [...this.downloadSelected.resources];
+  const draggedResource = updatedResources[this.draggingIndex];
+
+  updatedResources.splice(this.draggingIndex, 1);
+
+  const newIndex = event.target.dataset.index;
+
+  if (newIndex !== undefined && this.initialIndex !== newIndex) {
+    updatedResources.splice(newIndex, 0, draggedResource);
+
+    updatedResources.forEach((resource, index) => {
+      resource.prioridad = index + 1;
+    });
+
+    this.store.updateResourcesPriorities(updatedResources);
+    this.downloadSelected.resources = updatedResources;
+  }
+
+  this.draggingIndex = -1;
+  this.initialIndex = -1;
+},
+
   },
 };
 </script>
+
+<style scoped>
+  .drag-handle {
+    width: 5px;
+    cursor: grab;
+    margin-right: 100px;
+  }
+
+  .ml2 {
+    padding-left: 5px;
+  }
+</style>

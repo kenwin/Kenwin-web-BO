@@ -258,6 +258,9 @@ export const useDownloads = defineStore("downloads", {
       if (data.public) {
         formData.set("public", data.public.id);
       }
+      if (data.es_texto) {
+        formData.set("es_texto", data.es_texto);
+      }
       if (data.section) {
         formData.set("id_folder", data.section.id);
       }
@@ -376,6 +379,14 @@ export const useDownloads = defineStore("downloads", {
         if (error) throw error;
         this.loading = false;
       }
-    }
+    },
+    async updateResourcesPriorities(resources) {
+      try {
+        const response = await api.post('/api/downloads/resource/update-priorities', { resources });
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
   },
 });

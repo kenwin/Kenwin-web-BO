@@ -32,6 +32,16 @@
         </q-item>
         <q-item>
           <q-item-section>
+            <q-checkbox
+              size="lg"
+              val="lg"
+              v-model="resource.es_texto"
+              :label="$t('textType')"
+            />
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section>
             <q-select
               v-model="resource.public"
               filled
@@ -118,6 +128,7 @@ export default {
         public: "",
         section: null,
         data: null,
+        es_texto: false
       },
       sectionError: false,
       nameError: false,

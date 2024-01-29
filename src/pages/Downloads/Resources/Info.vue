@@ -21,7 +21,9 @@
         <q-item>
           <q-item-section>
             <div class="text-h6">
-              <b>{{ $t('resourceName') }}:</b> {{ resourceSelected.name }}
+              <b>{{ $t('resourceName') }}:</b> {{ resourceSelected.name }} <q-badge :color="resourceSelected.es_texto ? 'green' : 'white'">
+                  {{ resourceSelected.es_texto ? $t('textType') : '' }}
+                </q-badge>
             </div>
           </q-item-section>
         </q-item>
