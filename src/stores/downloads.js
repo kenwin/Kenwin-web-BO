@@ -258,7 +258,7 @@ export const useDownloads = defineStore("downloads", {
       if (data.public) {
         formData.set("public", data.public.id);
       }
-      if (data.es_texto) {
+      if (data) {
         formData.set("es_texto", data.es_texto);
       }
       if (data.section) {
