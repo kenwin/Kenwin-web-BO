@@ -19,11 +19,28 @@
         </q-list>
       </div>
       <div v-else class="col-12">
+        <div class="text-h6">
+          <b>{{ $t('sectionOrder') }}:</b>
+        </div>
+        <td>
+          {{$t('drop')}} <q-icon name="keyboard_arrow_down" size="40px" color="primary" />
+
+        </td>
         <q-list bordered separator>
-          <q-item v-for="(download, key) in downloadsList" :key="key">
-            <q-item-section avatar top>
-              <q-avatar icon="download" color="primary" text-color="white" />
-            </q-item-section>
+
+          <q-item v-for="(download, key) in downloadsList" :key="key" :download="download" class="drag"
+    @dragstart="startDrag(download, key)"
+    @dragover.prevent
+    @drop="handleDrop"
+    :draggable="true"
+    :style="{ opacity: draggingIndex === key ? '0.5' : '1' }"
+    :data-index="key">
+
+      <q-btn icon="swap_vert" flat color="primary" class="drag-handle" />
+
+      <q-item-section avatar top>
+        <q-avatar icon="download" color="primary" text-color="white" />
+      </q-item-section>
 
             <q-item-section>
               <q-item-label>
@@ -38,6 +55,9 @@
                 </q-chip>
                 <q-badge :color="download.active ? 'green' : 'red'">
                   {{ download.active ? 'Activo' : 'Inactivo' }}
+                </q-badge>
+                <q-badge v-if="download.prioridad" :color="blue" style="margin-left: 5px">
+                  Prioridad: {{ download.prioridad }}
                 </q-badge>
               </q-item-label>
             </q-item-section>
@@ -99,6 +119,7 @@ export default {
       fabLeft: ref(false),
       store,
       downloadsList,
+      draggingIndex: -1,
     };
   },
   async mounted() {
@@ -112,6 +133,40 @@ export default {
     formatDate(date) {
       return moment(String(date)).format("DD/MM/YYYY hh:mm");
     },
+    startDrag(download, index) {
+      this.draggingIndex = index;
+      this.initialIndex = index;
+    },
+    handleDrop(event) {
+      const updatedDownloads = [...this.downloadsList];
+      const draggedDownload = updatedDownloads[this.draggingIndex];
+      updatedDownloads.splice(this.draggingIndex, 1);
+      const newIndex = event.target.dataset.index;
+
+      if (newIndex !== undefined && this.initialIndex !== newIndex) {
+        updatedDownloads.splice(newIndex, 0, draggedDownload);
+        updatedDownloads.forEach((download, index) => {
+          download.prioridad = index + 1;
+        });
+        this.store.updateDownloadsPriorities(updatedDownloads);
+        this.store.getApiDownloads();
+        //this.downloadsList = this.store.getDownloadsList;
+
+      }
+      this.draggingIndex = -1;
+      this.initialIndex = -1;
+    },
   },
 };
 </script>
+
+<style scoped>
+  .drag-handle {
+    width: 5px;
+    cursor: grab;
+    margin-right: 100px;
+  }
+  .ml2 {
+    padding-left: 5px;
+  }
+</style>

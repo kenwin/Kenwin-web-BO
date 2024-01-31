@@ -84,6 +84,7 @@ export default {
   allowComments: "¿Permitir comentarios?",
   textType: "Botón con URL",
   drop: "Arrastre y suelte aquí",
+  sectionOrder: "Orden de secciones",
   home: {
     title: 'Inicio',
     caption: 'Página principal'

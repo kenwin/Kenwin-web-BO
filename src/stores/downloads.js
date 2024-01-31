@@ -388,5 +388,13 @@ export const useDownloads = defineStore("downloads", {
         console.error(error);
       }
     },
+    async updateDownloadsPriorities(downloads) {
+      try {
+        const response = await api.post('/api/downloads/update-priorities', { downloads });
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
   },
 });
