@@ -3,6 +3,7 @@
     <div class="row q-pa-sm">
       <div class="col-12">
         <p class="text-h5">{{ $t('downloadSectionList') }}</p>
+        <hr/>
       </div>
   <div v-if="downloadsListEsp.length + downloadsListPor.length === 0" class="col-12">
         <q-list bordered separator>
@@ -88,7 +89,8 @@
             </q-item-section>
           </q-item>
         </q-list>
-
+        <br>
+        <hr/>
 
     <div class="text-h6">
       <b>{{ $t('sectionOrderPor') }}:</b>
