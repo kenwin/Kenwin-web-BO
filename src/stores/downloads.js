@@ -21,7 +21,7 @@ export const useDownloads = defineStore("downloads", {
     setSection(payload) {
       this.section = payload;
     },
-    async getApiDownloads() {
+    async getApiDownloads(idioma = null) {
       this.loading = true;
       const auth = useAuth();
 
@@ -36,9 +36,14 @@ export const useDownloads = defineStore("downloads", {
         },
       };
 
+      let endpoint = "/api/downloads?thumbs=false";
+      if (idioma) {
+        endpoint += `&lang=${idioma}&lazy=true`;
+      }
+
       try {
         await api
-          .get("/api/downloads?thumbs=false", getConfig)
+          .get(endpoint, getConfig)
           .then((response) => {
             console.log(response.data);
             this.downloadsList = response.data;

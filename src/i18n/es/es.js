@@ -85,6 +85,8 @@ export default {
   textType: "Botón con URL",
   drop: "Arrastre y suelte aquí",
   sectionOrder: "Orden de secciones",
+  sectionOrderPor: "Orden de secciones - POR",
+  sectionOrderEsp: "Orden de secciones - ESP",
   home: {
     title: 'Inicio',
     caption: 'Página principal'
