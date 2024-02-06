@@ -87,6 +87,11 @@ export default {
   sectionOrder: "Ordem das seções",
   sectionOrderPor: "Ordem das seções - POR",
   sectionOrderEsp: "Ordem das seções - ESP",
+  documentType: "Tipo de documento",
+  normType: "Tipo padrão",
+  normName: "Nome padrão",
+  version: "Versão",
+  lastUpdate: "Fecha de última actualización en la web",
   home: {
     title: 'Home',
     caption: 'Página principal'

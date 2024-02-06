@@ -272,6 +272,24 @@ export const useDownloads = defineStore("downloads", {
       if (data.data) {
         formData.set("file", data.data);
       }
+      if (data.document_type) {
+        formData.set("document_type", data.document_type);
+      }
+      if (data.norm_type) {
+        formData.set("norm_type", data.norm_type);
+      }
+      if (data.norm_name) {
+        formData.set("norm_name", data.norm_name);
+      }
+      if (data.version) {
+        formData.set("version", data.version);
+      }
+      if (data.last_updated) {
+        formData.set("last_updated", data.last_updated);
+      }
+      if (data.language) {
+        formData.set("language", data.language);
+      }
 
       try {
         await api

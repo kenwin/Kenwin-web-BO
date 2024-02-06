@@ -11,7 +11,7 @@
           </q-item-section>
           <q-item-section>
             <div class="text-h5">
-              {{$t('sectionInfo')}}
+              {{ $t('sectionInfo') }}
             </div>
           </q-item-section>
         </q-item>
@@ -21,7 +21,7 @@
         <q-item>
           <q-item-section>
             <div class="text-h6">
-              <b>{{$t('sectionName')}}:</b> {{ downloadSelected.name }}
+              <b>{{ $t('sectionName') }}:</b> {{ downloadSelected.name }}
             </div>
           </q-item-section>
         </q-item>
@@ -29,36 +29,39 @@
           <b>{{ $t('sectionResources') }}:</b>
         </div>
         <td>
-          {{$t('drop')}} <q-icon name="keyboard_arrow_down" size="40px" color="primary" />
+          {{ $t('drop') }} <q-icon name="keyboard_arrow_down" size="40px" color="primary" />
 
         </td>
         <q-list bordered separator>
 
           <q-item v-for="(resource, key) in downloadSelected.resources" :key="key" :resource="resource" class="drag"
-    @dragstart="startDrag(resource, key)"
-    @dragover.prevent
-    @drop="handleDrop"
-    :draggable="true"
-    :style="{ opacity: draggingIndex === key ? '0.5' : '1' }"
-    :data-index="key">
+            @dragstart="startDrag(resource, key)" @dragover.prevent @drop="handleDrop" :draggable="true"
+            :style="{ opacity: draggingIndex === key ? '0.5' : '1' }" :data-index="key">
 
-    <!-- Nuevo contenedor para el botón de ordenación -->
-      <q-btn icon="swap_vert" flat color="primary" class="drag-handle" />
+            <!-- Nuevo contenedor para el botón de ordenación -->
+            <q-btn icon="swap_vert" flat color="primary" class="drag-handle" />
 
-    <!-- Contenedor del contenido del ítem con borde -->
-      <q-item-section avatar top>
-        <q-avatar icon="download" color="primary" text-color="white" />
-      </q-item-section>
+            <!-- Contenedor del contenido del ítem con borde -->
+            <q-item-section avatar top>
+              <q-avatar icon="download" color="primary" text-color="white" />
+            </q-item-section>
             <q-item-section>
               <q-item-label>
                 <b>{{ $t('resourceName') }}: </b> {{ resource.name }}
-                <b v-if="resource.created_at">{{ $t('creationDate') }}: {{ formatDate(resource.created_at) }}</b>
+                <b v-if="resource.created_at">{{ $t('creationDate') }}: {{ formatDate(resource.created_at) }} </b> &nbsp; 
                 <q-badge :color="blue">
                   Prioridad: {{ resource.prioridad }}
                 </q-badge>
               </q-item-label>
               <q-item-label caption>
                 <b>URL: </b> {{ resource.url }}
+                <b v-if="resource.document_type">| {{ $t('documentType') }}: </b> {{ resource.document_type }}
+                <b v-if="resource.language">| {{ $t('lang') }}: </b> {{ resource.language }} 
+              </q-item-label>
+              <q-item-label caption>
+
+                <b v-if="resource.norm_type">{{ $t('normType') }}: </b> {{ resource.norm_type }}
+                <b v-if="resource.norm_name">| {{ $t('normName') }}: </b> {{ resource.norm_name }} 
               </q-item-label>
             </q-item-section>
             <q-item-section>
@@ -74,19 +77,19 @@
                   <q-list>
                     <q-item clickable :to="'/downloads/resources/info/' + resource.id">
                       <q-item-section>
-                        <q-icon name='visibility' size='xs'/>
+                        <q-icon name='visibility' size='xs' />
                       </q-item-section>
                       <q-item-section>{{ $t('show') }}</q-item-section>
                     </q-item>
                     <q-item clickable @click="editStatus(resource.id, resource.id_folder)">
                       <q-item-section>
-                        <q-icon name='edit' size='xs'/>
+                        <q-icon name='edit' size='xs' />
                       </q-item-section>
                       <q-item-section>{{ $t(resource.public ? 'changePrivate' : 'changePublic') }}</q-item-section>
                     </q-item>
                     <q-item clickable @click="deleteResource(resource.id, resource.id_folder)">
                       <q-item-section>
-                        <q-icon name='delete' size='xs'/>
+                        <q-icon name='delete' size='xs' />
                       </q-item-section>
                       <q-item-section>{{ $t('delete') }}</q-item-section>
                     </q-item>
@@ -148,44 +151,44 @@ export default {
     },
 
     startDrag(resource, index) {
-  this.draggingIndex = index;
-  this.initialIndex = index;
-},
-handleDrop(event) {
-  const updatedResources = [...this.downloadSelected.resources];
-  const draggedResource = updatedResources[this.draggingIndex];
+      this.draggingIndex = index;
+      this.initialIndex = index;
+    },
+    handleDrop(event) {
+      const updatedResources = [...this.downloadSelected.resources];
+      const draggedResource = updatedResources[this.draggingIndex];
 
-  updatedResources.splice(this.draggingIndex, 1);
+      updatedResources.splice(this.draggingIndex, 1);
 
-  const newIndex = event.target.dataset.index;
+      const newIndex = event.target.dataset.index;
 
-  if (newIndex !== undefined && this.initialIndex !== newIndex) {
-    updatedResources.splice(newIndex, 0, draggedResource);
+      if (newIndex !== undefined && this.initialIndex !== newIndex) {
+        updatedResources.splice(newIndex, 0, draggedResource);
 
-    updatedResources.forEach((resource, index) => {
-      resource.prioridad = index + 1;
-    });
+        updatedResources.forEach((resource, index) => {
+          resource.prioridad = index + 1;
+        });
 
-    this.store.updateResourcesPriorities(updatedResources);
-    this.downloadSelected.resources = updatedResources;
-  }
+        this.store.updateResourcesPriorities(updatedResources);
+        this.downloadSelected.resources = updatedResources;
+      }
 
-  this.draggingIndex = -1;
-  this.initialIndex = -1;
-},
+      this.draggingIndex = -1;
+      this.initialIndex = -1;
+    },
 
   },
 };
 </script>
 
 <style scoped>
-  .drag-handle {
-    width: 5px;
-    cursor: grab;
-    margin-right: 100px;
-  }
+.drag-handle {
+  width: 5px;
+  cursor: grab;
+  margin-right: 100px;
+}
 
-  .ml2 {
-    padding-left: 5px;
-  }
+.ml2 {
+  padding-left: 5px;
+}
 </style>
