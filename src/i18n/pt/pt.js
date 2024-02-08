@@ -92,6 +92,11 @@ export default {
   normName: "Nome padrão",
   version: "Versão",
   lastUpdate: "Fecha de última actualización en la web",
+  filename: "Arquivo",
+  downloadDate: "Data de download",
+  reports: "Relatórios",
+  downloadsCount: "Downloads",
+  data: "Dados",
   home: {
     title: 'Home',
     caption: 'Página principal'

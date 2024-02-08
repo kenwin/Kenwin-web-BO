@@ -8,13 +8,16 @@ export const useDownloads = defineStore("downloads", {
     section: {},
     resource: {},
     downloadsList: [],
+    reportsList: [],
     loading: false,
   }),
   getters: {
     getDownload: (state) => state.download,
     getSection: (state) => state.section,
     getResource: (state) => state.resource,
+    getReport: (state) => state.report,
     getDownloadsList: (state) => state.downloadsList,
+    getReportsList: (state) => state.reportsList,
     getLoading: (state) => state.loading,
   },
   actions: {
@@ -47,6 +50,73 @@ export const useDownloads = defineStore("downloads", {
           .then((response) => {
             console.log(response.data);
             this.downloadsList = response.data;
+            this.loading = false;
+          })
+          .catch((error) => {
+            // handle error
+            console.log(error);
+          });
+      } catch (error) {
+        if (error) throw error;
+        this.loading = false;
+      }
+    },
+    async getApiReports() {
+      this.loading = true;
+      const auth = useAuth();
+
+      if (!auth.getToken) {
+        console.log("Null token");
+        return;
+      }
+
+      const getConfig = {
+        headers: {
+          Authorization: "Bearer " + auth.getToken,
+        },
+      };
+
+      let endpoint = "/api/reports";
+
+      try {
+        await api
+          .get(endpoint, getConfig)
+          .then((response) => {
+            console.log(response.data);
+            this.reportsList = response.data;
+            
+            this.loading = false;
+          })
+          .catch((error) => {
+            // handle error
+            console.log(error);
+          });
+      } catch (error) {
+        if (error) throw error;
+        this.loading = false;
+      }
+    },
+    async getReportByResourceId(resource_id) {
+      this.loading = true;
+      const auth = useAuth();
+
+      if (!auth.getToken) {
+        console.log("Null token");
+        return;
+      }
+
+      const getConfig = {
+        headers: {
+          Authorization: "Bearer " + auth.getToken,
+        },
+      };
+
+      try {
+        await api
+          .get("/api/report/" + resource_id, getConfig)
+          .then((response) => {
+            console.log(response);
+            this.report = response.data[0];
             this.loading = false;
           })
           .catch((error) => {

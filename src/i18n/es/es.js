@@ -92,6 +92,11 @@ export default {
   normName: "Nombre de la norma",
   version: "Versión",
   lastUpdate: "Fecha de última actualización en la web",
+  filename: "Archivo",
+  downloadDate: "Fecha de descarga",
+  reports: "Reportes",
+  downloadsCount: "Descargas",
+  data: "Datos",
   home: {
     title: 'Inicio',
     caption: 'Página principal'

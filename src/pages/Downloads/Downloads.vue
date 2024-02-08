@@ -2,7 +2,7 @@
   <q-page>
     <div class="row q-pa-sm">
       <div class="col-12">
-        <p class="text-h5">{{ $t('downloadSectionList') }}</p>
+        <p class="text-h5">{{ $t('downloadSectionList') }} <q-btn color="primary" to="reports">{{ $t('reports') }}</q-btn></p>
         <hr/>
       </div>
   <div v-if="downloadsListEsp.length + downloadsListPor.length === 0" class="col-12">
