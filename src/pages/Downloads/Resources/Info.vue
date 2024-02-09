@@ -35,6 +35,48 @@
             </div>
           </q-item-section>
         </q-item>
+        <q-item v-if="resourceSelected.document_type" >
+          <q-item-section>
+              <div class="text-h6">
+                  <b>{{ $t('documentType') }}:</b> {{ resourceSelected.document_type }}
+              </div>
+          </q-item-section>
+        </q-item >
+        <q-item v-if="resourceSelected.norm_type">
+          <q-item-section>
+            <div class="text-h6">
+              <b>{{ $t('normType') }}:</b> {{ resourceSelected.norm_type }}
+            </div>
+          </q-item-section>
+        </q-item>
+        <q-item v-if="resourceSelected.norm_name">
+          <q-item-section>
+            <div class="text-h6">
+              <b>{{ $t('normName') }}:</b> {{ resourceSelected.norm_name }}
+            </div>
+          </q-item-section>
+        </q-item>
+        <q-item v-if="resourceSelected.version">
+          <q-item-section>
+            <div class="text-h6">
+              <b>{{ $t('version') }}:</b> {{ resourceSelected.version }}
+            </div>
+          </q-item-section>
+        </q-item>
+        <q-item v-if="resourceSelected.last_updated">
+          <q-item-section>
+            <div class="text-h6">
+              <b>{{ $t('lastUpdate') }}:</b> {{ resourceSelected.last_updated }}
+            </div>
+          </q-item-section>
+        </q-item>
+        <q-item v-if="resourceSelected.language">
+          <q-item-section>
+            <div class="text-h6">
+              <b>{{ $t('lang') }}:</b> {{ resourceSelected.language }}
+            </div>
+          </q-item-section>
+        </q-item>
         <q-item>
           <q-item-section>
             <div class="text-h6"><b>URL:</b> <a target="_blank"

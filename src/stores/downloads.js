@@ -8,20 +8,96 @@ export const useDownloads = defineStore("downloads", {
     section: {},
     resource: {},
     downloadsList: [],
+    reportsList: [],
     loading: false,
+    report: []
   }),
   getters: {
     getDownload: (state) => state.download,
     getSection: (state) => state.section,
     getResource: (state) => state.resource,
+    getReport: (state) => state.report,
     getDownloadsList: (state) => state.downloadsList,
+    getReportsList: (state) => state.reportsList,
     getLoading: (state) => state.loading,
   },
   actions: {
     setSection(payload) {
       this.section = payload;
     },
-    async getApiDownloads() {
+    async getApiDownloads(idioma = null) {
+      this.loading = true;
+      const auth = useAuth();
+
+      if (!auth.getToken) {
+        console.log("Null token");
+        return;
+      }
+
+      const getConfig = {
+        headers: {
+          Authorization: "Bearer " + auth.getToken,
+        },
+      };
+
+      let endpoint = "/api/downloads?thumbs=false";
+      if (idioma) {
+        endpoint += `&lang=${idioma}&lazy=true`;
+      }
+
+      try {
+        await api
+          .get(endpoint, getConfig)
+          .then((response) => {
+            console.log(response.data);
+            this.downloadsList = response.data;
+            this.loading = false;
+          })
+          .catch((error) => {
+            // handle error
+            console.log(error);
+          });
+      } catch (error) {
+        if (error) throw error;
+        this.loading = false;
+      }
+    },
+    async getApiReports() {
+      this.loading = true;
+      const auth = useAuth();
+
+      if (!auth.getToken) {
+        console.log("Null token");
+        return;
+      }
+
+      const getConfig = {
+        headers: {
+          Authorization: "Bearer " + auth.getToken,
+        },
+      };
+
+      let endpoint = "/api/reports";
+
+      try {
+        await api
+          .get(endpoint, getConfig)
+          .then((response) => {
+            console.log(response.data);
+            this.reportsList = response.data;
+            
+            this.loading = false;
+          })
+          .catch((error) => {
+            // handle error
+            console.log(error);
+          });
+      } catch (error) {
+        if (error) throw error;
+        this.loading = false;
+      }
+    },
+    async getReportByResourceId(resource_id) {
       this.loading = true;
       const auth = useAuth();
 
@@ -38,10 +114,10 @@ export const useDownloads = defineStore("downloads", {
 
       try {
         await api
-          .get("/api/downloads?thumbs=false", getConfig)
+          .get("/api/report/" + resource_id, getConfig)
           .then((response) => {
-            console.log(response.data);
-            this.downloadsList = response.data;
+            console.log('Respuesta del servidor:', response);
+            this.report = response.data;
             this.loading = false;
           })
           .catch((error) => {
@@ -267,6 +343,24 @@ export const useDownloads = defineStore("downloads", {
       if (data.data) {
         formData.set("file", data.data);
       }
+      if (data.document_type) {
+        formData.set("document_type", data.document_type);
+      }
+      if (data.norm_type) {
+        formData.set("norm_type", data.norm_type);
+      }
+      if (data.norm_name) {
+        formData.set("norm_name", data.norm_name);
+      }
+      if (data.version) {
+        formData.set("version", data.version);
+      }
+      if (data.last_updated) {
+        formData.set("last_updated", data.last_updated);
+      }
+      if (data.language) {
+        formData.set("language", data.language);
+      }
 
       try {
         await api
@@ -383,6 +477,14 @@ export const useDownloads = defineStore("downloads", {
     async updateResourcesPriorities(resources) {
       try {
         const response = await api.post('/api/downloads/resource/update-priorities', { resources });
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async updateDownloadsPriorities(downloads) {
+      try {
+        const response = await api.post('/api/downloads/update-priorities', { downloads });
         console.log(response.data);
       } catch (error) {
         console.error(error);

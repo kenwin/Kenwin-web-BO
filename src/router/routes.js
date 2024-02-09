@@ -159,6 +159,19 @@ const routes = [
         meta: { requiresAuth: true },
         component: () => import("src/pages/Config/Index.vue"),
       },
+      {
+        path: "reports",
+        name: "reports",
+        meta: { requiresAuth: true },
+        component: () => import("src/pages/Downloads/Reports.vue"),
+      },
+      {
+        path: "reports/info/:resource_id",
+        name: "report_info",
+        props: true,
+        meta: { requiresAuth: true },
+        component: () => import("src/pages/Downloads/ReportInfo.vue"),
+      },
     ],
   },
 

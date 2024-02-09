@@ -87,6 +87,64 @@
             <span class="text-negative">{{ $t('fileResource') }}</span>
           </q-item-section>
         </q-item>
+          <q-item>
+              <q-item-section>
+                <q-input
+                  v-model="resource.document_type"
+                  filled
+                :label="$t('documentType')"
+                    />
+              </q-item-section>
+            </q-item>
+          <q-item>
+            <q-item-section>
+              <q-input
+                v-model="resource.norm_type"
+                filled
+                :label="$t('normType')"
+                />
+            </q-item-section>
+          </q-item>
+          <q-item>
+            <q-item-section>
+              <q-input
+                v-model="resource.norm_name"
+                filled
+                :label="$t('normName')"
+                />
+            </q-item-section>
+          </q-item>
+          <q-item>
+            <q-item-section>
+              <q-input
+                v-model="resource.version"
+                filled
+                :label="$t('version')"
+                />
+            </q-item-section>
+          </q-item>
+          <q-item>
+            <q-item-section>
+              <q-input
+                v-model="resource.last_updated"
+                filled
+                type="date"
+                :label="$t('lastUpdate')"
+                />
+            </q-item-section>
+          </q-item>
+          <q-item>
+            <q-item-section>
+              <q-select
+                v-model="resource.language"
+                filled
+                :options="idiomas"
+                :label="$t('lang')"
+                  option-value="id"
+                option-label="nombre"
+              />
+            </q-item-section>
+          </q-item>
         <q-item>
           <q-item-section>
             <q-btn @click="onSubmit()" color="green" :label="$t('resourceCreate')" />
@@ -119,6 +177,16 @@ export default {
         { id: 1, label: "Publico" },
         { id: 0, label: "Privado" },
       ],
+      idiomas: [
+        {
+          id: "esp",
+          nombre: "Español",
+        },
+        {
+          id: "por",
+          nombre: "Portugués",
+        },
+      ]
     };
   },
   data() {
@@ -128,7 +196,13 @@ export default {
         public: "",
         section: null,
         data: null,
-        es_texto: false
+        es_texto: false,
+        document_type: "",
+        norm_type: "",
+        norm_name: "",
+        version: "",
+        last_updated: "",
+        language: ""
       },
       sectionError: false,
       nameError: false,
@@ -171,6 +245,8 @@ export default {
       }
 
       this.sectionError = false;
+
+      this.resource.language = this.resource.language.id;
 
       await this.store.createResource(this.resource).then(() => {
         this.router.push({ path: "/downloads" });
