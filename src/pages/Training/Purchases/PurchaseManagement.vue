@@ -225,7 +225,7 @@ export default {
   },
   computed: {
     imgUrl() {
-      return "http://localhost:8000/images/receipts/";
+      return process.env.NODE_ENV == 'development' ? "http://localhost:8000/images/receipts/" : "https://api2023.kenwin.net/images/receipts/";
     },
   },
   mounted() {
