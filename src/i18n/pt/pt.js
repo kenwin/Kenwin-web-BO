@@ -95,8 +95,15 @@ export default {
   filename: "Arquivo",
   downloadDate: "Data de download",
   reports: "Relatórios",
-  downloadsCount: "Downloads",
+  downloadsCount: "Número de downloads",
   data: "Dados",
+  report: "Relatório do recurso",
+  anon: "Anônimo",
+  user: "Usuário",
+  userData: "Dados do usuário",
+  lastName: "Sobrenome",
+  area: "Área",
+  position: "Posição",
   home: {
     title: 'Home',
     caption: 'Página principal'

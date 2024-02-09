@@ -1,10 +1,19 @@
 <template>
   <q-page>
     <div class="row q-pa-sm">
-      <div class="col-12">
-        <p class="text-h5">{{ $t('reports') }}</p>
-        <hr />
-      </div>
+      <div class="col-12 q-gutter-sm">
+          <q-item>
+            <q-item-section avatar>
+              <q-btn outline round color="primary" icon="west" to="/downloads" />
+            </q-item-section>
+            <q-item-section>
+              <div class="text-h5">
+                {{ $t('reports') }}
+              </div>
+            </q-item-section>
+          </q-item>
+          <q-separator />
+        </div>
       <q-list bordered separator class="col-12">
         <q-item v-for="(report, key) in reportsList" :key="key" :report="report">
 

@@ -95,8 +95,15 @@ export default {
   filename: "Archivo",
   downloadDate: "Fecha de descarga",
   reports: "Reportes",
-  downloadsCount: "Descargas",
+  downloadsCount: "Cantidad de descargas",
   data: "Datos",
+  report: "Reporte del recurso",
+  anon: "Anónimo",
+  user: "Usuario",
+  userData: "Datos de usuario",
+  lastName: "Apellido",
+  area: "Área",
+  position: "Puesto",
   home: {
     title: 'Inicio',
     caption: 'Página principal'

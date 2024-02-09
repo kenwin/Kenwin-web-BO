@@ -10,6 +10,7 @@ export const useDownloads = defineStore("downloads", {
     downloadsList: [],
     reportsList: [],
     loading: false,
+    report: []
   }),
   getters: {
     getDownload: (state) => state.download,
@@ -115,8 +116,8 @@ export const useDownloads = defineStore("downloads", {
         await api
           .get("/api/report/" + resource_id, getConfig)
           .then((response) => {
-            console.log(response);
-            this.report = response.data[0];
+            console.log('Respuesta del servidor:', response);
+            this.report = response.data;
             this.loading = false;
           })
           .catch((error) => {

@@ -146,7 +146,7 @@ const routes = [
         component: () => import("src/pages/Downloads/Reports.vue"),
       },
       {
-        path: "reports/info/:report_id",
+        path: "reports/info/:resource_id",
         name: "report_info",
         props: true,
         meta: { requiresAuth: true },
