@@ -9,11 +9,11 @@
           <q-item-section avatar>
             <q-btn outline round color="primary" icon="west" to="/training" />
           </q-item-section>
-          <q-item-section
-            ><div class="text-h5">
-              {{$t('trainingInfo')}}
-            </div></q-item-section
-          >
+          <q-item-section>
+            <div class="text-h5">
+              {{ $t('trainingInfo') }}
+            </div>
+          </q-item-section>
         </q-item>
         <q-separator />
       </div>
@@ -38,6 +38,13 @@
             <div class="text-h6">
               <b>{{ $t('endDate') }}:</b>
               {{ formatDate(trainingSelected.date_end) || " " }}
+            </div>
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section>
+            <div class="text-h6">
+              <b>Id interno Go4click:</b> {{ trainingSelected.id_training_go4click || "Pendiente" }}
             </div>
           </q-item-section>
         </q-item>

@@ -27,8 +27,8 @@
 
             <q-item-section>
               <q-item-label>
-                <b>{{$t('sectionName')}}: </b> {{ download.name }} |
-                <b>{{$t('creationDate')}}: </b>
+                <b>{{ $t('sectionName') }}: </b> {{ download.name }} |
+                <b>{{ $t('creationDate') }}: </b>
                 {{ formatDate(download.created_at) }}
                 <q-chip color="primary" text-color="white" class="float-right">
                   <q-avatar>
@@ -44,25 +44,25 @@
 
             <q-item-section side>
               <q-btn color="grey-7" round flat icon="more_vert">
-                <q-menu cover auto-close>
-                  <q-list>
+                <q-menu auto-close>
+                  <q-list class="q-px-xs q-py-xs">
                     <q-item clickable :to="'/downloads/sections/info/' + download.id">
                       <q-item-section>
-                        <q-icon name='visibility' size='xs'/>
+                        <q-icon name='visibility' size='xs' />
                       </q-item-section>
-                      <q-item-section>{{ $t('show') }}</q-item-section>
+                      <q-item-section class="q-px-xs" style="min-width: 60px">{{ $t('show') }}</q-item-section>
                     </q-item>
                     <q-item clickable :to="'/downloads/sections/edit/' + download.id">
                       <q-item-section>
-                        <q-icon name='edit' size='xs'/>
+                        <q-icon name='edit' size='xs' />
                       </q-item-section>
-                      <q-item-section>{{ $t('edit') }}</q-item-section>
+                      <q-item-section class="q-px-xs" style="min-width: 60px">{{ $t('edit') }}</q-item-section>
                     </q-item>
                     <q-item clickable @click="deleteSection(download.id)">
                       <q-item-section>
-                        <q-icon name='delete' size='xs'/>
+                        <q-icon name='delete' size='xs' />
                       </q-item-section>
-                      <q-item-section>{{ $t('delete') }}</q-item-section>
+                      <q-item-section class="q-px-xs" style="min-width: 60px">{{ $t('delete') }}</q-item-section>
                     </q-item>
                   </q-list>
                 </q-menu>

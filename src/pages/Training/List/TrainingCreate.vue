@@ -84,6 +84,15 @@
         </q-item>
         <q-item>
           <q-item-section>
+            <q-input
+              v-model="form.id_training_go4click"
+              filled
+              :label="'Id interno Go4click'"
+            />
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section>
             <ckeditor
               :editor="editor"
               v-model="form.description"
@@ -137,6 +146,7 @@ export default {
         date_end: "",
         duration_description: "",
         description: "<p>Descripcion de la capacitacion</p>",
+        id_training_go4click: "",
       },
     };
   },

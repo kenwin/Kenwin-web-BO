@@ -37,25 +37,31 @@
 
             <q-item-section side>
               <q-btn color="grey-7" round flat icon="more_vert">
-                <q-menu cover auto-close>
-                  <q-list>
+                <q-menu auto-close>
+                  <q-list class="q-px-xs q-py-xs">
                     <q-item clickable :to="'/training/info/' + training.id">
                       <q-item-section>
-                        <q-icon name='visibility' size='xs'/>
+                        <q-icon name='visibility' size='xs' />
                       </q-item-section>
-                      <q-item-section>{{ $t('show') }}</q-item-section>
+                      <q-item-section class="q-px-xs" style="min-width: 80px">{{ $t('show') }}</q-item-section>
+                    </q-item>
+                    <q-item clickable :to="'/training/prices/' + training.id">
+                      <q-item-section>
+                        <q-icon name='paid' size='xs' />
+                      </q-item-section>
+                      <q-item-section class="q-px-xs" style="min-width: 80px">{{ $t('show_prices') }}</q-item-section>
                     </q-item>
                     <q-item clickable :to="'/training/edit/' + training.id">
                       <q-item-section>
-                        <q-icon name='edit' size='xs'/>
+                        <q-icon name='edit' size='xs' />
                       </q-item-section>
-                      <q-item-section>{{ $t('edit') }}</q-item-section>
+                      <q-item-section class="q-px-xs" style="min-width: 80px">{{ $t('edit') }}</q-item-section>
                     </q-item>
                     <q-item clickable @click="deleteTraining(training.id)">
                       <q-item-section>
-                        <q-icon name='delete' size='xs'/>
+                        <q-icon name='delete' size='xs' />
                       </q-item-section>
-                      <q-item-section>{{ $t('delete') }}</q-item-section>
+                      <q-item-section class="q-px-xs" style="min-width: 80px">{{ $t('delete') }}</q-item-section>
                     </q-item>
                   </q-list>
                 </q-menu>

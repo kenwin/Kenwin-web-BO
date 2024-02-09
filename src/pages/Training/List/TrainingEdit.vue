@@ -9,9 +9,9 @@
           <q-item-section avatar>
             <q-btn outline round color="primary" icon="west" to="/training" />
           </q-item-section>
-          <q-item-section
-            ><div class="text-h5">{{$t('trainingUpdate')}}</div></q-item-section
-          >
+          <q-item-section>
+            <div class="text-h5">{{ $t('trainingUpdate') }}</div>
+          </q-item-section>
         </q-item>
         <q-separator />
       </div>
@@ -23,26 +23,13 @@
         </q-item>
         <q-item>
           <q-item-section>
-            <q-input
-              v-model="trainingData.date_start"
-              filled
-              :label="$t('startDate')"
-            >
+            <q-input v-model="trainingData.date_start" filled :label="$t('startDate')">
               <template v-slot:append>
                 <q-icon name="event" class="cursor-pointer">
-                  <q-popup-proxy
-                    cover
-                    transition-show="scale"
-                    transition-hide="scale"
-                  >
+                  <q-popup-proxy cover transition-show="scale" transition-hide="scale">
                     <q-date v-model="trainingData.date_start" mask="DD/MM/YYYY">
                       <div class="row items-center justify-end">
-                        <q-btn
-                          v-close-popup
-                          :label="$t('close')"
-                          color="primary"
-                          flat
-                        />
+                        <q-btn v-close-popup :label="$t('close')" color="primary" flat />
                       </div>
                     </q-date>
                   </q-popup-proxy>
@@ -53,26 +40,13 @@
         </q-item>
         <q-item>
           <q-item-section>
-            <q-input
-              v-model="trainingData.date_end"
-              filled
-              :label="$t('endDate')"
-            >
+            <q-input v-model="trainingData.date_end" filled :label="$t('endDate')">
               <template v-slot:append>
                 <q-icon name="event" class="cursor-pointer">
-                  <q-popup-proxy
-                    cover
-                    transition-show="scale"
-                    transition-hide="scale"
-                  >
+                  <q-popup-proxy cover transition-show="scale" transition-hide="scale">
                     <q-date v-model="trainingData.date_end" mask="DD/MM/YYYY">
                       <div class="row items-center justify-end">
-                        <q-btn
-                          v-close-popup
-                          :label="$t('close')"
-                          color="primary"
-                          flat
-                        />
+                        <q-btn v-close-popup :label="$t('close')" color="primary" flat />
                       </div>
                     </q-date>
                   </q-popup-proxy>
@@ -83,29 +57,22 @@
         </q-item>
         <q-item>
           <q-item-section>
-            <q-input
-              v-model="trainingData.duration_description"
-              filled
-              :label="$t('durationDescription')"
-            />
+            <q-input v-model="trainingData.duration_description" filled :label="$t('durationDescription')" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <ckeditor
-              :editor="editor"
-              v-model="trainingData.description"
-              :config="editorConfig"
-            ></ckeditor>
+            <q-input v-model="trainingData.id_training_go4click" filled :label="'Id interno Go4click'" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <q-btn
-              @click="onSubmit()"
-              color="green"
-              :label="$t('trainingUpdate')"
-            />
+            <ckeditor :editor="editor" v-model="trainingData.description" :config="editorConfig"></ckeditor>
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section>
+            <q-btn @click="onSubmit()" color="green" :label="$t('trainingUpdate')" />
           </q-item-section>
         </q-item>
       </div>

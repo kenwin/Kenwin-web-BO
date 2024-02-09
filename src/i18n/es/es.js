@@ -11,6 +11,7 @@ export default {
   lang: 'Idioma',
   config: 'Configuración',
   show: 'Ver más',
+  show_prices: "Ver precios",
   edit: 'Editar',
   delete: 'Borrar',
   update: 'Actualizar',
@@ -102,6 +103,12 @@ export default {
   },
   trainings: {
     title: "Capacitaciones",
-    caption: "Listado de capacitaciones"
+    caption: "Seccion de capacitaciones",
+    list: "Listado",
+    list_caption: "Listado de capacitaciones",
+    purchases: {
+      purchases_section: "Compras",
+      purchases_caption: "Gestion de compras",
+    }
   }
 };

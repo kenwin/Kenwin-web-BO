@@ -5,17 +5,28 @@ import { useAuth } from "stores/auth";
 export const useTraining = defineStore("training", {
   state: () => ({
     training: {},
+    trainingPrices: [],
     trainingList: [],
+    purchase: {},
+    trainingPurchases: [],
     loading: false,
   }),
   getters: {
     getTraining: (state) => state.training,
+    getTrainingPrices: (state) => state.trainingPrices,
     getTrainingList: (state) => state.trainingList,
+    getPurchase: (state) => state.purchase,
+    getTrainingPurchases: (state) => state.trainingPurchases,
     getLoading: (state) => state.loading,
   },
   actions: {
     setTraining(payload) {
       this.training = payload;
+    },
+    selectTraining(training_id) {
+      this.training = this.trainingList.filter((data) => {
+        return data.id == training_id
+      })[0]
     },
     async getApiTraining() {
       this.loading = true;
@@ -33,11 +44,136 @@ export const useTraining = defineStore("training", {
       };
 
       try {
-        await api
-          .get("/api/training", config)
+        await api.get("/api/training", config)
           .then((response) => {
             console.log(response.data);
             this.trainingList = response.data;
+            this.loading = false;
+          })
+          .catch((error) => {
+            // handle error
+            console.log(error);
+          });
+      } catch (error) {
+        if (error) throw error;
+        this.loading = false;
+      }
+    },
+    async getTrainingPricesById(training_id) {
+      this.loading = true;
+      const auth = useAuth();
+
+      if (!auth.getToken) {
+        console.log("Null token");
+        return;
+      }
+
+      const config = {
+        headers: {
+          Authorization: "Bearer " + auth.getToken,
+        },
+      };
+
+      try {
+        await api.get("/api/training_price/" + training_id + "/" + auth.getUser.country.id, config)
+          .then((response) => {
+            console.log(response);
+            this.trainingPrices = response.data;
+            this.loading = false;
+          })
+          .catch((error) => {
+            // handle error
+            console.log(error);
+          });
+      } catch (error) {
+        if (error) throw error;
+        this.loading = false;
+      }
+    },
+    async getApiPurchases() {
+      this.loading = true;
+      const auth = useAuth();
+
+      if (!auth.getToken) {
+        console.log("Null token");
+        return;
+      }
+
+      const config = {
+        headers: {
+          Authorization: "Bearer " + auth.getToken,
+        },
+      };
+
+      try {
+        await api.get("/api/training_purchases_list/", config)
+          .then((response) => {
+            console.log(response);
+            this.trainingPurchases = response.data;
+            this.loading = false;
+          })
+          .catch((error) => {
+            // handle error
+            console.log(error);
+          });
+      } catch (error) {
+        if (error) throw error;
+        this.loading = false;
+      }
+    },
+    async getPurchaseById(purchase_id) {
+      this.loading = true;
+      const auth = useAuth();
+
+      if (!auth.getToken) {
+        console.log("Null token");
+        return;
+      }
+
+      const config = {
+        headers: {
+          Authorization: "Bearer " + auth.getToken,
+        },
+      };
+
+      try {
+        await api
+          .get("/api/training_purchase/" + purchase_id, config)
+          .then((response) => {
+            console.log(response);
+            this.purchase = response.data;
+            this.loading = false;
+          })
+          .catch((error) => {
+            // handle error
+            console.log(error);
+          });
+      } catch (error) {
+        if (error) throw error;
+        this.loading = false;
+      }
+    },
+    async confirmPurchaseById(purchase_id) {
+      this.loading = true;
+      const auth = useAuth();
+
+      if (!auth.getToken) {
+        console.log("Null token");
+        return;
+      }
+
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
+          Authorization: "Bearer " + auth.getToken,
+        },
+      };
+
+      try {
+        await api
+          .post("/api/training_confirm_purchase/" + purchase_id, {}, config)
+          .then((response) => {
+            console.log(response);
             this.loading = false;
           })
           .catch((error) => {
@@ -106,6 +242,9 @@ export const useTraining = defineStore("training", {
       if (data.description) {
         formData.set("description", data.description);
       }
+      if (data.id_training_go4click) {
+        formData.set("id_training_go4click", data.id_training_go4click);
+      }
 
       const config = {
         headers: {
@@ -164,6 +303,9 @@ export const useTraining = defineStore("training", {
           "duration_description",
           this.training.duration_description
         );
+      }
+      if (this.training) {
+        formData.set("id_training_go4click", this.training.id_training_go4click);
       }
 
       try {

@@ -2,14 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
+        <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
 
         <q-toolbar-title> Kenwin Backoffice </q-toolbar-title>
         <q-btn :to="'config'" stretch flat icon="settings" :label="$t('config')" />
@@ -18,7 +11,83 @@
     </q-header>
 
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
-      <q-list>
+      <q-list bordered class="rounded-borders">
+
+        <q-item-label header> {{ $t('administration') }} </q-item-label>
+
+        <q-item clickable tag="a" :to="'/'">
+          <q-item-section avatar>
+            <q-icon :name="'home'" />
+          </q-item-section>
+
+          <q-item-section>
+            <q-item-label>{{ $t('home.title') }}</q-item-label>
+            <q-item-label caption>{{ $t('home.caption') }}</q-item-label>
+          </q-item-section>
+        </q-item>
+
+        <q-item clickable tag="a" :to="'/contact_forms'">
+          <q-item-section avatar>
+            <q-icon :name="'record_voice_over'" />
+          </q-item-section>
+
+          <q-item-section>
+            <q-item-label>{{ $t('contact.title') }}</q-item-label>
+            <q-item-label caption>{{ $t('contact.caption') }}</q-item-label>
+          </q-item-section>
+        </q-item>
+
+        <q-item clickable tag="a" :to="'/news'">
+          <q-item-section avatar>
+            <q-icon :name="'feed'" />
+          </q-item-section>
+
+          <q-item-section>
+            <q-item-label>{{ $t('news.title') }}</q-item-label>
+            <q-item-label caption>{{ $t('news.caption') }}</q-item-label>
+          </q-item-section>
+        </q-item>
+
+        <q-item clickable tag="a" :to="'/downloads'">
+          <q-item-section avatar>
+            <q-icon :name="'download'" />
+          </q-item-section>
+
+          <q-item-section>
+            <q-item-label>{{ $t('downloads.title') }}</q-item-label>
+            <q-item-label caption>{{ $t('downloads.caption') }}</q-item-label>
+          </q-item-section>
+        </q-item>
+
+        <q-expansion-item :content-inset-level="0.5" expand-separator icon="source" :label="$t('trainings.title')"
+          :caption="$t('trainings.caption')">
+
+          <q-item clickable tag="a" :to="'/training'">
+            <q-item-section avatar>
+              <q-icon :name="'source'" />
+            </q-item-section>
+
+            <q-item-section>
+              <q-item-label>{{ $t('trainings.list') }}</q-item-label>
+              <q-item-label caption>{{ $t('trainings.list_caption') }}</q-item-label>
+            </q-item-section>
+          </q-item>
+
+          <q-item clickable tag="a" :to="'/training/purchases'">
+            <q-item-section avatar>
+              <q-icon :name="'shopping_cart'" />
+            </q-item-section>
+
+            <q-item-section>
+              <q-item-label>{{ $t('trainings.purchases.purchases_section') }}</q-item-label>
+              <q-item-label caption>{{ $t('trainings.purchases.purchases_caption') }}</q-item-label>
+            </q-item-section>
+          </q-item>
+
+        </q-expansion-item>
+      </q-list>
+
+      <!--q-list>
         <q-item-label header> {{ $t('administration') }} </q-item-label>
 
         <EssentialLink
@@ -26,7 +95,7 @@
           :key="link.title"
           v-bind="link"
         />
-      </q-list>
+      </q-list-->
     </q-drawer>
 
     <q-page-container>
@@ -37,7 +106,7 @@
 
 <script>
 import { defineComponent, ref, onBeforeMount } from "vue";
-import EssentialLink from "components/EssentialLink.vue";
+//import EssentialLink from "components/EssentialLink.vue";
 import { useAuth } from "stores/auth";
 import { useRouter } from "vue-router";
 
@@ -77,9 +146,9 @@ const linksList = [
 export default defineComponent({
   name: "MainLayout",
 
-  components: {
+  /*components: {
     EssentialLink,
-  },
+  },*/
 
   setup() {
     const leftDrawerOpen = ref(false);

@@ -2,7 +2,7 @@
   <q-page>
     <div class="row q-pa-sm">
       <div class="col-12">
-        <p class="text-h5">{{$t('categoryList')}}</p>
+        <p class="text-h5">{{ $t('categoryList') }}</p>
       </div>
       <div v-if="categoriesList.length == 0" class="col-12">
         <q-list bordered separator>
@@ -27,34 +27,34 @@
 
             <q-item-section>
               <q-item-label>
-                <b>{{$t('categoryName')}}: </b> {{ category.nombre }} |
-                <b>{{$t('creationDate')}}: </b>
+                <b>{{ $t('categoryName') }}: </b> {{ category.nombre }} |
+                <b>{{ $t('creationDate') }}: </b>
                 {{ formatDate(category.created_at) }}
-                <b>{{$t('newsQuantity')}}: </b> {{ category.news.length }}
+                <b>{{ $t('newsQuantity') }}: </b> {{ category.news.length }}
               </q-item-label>
             </q-item-section>
 
             <q-item-section side>
               <q-btn color="grey-7" round flat icon="more_vert">
-                <q-menu cover auto-close>
-                  <q-list>
+                <q-menu auto-close>
+                  <q-list class="q-px-xs q-py-xs">
                     <q-item clickable :to="'/categorias/' + category.id">
                       <q-item-section>
-                        <q-icon name='visibility' size='xs'/>
+                        <q-icon name='visibility' size='xs' />
                       </q-item-section>
-                      <q-item-section>{{ $t('show') }}</q-item-section>
+                      <q-item-section class="q-px-xs" style="min-width: 60px">{{ $t('show') }}</q-item-section>
                     </q-item>
                     <q-item clickable :to="'/categorias/edit/' + category.id">
                       <q-item-section>
-                        <q-icon name='edit' size='xs'/>
+                        <q-icon name='edit' size='xs' />
                       </q-item-section>
-                      <q-item-section>{{ $t('edit') }}</q-item-section>
+                      <q-item-section class="q-px-xs" style="min-width: 60px">{{ $t('edit') }}</q-item-section>
                     </q-item>
                     <q-item clickable @click="removeCategory(category.id)">
                       <q-item-section>
-                        <q-icon name='delete' size='xs'/>
+                        <q-icon name='delete' size='xs' />
                       </q-item-section>
-                      <q-item-section>{{ $t('delete') }}</q-item-section>
+                      <q-item-section class="q-px-xs" style="min-width: 60px">{{ $t('delete') }}</q-item-section>
                     </q-item>
                   </q-list>
                 </q-menu>
@@ -67,7 +67,7 @@
 
     <div class="row q-pa-sm">
       <div class="col-12">
-        <p class="text-h5">{{$t('newsList')}}</p>
+        <p class="text-h5">{{ $t('newsList') }}</p>
       </div>
       <div v-if="newsList.length == 0" class="col-12">
         <q-list bordered separator>
@@ -92,37 +92,37 @@
 
             <q-item-section>
               <q-item-label>
-                <b>{{$t('title')}}: </b> {{ news.titulo }} | <b>{{$t('author')}}: </b>
+                <b>{{ $t('title') }}: </b> {{ news.titulo }} | <b>{{ $t('author') }}: </b>
                 {{ news.autor }}
               </q-item-label>
               <q-item-label caption lines="3">
-                <b>{{$t('body')}}: </b> {{ news.cuerpo }}
+                <b>{{ $t('body') }}: </b> {{ news.cuerpo }}
               </q-item-label>
             </q-item-section>
 
             <q-item-section side>
               <q-btn color="grey-7" round flat icon="more_vert">
-                <q-menu cover auto-close>
-                  <q-list>
+                <q-menu auto-close>
+                  <q-list class="q-px-xs q-py-xs">
                     <q-item clickable icon='logout' :to="'/news/info/' + news.id">
                       <q-item-section>
-                        <q-icon name='visibility' size='xs'/>
+                        <q-icon name='visibility' size='xs' />
                       </q-item-section>
-                      <q-item-section>
+                      <q-item-section class="q-px-xs" style="min-width: 60px">
                         {{ $t('show') }}
                       </q-item-section>
                     </q-item>
                     <q-item clickable :to="'/news/edit/' + news.id">
                       <q-item-section>
-                        <q-icon name='edit' size='xs'/>
+                        <q-icon name='edit' size='xs' />
                       </q-item-section>
-                      <q-item-section>{{ $t('edit') }}</q-item-section>
+                      <q-item-section class="q-px-xs" style="min-width: 60px">{{ $t('edit') }}</q-item-section>
                     </q-item>
                     <q-item clickable @click="removeNews(news.id)">
                       <q-item-section>
-                        <q-icon name='delete' size='xs'/>
+                        <q-icon name='delete' size='xs' />
                       </q-item-section>
-                      <q-item-section>{{ $t('delete') }}</q-item-section>
+                      <q-item-section class="q-px-xs" style="min-width: 60px">{{ $t('delete') }}</q-item-section>
                     </q-item>
                   </q-list>
                 </q-menu>
