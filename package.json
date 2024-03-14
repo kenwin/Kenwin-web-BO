@@ -16,6 +16,7 @@
     "@ckeditor/ckeditor5-vue": "^5.1.0",
     "@quasar/cli": "^2.2.3",
     "@quasar/extras": "^1.0.0",
+    "@tinymce/tinymce-vue": "^5.1.1",
     "axios": "^1.2.1",
     "dotenv": "^16.3.1",
     "moment": "^2.29.4",

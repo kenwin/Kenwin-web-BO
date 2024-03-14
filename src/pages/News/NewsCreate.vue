@@ -10,7 +10,7 @@
             <q-btn outline round color="primary" icon="west" to="/news" />
           </q-item-section>
           <q-item-section>
-            <div class="text-h5">{{$t('newsCreate')}}</div>
+            <div class="text-h5">{{ $t('newsCreate') }}</div>
           </q-item-section>
         </q-item>
         <q-separator />
@@ -18,20 +18,12 @@
       <div class="col-12">
         <q-item>
           <q-item-section>
-            <q-input
-              v-model="form.epigrafe"
-              filled
-              :label="$t('epigrafe')"
-            />
+            <q-input v-model="form.epigrafe" filled :label="$t('epigrafe')" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <q-input
-              v-model="form.titulo"
-              filled
-              :label="$t('newsTitle')"
-            />
+            <q-input v-model="form.titulo" filled :label="$t('newsTitle')" />
           </q-item-section>
         </q-item>
         <q-item>
@@ -41,64 +33,30 @@
         </q-item>
         <q-item>
           <q-item-section>
-            <q-input
-              v-model="form.keywords"
-              filled
-              label="Keywords"
-              placeholder="Ej: kenwin, soluciones, people, etc"
-            />
+            <q-input v-model="form.keywords" filled label="Keywords"
+              placeholder="Ej: kenwin, soluciones, people, etc" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <q-select
-              v-model="form.categories"
-              filled
-              multiple
-              :options="categoriesList"
-              :label="$t('categories')"
-              option-value="id"
-              option-label="nombre"
-            />
+            <q-select v-model="form.categories" filled multiple :options="categoriesList" :label="$t('categories')"
+              option-value="id" option-label="nombre" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <q-checkbox
-              size="lg"
-              val="lg"
-              v-model="form.destacada"
-              :label="$t('starred')"
-            />
+            <q-checkbox size="lg" val="lg" v-model="form.destacada" :label="$t('starred')" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <q-input
-              filled
-              v-model="form.fecha_alta"
-              :label="$t('activeDate')"
-              style="max-width: 300px"
-            >
+            <q-input filled v-model="form.fecha_alta" :label="$t('activeDate')" style="max-width: 300px">
               <template v-slot:prepend>
                 <q-icon name="event" class="cursor-pointer">
-                  <q-popup-proxy
-                    cover
-                    transition-show="scale"
-                    transition-hide="scale"
-                  >
-                    <q-date
-                      ref="datePicker"
-                      v-model="form.fecha_alta"
-                      mask="DD/MM/YYYY"
-                    >
+                  <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                    <q-date ref="datePicker" v-model="form.fecha_alta" mask="DD/MM/YYYY">
                       <div class="row items-center justify-end">
-                        <q-btn
-                          v-close-popup
-                          label="Cerrar"
-                          color="primary"
-                          flat
-                        />
+                        <q-btn v-close-popup label="Cerrar" color="primary" flat />
                       </div>
                     </q-date>
                   </q-popup-proxy>
@@ -109,61 +67,37 @@
         </q-item>
         <q-item>
           <q-item-section>
-            <q-select
-              v-model="form.idioma"
-              filled
-              :options="idiomas"
-              :label="$t('lang')"
-              option-value="id"
-              option-label="nombre"
-            />
+            <q-select v-model="form.idioma" filled :options="idiomas" :label="$t('lang')" option-value="id"
+              option-label="nombre" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <q-checkbox
-              size="lg"
-              val="lg"
-              v-model="form.allow_comments"
-              :label="$t('allowComments')"
-            />
+            <q-checkbox size="lg" val="lg" v-model="form.allow_comments" :label="$t('allowComments')" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <q-input
-              @update:model-value="
-                (val) => {
-                  form.image = val[0];
-                }
-              "
-              filled
-              type="file"
-              :hint="$t('coverImage')"
-            />
+            <q-input @update:model-value="(val) => {
+      form.image = val[0];
+    }
+      " filled type="file" :hint="$t('coverImage')" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <q-input
-              @update:model-value="
-                (val) => {
-                  form.video = val[0];
-                }
-              "
-              filled
-              type="file"
-              :hint="$t('videoUpload')"
-            />
+            <q-input @update:model-value="(val) => {
+      form.video = val[0];
+    }
+      " filled type="file" :hint="$t('videoUpload')" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <ckeditor
-              :editor="editor"
-              v-model="form.cuerpo"
-              :config="editorConfig"
-            ></ckeditor>
+            <div>
+              <Editor :init="editorInit" api-key="qidklezig3896hlxgkdamsoastf8nf5e888ezuzwj8tqpzqq"
+                v-model="form.cuerpo" />
+            </div>
           </q-item-section>
         </q-item>
         <q-item>
@@ -187,9 +121,12 @@ import { useNews } from "stores/news";
 import { useCategories } from "stores/categories";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import Editor from '@tinymce/tinymce-vue'
 
 export default {
+  components: {
+    Editor,
+  },
   name: "NewsCreate",
   setup() {
     const store = useNews();
@@ -213,10 +150,6 @@ export default {
         },
       ],
       file: ref(null),
-      editor: ClassicEditor,
-      editorConfig: {
-        // The configuration of the editor.
-      },
       myLocale: {
         days: "Domingo_Lunes_Martes_Miércoles_Jueves_Viernes_Sábado".split("_"),
         daysShort: "Dom_Lun_Mar_Mié_Jue_Vie_Sáb".split("_"),
@@ -250,9 +183,27 @@ export default {
         image: ref(null),
         video: ref(null),
       },
+      editorInit: {
+        toolbar_mode: 'sliding',
+        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
+        images_upload_url: "/api/downloads/create_resource",
+        mergetags_list: [
+          { value: 'First.Name', title: 'First Name' },
+          { value: 'Email', title: 'Email' },
+        ],
+        ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+        language_url: '/langs/es_MX.js',
+        language: 'es_MX',
+        menubar: "file edit view insert format tools table help",
+        toolbar_mode: "floating",
+        height: 600,
+      },
     };
   },
-  mounted() {},
+  mounted() { },
   methods: {
     async onSubmit() {
       this.form.idioma = this.form.idioma.id;
