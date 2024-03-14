@@ -189,7 +189,7 @@ export default {
         toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
         tinycomments_mode: 'embedded',
         tinycomments_author: 'Author name',
-        images_upload_url: "/api/downloads/create_resource",
+        images_upload_url: "https://api2023.kenwin.net/api/downloads/create_resource",
         mergetags_list: [
           { value: 'First.Name', title: 'First Name' },
           { value: 'Email', title: 'Email' },
