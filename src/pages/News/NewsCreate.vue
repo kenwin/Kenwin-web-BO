@@ -10,7 +10,7 @@
             <q-btn outline round color="primary" icon="west" to="/news" />
           </q-item-section>
           <q-item-section>
-            <div class="text-h5">{{$t('newsCreate')}}</div>
+            <div class="text-h5">{{ $t('newsCreate') }}</div>
           </q-item-section>
         </q-item>
         <q-separator />
@@ -18,20 +18,12 @@
       <div class="col-12">
         <q-item>
           <q-item-section>
-            <q-input
-              v-model="form.epigrafe"
-              filled
-              :label="$t('epigrafe')"
-            />
+            <q-input v-model="form.epigrafe" filled :label="$t('epigrafe')" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <q-input
-              v-model="form.titulo"
-              filled
-              :label="$t('newsTitle')"
-            />
+            <q-input v-model="form.titulo" filled :label="$t('newsTitle')" />
           </q-item-section>
         </q-item>
         <q-item>
@@ -41,64 +33,30 @@
         </q-item>
         <q-item>
           <q-item-section>
-            <q-input
-              v-model="form.keywords"
-              filled
-              label="Keywords"
-              placeholder="Ej: kenwin, soluciones, people, etc"
-            />
+            <q-input v-model="form.keywords" filled label="Keywords"
+              placeholder="Ej: kenwin, soluciones, people, etc" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <q-select
-              v-model="form.categories"
-              filled
-              multiple
-              :options="categoriesList"
-              :label="$t('categories')"
-              option-value="id"
-              option-label="nombre"
-            />
+            <q-select v-model="form.categories" filled multiple :options="categoriesList" :label="$t('categories')"
+              option-value="id" option-label="nombre" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <q-checkbox
-              size="lg"
-              val="lg"
-              v-model="form.destacada"
-              :label="$t('starred')"
-            />
+            <q-checkbox size="lg" val="lg" v-model="form.destacada" :label="$t('starred')" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <q-input
-              filled
-              v-model="form.fecha_alta"
-              :label="$t('activeDate')"
-              style="max-width: 300px"
-            >
+            <q-input filled v-model="form.fecha_alta" :label="$t('activeDate')" style="max-width: 300px">
               <template v-slot:prepend>
                 <q-icon name="event" class="cursor-pointer">
-                  <q-popup-proxy
-                    cover
-                    transition-show="scale"
-                    transition-hide="scale"
-                  >
-                    <q-date
-                      ref="datePicker"
-                      v-model="form.fecha_alta"
-                      mask="DD/MM/YYYY"
-                    >
+                  <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                    <q-date ref="datePicker" v-model="form.fecha_alta" mask="DD/MM/YYYY">
                       <div class="row items-center justify-end">
-                        <q-btn
-                          v-close-popup
-                          label="Cerrar"
-                          color="primary"
-                          flat
-                        />
+                        <q-btn v-close-popup label="Cerrar" color="primary" flat />
                       </div>
                     </q-date>
                   </q-popup-proxy>
@@ -109,62 +67,37 @@
         </q-item>
         <q-item>
           <q-item-section>
-            <q-select
-              v-model="form.idioma"
-              filled
-              :options="idiomas"
-              :label="$t('lang')"
-              option-value="id"
-              option-label="nombre"
-            />
+            <q-select v-model="form.idioma" filled :options="idiomas" :label="$t('lang')" option-value="id"
+              option-label="nombre" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <q-checkbox
-              size="lg"
-              val="lg"
-              v-model="form.allow_comments"
-              :label="$t('allowComments')"
-            />
+            <q-checkbox size="lg" val="lg" v-model="form.allow_comments" :label="$t('allowComments')" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <q-input
-              @update:model-value="
-                (val) => {
-                  form.image = val[0];
-                }
-              "
-              filled
-              type="file"
-              :hint="$t('coverImage')"
-            />
+            <q-input @update:model-value="(val) => {
+      form.image = val[0];
+    }
+      " filled type="file" :hint="$t('coverImage')" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <q-input
-              @update:model-value="
-                (val) => {
-                  form.video = val[0];
-                }
-              "
-              filled
-              type="file"
-              :hint="$t('videoUpload')"
-            />
+            <q-input @update:model-value="(val) => {
+      form.video = val[0];
+    }
+      " filled type="file" :hint="$t('videoUpload')" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <ckeditor
-              :editor="editor"
-              v-model="form.cuerpo"
-              :config="editorConfig"
-            ></ckeditor>
-          </q-item-section>
+            <div id="container">
+            <div id="editor">
+            </div>
+        </div>          </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
@@ -187,7 +120,6 @@ import { useNews } from "stores/news";
 import { useCategories } from "stores/categories";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 export default {
   name: "NewsCreate",
@@ -213,10 +145,7 @@ export default {
         },
       ],
       file: ref(null),
-      editor: ClassicEditor,
-      editorConfig: {
-        // The configuration of the editor.
-      },
+
       myLocale: {
         days: "Domingo_Lunes_Martes_Miércoles_Jueves_Viernes_Sábado".split("_"),
         daysShort: "Dom_Lun_Mar_Mié_Jue_Vie_Sáb".split("_"),
@@ -252,7 +181,148 @@ export default {
       },
     };
   },
-  mounted() {},
+  mounted() {
+    CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
+      // https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
+      toolbar: {
+        items: [
+          'exportPDF', 'exportWord', '|',
+          'findAndReplace', 'selectAll', '|',
+          'heading', '|',
+          'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript', 'removeFormat', '|',
+          'bulletedList', 'numberedList', 'todoList', '|',
+          'outdent', 'indent', '|',
+          'undo', 'redo',
+          '-',
+          'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
+          'alignment', '|',
+          'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
+          'specialCharacters', 'horizontalLine', 'pageBreak', '|',
+          'textPartLanguage', '|',
+          'sourceEditing'
+        ],
+        shouldNotGroupWhenFull: true
+      },
+      // Changing the language of the interface requires loading the language file using the <script> tag.
+      language: 'es',
+      list: {
+        properties: {
+          styles: true,
+          startIndex: true,
+          reversed: true
+        }
+      },
+      // https://ckeditor.com/docs/ckeditor5/latest/features/headings.html#configuration
+      heading: {
+        options: [
+          { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+          { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+          { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+          { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+          { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
+          { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
+          { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
+        ]
+      },
+      // https://ckeditor.com/docs/ckeditor5/latest/features/editor-placeholder.html#using-the-editor-configuration
+      placeholder: 'Welcome to CKEditor 5!',
+      // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-family-feature
+      fontFamily: {
+        options: [
+          'default',
+          'Arial, Helvetica, sans-serif',
+          'Courier New, Courier, monospace',
+          'Georgia, serif',
+          'Lucida Sans Unicode, Lucida Grande, sans-serif',
+          'Tahoma, Geneva, sans-serif',
+          'Times New Roman, Times, serif',
+          'Trebuchet MS, Helvetica, sans-serif',
+          'Verdana, Geneva, sans-serif'
+        ],
+        supportAllValues: true
+      },
+      // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-size-feature
+      fontSize: {
+        options: [10, 12, 14, 'default', 18, 20, 22],
+        supportAllValues: true
+      },
+      // Be careful with the setting below. It instructs CKEditor to accept ALL HTML markup.
+      // https://ckeditor.com/docs/ckeditor5/latest/features/general-html-support.html#enabling-all-html-features
+      htmlSupport: {
+        allow: [
+          {
+            name: /.*/,
+            attributes: true,
+            classes: true,
+            styles: true
+          }
+        ]
+      },
+      // Be careful with enabling previews
+      // https://ckeditor.com/docs/ckeditor5/latest/features/html-embed.html#content-previews
+      htmlEmbed: {
+        showPreviews: true
+      },
+      // https://ckeditor.com/docs/ckeditor5/latest/features/link.html#custom-link-attributes-decorators
+      link: {
+        decorators: {
+          addTargetToExternalLinks: true,
+          defaultProtocol: 'https://',
+          toggleDownloadable: {
+            mode: 'manual',
+            label: 'Downloadable',
+            attributes: {
+              download: 'file'
+            }
+          }
+        }
+      },
+      // https://ckeditor.com/docs/ckeditor5/latest/features/mentions.html#configuration
+      mention: {
+        feeds: [
+          {
+            marker: '@',
+            feed: [
+              '@apple', '@bears', '@brownie', '@cake', '@cake', '@candy', '@canes', '@chocolate', '@cookie', '@cotton', '@cream',
+              '@cupcake', '@danish', '@donut', '@dragée', '@fruitcake', '@gingerbread', '@gummi', '@ice', '@jelly-o',
+              '@liquorice', '@macaroon', '@marzipan', '@oat', '@pie', '@plum', '@pudding', '@sesame', '@snaps', '@soufflé',
+              '@sugar', '@sweet', '@topping', '@wafer'
+            ],
+            minimumCharacters: 1
+          }
+        ]
+      },
+      // The "super-build" contains more premium features that require additional configuration, disable them below.
+      // Do not turn them on unless you read the documentation and know how to configure them and setup the editor.
+      removePlugins: [
+        // These two are commercial, but you can try them out without registering to a trial.
+        // 'ExportPdf',
+        // 'ExportWord',
+        //'CKBox',
+        //'CKFinder',
+        'EasyImage',
+        // This sample uses the Base64UploadAdapter to handle image uploads as it requires no configuration.
+        // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/base64-upload-adapter.html
+        // Storing images as Base64 is usually a very bad idea.
+        // Replace it on production website with other solutions:
+        // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/image-upload.html
+        // 'Base64UploadAdapter',
+        'RealTimeCollaborativeComments',
+        'RealTimeCollaborativeTrackChanges',
+        'RealTimeCollaborativeRevisionHistory',
+        'PresenceList',
+        'Comments',
+        'TrackChanges',
+        'TrackChangesData',
+        'RevisionHistory',
+        'Pagination',
+        'WProofreader',
+        // Careful, with the Mathtype plugin CKEditor will not load when loading this sample
+        // from a local file system (file://) - load this site via HTTP server if you enable MathType
+        'MathType'
+      ]
+    });
+  },
   methods: {
     async onSubmit() {
       this.form.idioma = this.form.idioma.id;
