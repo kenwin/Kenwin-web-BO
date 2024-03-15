@@ -122,9 +122,6 @@ import { useRouter } from "vue-router";
 import { ref } from "vue";
 
 export default {
-  components: {
-    Editor,
-  },
   name: "NewsCreate",
   setup() {
     const store = useNews();
