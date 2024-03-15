@@ -95,8 +95,8 @@
         <q-item>
           <q-item-section>
             <div id="container">
-            <div id="editor">
-            </div>
+            <q-div id="editor" v-model="form.cuerpo">
+            </q-div>
         </div>          </q-item-section>
         </q-item>
         <q-item>
