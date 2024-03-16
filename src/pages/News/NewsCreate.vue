@@ -95,9 +95,10 @@
         <q-item>
           <q-item-section>
             <div id="container">
-            <q-div id="editor" v-model="form.cuerpo">
-            </q-div>
-        </div>          </q-item-section>
+              <q-div id="editor">
+              </q-div>
+            </div>
+          </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
@@ -172,6 +173,7 @@ export default {
         idioma: "",
         destacada: false,
         fecha_alta: "",
+        editor: null,
         cuerpo: "<p>body de la noticia</p>",
         autor: "",
         allow_comments: true,
@@ -338,6 +340,18 @@ export default {
         // from a local file system (file://) - load this site via HTTP server if you enable MathType
         'MathType'
       ]
+    }).then(editor => {
+      this.editor = editor;
+
+      // Configurar el evento input para capturar cambios en el contenido del editor
+      editor.model.document.on("change:data", () => {
+        this.form.cuerpo = editor.getData();
+      });
+
+      // Si deseas establecer un contenido inicial, puedes hacerlo aquí
+      editor.setData(this.form.cuerpo);
+    }).catch(error => {
+      console.error('Error al inicializar CKEditor:', error);
     });
   },
   methods: {
