@@ -33,6 +33,7 @@ export default {
   fileResource: "Por favor, adjunte un archivo para el recurso.",
   resourceCreate: "Crear recurso",
   resourceInfo: "Informacion del recurso para descargar",
+  download: "Descargar",
   resourceName: "Nombre del recurso",
   creationDate: "Fecha de creación",
   preview: "Vista previa",

@@ -85,7 +85,7 @@ export const useDownloads = defineStore("downloads", {
           .then((response) => {
             console.log(response.data);
             this.reportsList = response.data;
-            
+
             this.loading = false;
           })
           .catch((error) => {
@@ -488,6 +488,55 @@ export const useDownloads = defineStore("downloads", {
         console.log(response.data);
       } catch (error) {
         console.error(error);
+      }
+    },
+    generateReport(userId) {
+      try {
+        const auth = useAuth();
+        if (!auth.getToken) {
+          console.log("Null token");
+          return;
+        }
+
+        const getConfig = {
+          headers: {
+            Authorization: "Bearer " + auth.getToken,
+          },
+          responseType: "blob",
+        };
+
+        const currentDate = new Date();
+        const formattedDate = currentDate.toLocaleString("es-ES", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+
+        return api
+          .get(`/api/report/generate-report/${userId}`, getConfig)
+          .then((response) => {
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+
+            const fileName = `Downloads (${formattedDate}).xlsx`;
+
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", fileName);
+            document.body.appendChild(link);
+
+            link.click();
+
+            window.URL.revokeObjectURL(url);
+          })
+          .catch((error) => {
+            console.error(error);
+            throw error;
+          });
+      } catch (error) {
+        console.error(error);
+        throw error;
       }
     },
   },
