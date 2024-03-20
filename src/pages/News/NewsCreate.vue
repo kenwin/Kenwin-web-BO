@@ -95,9 +95,10 @@
         <q-item>
           <q-item-section>
             <div id="container">
-            <q-div id="editor" v-model="form.cuerpo">
-            </q-div>
-        </div>          </q-item-section>
+              <q-div id="editor">
+              </q-div>
+            </div>
+          </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
@@ -172,29 +173,12 @@ export default {
         idioma: "",
         destacada: false,
         fecha_alta: "",
+        editor: null,
         cuerpo: "<p>body de la noticia</p>",
         autor: "",
         allow_comments: true,
         image: ref(null),
         video: ref(null),
-      },
-      editorInit: {
-        toolbar_mode: 'sliding',
-        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
-        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-        tinycomments_mode: 'embedded',
-        tinycomments_author: 'Author name',
-        images_upload_url: "https://api2023.kenwin.net/api/downloads/create_resource",
-        mergetags_list: [
-          { value: 'First.Name', title: 'First Name' },
-          { value: 'Email', title: 'Email' },
-        ],
-        ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
-        language_url: '/langs/es_MX.js',
-        language: 'es_MX',
-        menubar: "file edit view insert format tools table help",
-        toolbar_mode: "floating",
-        height: 600,
       },
     };
   },
@@ -338,7 +322,19 @@ export default {
         // from a local file system (file://) - load this site via HTTP server if you enable MathType
         'MathType'
       ]
-    });
+    }).then(editor => {
+      this.editor = editor;
+
+      // Configurar el evento input para capturar cambios en el contenido del editor
+      editor.model.document.on("change:data", () => {
+        this.form.cuerpo = editor.getData();
+      });
+
+      // Si deseas establecer un contenido inicial, puedes hacerlo aquí
+      editor.setData(this.form.cuerpo);
+    }).catch(error => {
+      console.error('Error al inicializar CKEditor:', error);
+    })
   },
   methods: {
     async onSubmit() {
