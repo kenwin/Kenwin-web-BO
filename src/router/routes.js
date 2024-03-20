@@ -180,6 +180,11 @@ const routes = [
     component: () => import("pages/Auth/Login.vue"),
   },
 
+  {
+    path: "/password_recover",
+    component: () => import("pages/Auth/PassRecover.vue"),
+  },
+
   // Always leave this as last one,
   // but you can also remove it
   {

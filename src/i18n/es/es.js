@@ -106,6 +106,11 @@ export default {
   lastName: "Apellido",
   area: "Área",
   position: "Puesto",
+  recoverSuccess: "Si el email existe, recibirá un correo para reestablecer su contraseña.",
+  recoverError: "Error al recuperar contraseña. Por favor, inténtelo de nuevo más tarde.",
+  emptyEmail: "Email vacío",
+  systemError: "Error en el sistema",
+  "The email field must be a valid email address.": "Ingrese una dirección de correo válida.",
   home: {
     title: 'Inicio',
     caption: 'Página principal'

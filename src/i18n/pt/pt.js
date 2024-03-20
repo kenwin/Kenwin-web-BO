@@ -106,6 +106,11 @@ export default {
   lastName: "Sobrenome",
   area: "Área",
   position: "Posição",
+  recoverSuccess: "Se o e-mail existir, você receberá um e-mail para redefinir sua senha.",
+  recoverError: "Erro ao recuperar senha. Por favor, tente novamente mais tarde.",
+  emptyEmail: "Email vazio",
+  systemError: "Erro no sistema",
+  "The email field must be a valid email address.": "Por favor insira um e-mail válido.",
   home: {
     title: 'Home',
     caption: 'Página principal'

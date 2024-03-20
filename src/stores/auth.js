@@ -96,6 +96,37 @@ export const useAuth = defineStore("auth", {
         this.loading = false;
       }
     },
+    async recoverPass(data) {
+      this.loading = true;
+
+      if (data.email == "") {
+        throw new Error("email vacio");
+      }
+
+      const formData = new FormData();
+
+      const config = {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      };
+
+      formData.set("email", data.email);
+      try {
+        const response = await api.post("/api/forgot_password", formData, config);
+        if (response.data.success) {
+          this.$q.notify({
+            type: "positive",
+            message: this.$t('recoverSuccess')
+          });
+        } else {
+          throw new Error("Error en sistema");
+        }
+        this.loading = false;
+      } catch (error) {
+        if (error) throw error;
+      }
+    },
 
   },
 });

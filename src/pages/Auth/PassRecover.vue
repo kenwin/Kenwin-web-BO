@@ -8,23 +8,20 @@
         <div v-else class="column">
           <div class="row">
             <h5 class="text-h5 text-white q-my-md" size="lg">
-              Iniciar sesión/sessão | Kenwin Backoffice
+              Olvidé mi contraseña/Esqueci minha senha | Kenwin Backoffice
             </h5>
           </div>
-          <div class="row">
+          <div class="row justify-center items-center">
             <q-card square bordered class="q-pa-lg shadow-1">
               <q-card-section>
-                <q-form class="q-gutter-md">
+                <q-form class="q-gutter-md" @submit.prevent="send">
                   <q-input square filled v-model="data.email" type="email" label="Email" />
-                  <q-input square filled v-model="data.password" type="password" label="Contraseña/Senha"
-                    @keyup.enter="login()" />
                 </q-form>
               </q-card-section>
               <q-card-actions class="q-px-md">
-                <q-btn unelevated color="cyan-7" size="lg" class="full-width" label="Ingresar/Entrar"
-                  @click="login()" />
-                  <q-btn unelevated flat rounded color="cyan-7" class="q-my-xs full-width"
-                  label="Olvidé mi contraseña/Esqueci minha senha" to="/password_recover" />
+                <q-btn unelevated color="cyan-7" size="lg" class="full-width" label="Enviar" @click="send()" />
+                <q-btn unelevated flat rounded color="cyan-7" class="q-my-xs full-width"
+                  label="Ir al login/Ir para login" to="/login" />
               </q-card-actions>
             </q-card>
           </div>
@@ -55,22 +52,42 @@ export default {
     return {
       data: {
         email: "",
-        password: "",
       },
     };
   },
   methods: {
-    async login() {
-      await this.store.logginUser(this.data);
-      if (this.store.getToken) {
-        const lang = this.store.getLang === 'Port' ? 'pt' : 'es';
-        this.store.changeLanguage(lang);
-        this.router.push({ path: "/" });
-      } else {
+    async send() {
+      try {
+        this.loading = true;
+        await this.store.recoverPass(this.data);
         this.$q.notify({
-          type: "negative",
-          message: this.$t('wrongCred')
+          type: "positive",
+          message: this.$t('recoverSuccess')
         });
+      } catch (error) {
+        if (error.message === 'error al recuperar') {
+          this.$q.notify({
+            type: "negative",
+            message: this.$t('recoverError')
+          });
+        } else if (error.message === 'email vacio') {
+          this.$q.notify({
+            type: "negative",
+            message: this.$t('emptyEmail')
+          });
+        } else if (error.response && error.response.data) {
+          this.$q.notify({
+            type: "negative",
+            message: this.$t(error.response.data.message)
+          });
+        } else {
+          this.$q.notify({
+            type: "positive",
+            message: this.$t('recoverSuccess')
+          });
+        }
+      } finally {
+        this.loading = false;
       }
     },
   },
