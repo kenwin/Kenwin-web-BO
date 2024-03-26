@@ -126,6 +126,7 @@ export const useNews = defineStore("news", {
       if (data.video) {
         formData.set("video", data.video);
       }
+      formData.set("video_top", data.video_top != "" ? data.video_top : null);
 
       const config = {
         headers: {
@@ -205,6 +206,9 @@ export const useNews = defineStore("news", {
       }
       if (this.news && this.news.video) {
         formData.set("video", this.news.video);
+      }
+      if (this.news) {
+        formData.set("video_top", this.news.video_top);
       }
 
       try {

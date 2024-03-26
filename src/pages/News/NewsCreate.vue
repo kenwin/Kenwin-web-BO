@@ -94,6 +94,11 @@
         </q-item>
         <q-item>
           <q-item-section>
+            <q-checkbox size="lg" val="lg" v-model="form.video_top" :label="$t('videoTop')" />
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section>
             <div id="container">
               <q-div id="editor">
               </q-div>
@@ -179,6 +184,7 @@ export default {
         allow_comments: true,
         image: ref(null),
         video: ref(null),
+        video_top: false
       },
     };
   },
@@ -264,6 +270,7 @@ export default {
       htmlEmbed: {
         showPreviews: true
       },
+      mediaEmbed: { previewsInData: true },
       // https://ckeditor.com/docs/ckeditor5/latest/features/link.html#custom-link-attributes-decorators
       link: {
         decorators: {

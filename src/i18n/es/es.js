@@ -111,6 +111,7 @@ export default {
   emptyEmail: "Email vacío",
   systemError: "Error en el sistema",
   "The email field must be a valid email address.": "Ingrese una dirección de correo válida.",
+  videoTop: "Video al inicio (si no se tilda, queda al final)",
   home: {
     title: 'Inicio',
     caption: 'Página principal'

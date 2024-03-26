@@ -111,6 +111,7 @@ export default {
   emptyEmail: "Email vazio",
   systemError: "Erro no sistema",
   "The email field must be a valid email address.": "Por favor insira um e-mail válido.",
+  videoTop: "Vídeo no início (se não estiver marcado, está no final)",
   home: {
     title: 'Home',
     caption: 'Página principal'

@@ -78,20 +78,47 @@
             <q-checkbox size="lg" val="lg" v-model="newsData.allow_comments" :label="$t('allowComments')" />
           </q-item-section>
         </q-item>
+        <div class="row">
+  <q-item class="col-12">
+    <q-item-section>
+      <q-input @update:model-value="(val) => {
+        newsData.image = val[0];
+      }" filled type="file" :hint="$t('coverImage')" />
+    </q-item-section>
+  </q-item>
+  <div class="col-12" v-if="newsData.image">
+    <q-item>
+      <q-item-section>
+        <p class="text-h6"><b>{{$t('preview')}}:</b></p>
+        <img width="500" :src="newsData.image" />
+      </q-item-section>
+    </q-item>
+  </div>
+</div>
+
+<div class="row">
+  <q-item class="col-12">
+    <q-item-section>
+      <q-input @update:model-value="(val) => {
+        newsData.video = val[0];
+      }" filled type="file" :hint="$t('videoUpload')" />
+    </q-item-section>
+  </q-item>
+  <div class="col-12" v-if="newsData.video">
+    <q-item>
+      <q-item-section>
+        <p class="text-h6"><b>{{$t('videoPreview')}}:</b></p>
+        <video width="500" controls>
+          <source :src="baseUrl + newsData.video">
+          {{$t('videoNotSupported')}}
+        </video>
+      </q-item-section>
+    </q-item>
+  </div>
+</div>
         <q-item>
           <q-item-section>
-            <q-input @update:model-value="(val) => {
-      newsData.image = val[0];
-    }
-      " filled type="file" :hint="$t('coverImage')" />
-          </q-item-section>
-        </q-item>
-        <q-item>
-          <q-item-section>
-            <q-input @update:model-value="(val) => {
-      newsData.video = val[0];
-    }
-      " filled type="file" :hint="$t('videoUpload')" />
+            <q-checkbox size="lg" val="lg" v-model="newsData.video_top" :label="$t('videoTop')" />
           </q-item-section>
         </q-item>
         <q-item v-if="newsData.cuerpo">
@@ -166,7 +193,11 @@ export default {
         this.store.setNews(newValue);
       },
     },
+    baseUrl() {
+      return process.env.NODE_ENV == 'development' ? "http://localhost:8000" : "https://api2023.kenwin.net";
+    }
   },
+
   mounted() {
     if (this.news_id) {
       this.getNews(this.news_id).then(() => {
@@ -242,6 +273,7 @@ export default {
           htmlEmbed: {
             showPreviews: true
           },
+          mediaEmbed: {previewsInData: true},
           link: {
             decorators: {
               addTargetToExternalLinks: true,
