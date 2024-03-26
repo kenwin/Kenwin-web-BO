@@ -126,6 +126,7 @@ import { useNews } from "stores/news";
 import { useCategories } from "stores/categories";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
+import { loadScript } from "vue-plugin-load-script";
 
 export default {
   name: "NewsCreate",
@@ -134,6 +135,9 @@ export default {
     const router = useRouter();
     const categoriesList = computed(() => useCategories().getCategoriesList);
     const loading = computed(() => store.getLoading);
+
+    loadScript("/js/ckeditor.js")
+    loadScript("/js/es.js")
 
     return {
       store,
@@ -189,6 +193,10 @@ export default {
     };
   },
   mounted() {
+    Promise.all([
+      loadScript("/js/ckeditor.js"),
+      loadScript("/js/es.js")
+    ]).then(() => {
     CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
       // https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
       toolbar: {
@@ -343,6 +351,7 @@ export default {
     }).catch(error => {
       console.error('Error al inicializar CKEditor:', error);
     })
+  });
   },
   methods: {
     async onSubmit() {
@@ -361,7 +370,7 @@ export default {
 <style>
 @font-face {
   font-family: 'Encode Sans';
-    src: url('/src/assets/fonts/EncodeSans-Regular.woff2') format('woff2'),
+  src: url('/src/assets/fonts/EncodeSans-Regular.woff2') format('woff2'),
     url('/src/assets/fonts/EncodeSans-Regular.woff') format('woff');
 }
 

@@ -91,6 +91,8 @@ export default {
   sectionOrderEsp: "Orden de secciones - ESP",
   documentType: "Tipo de documento",
   normType: "Tipo de norma",
+  documentTypes: "Tipos de documento",
+  normTypes: "Tipos de norma",
   normName: "Nombre de la norma",
   version: "Versión",
   lastUpdate: "Fecha de última actualización en la web",

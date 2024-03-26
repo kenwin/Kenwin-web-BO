@@ -120,6 +120,7 @@ import { useTraining } from "stores/training";
 import { useRouter } from "vue-router";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import moment from "moment";
+import { unloadScript } from "vue-plugin-load-script";
 
 export default {
   name: "NewsCreate",
@@ -127,6 +128,11 @@ export default {
     const store = useTraining();
     const router = useRouter();
     const loading = computed(() => store.getLoading);
+
+    Promise.all([
+      unloadScript("/js/ckeditor.js"),
+      unloadScript("/js/es.js")
+    ])
 
     return {
       store,

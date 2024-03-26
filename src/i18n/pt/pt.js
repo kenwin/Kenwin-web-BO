@@ -90,6 +90,8 @@ export default {
   sectionOrderPor: "Ordem das seções - POR",
   sectionOrderEsp: "Ordem das seções - ESP",
   documentType: "Tipo de documento",
+  normTypes: "Tipos padrão",
+  documentTypes: "Tipos de documento",
   normType: "Tipo padrão",
   normName: "Nome padrão",
   version: "Versão",

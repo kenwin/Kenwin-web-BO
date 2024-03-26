@@ -48,17 +48,41 @@
           </q-item-section>
         </q-item>
 
-        <q-item clickable tag="a" :to="'/downloads'">
-          <q-item-section avatar>
-            <q-icon :name="'download'" />
-          </q-item-section>
+        <q-expansion-item :content-inset-level="0.5" expand-separator icon="source" :label="$t('downloads.title')"
+          :caption="$t('downloads.caption')">
 
-          <q-item-section>
-            <q-item-label>{{ $t('downloads.title') }}</q-item-label>
-            <q-item-label caption>{{ $t('downloads.caption') }}</q-item-label>
-          </q-item-section>
-        </q-item>
+          <q-item clickable tag="a" :to="'/downloads'">
+            <q-item-section avatar>
+              <q-icon :name="'source'" />
+            </q-item-section>
 
+            <q-item-section>
+              <q-item-label>{{ $t('downloads.title') }}</q-item-label>
+            </q-item-section>
+          </q-item>
+
+          <q-item clickable tag="a" :to="'/tipo_documento'">
+            <q-item-section avatar>
+              <q-icon :name="'source'" />
+            </q-item-section>
+
+            <q-item-section>
+              <q-item-label>{{ $t('documentTypes') }}</q-item-label>
+            </q-item-section>
+          </q-item>
+
+          <q-item clickable tag="a" :to="'/tipo_norma'">
+            <q-item-section avatar>
+              <q-icon :name="'source'" />
+            </q-item-section>
+
+            <q-item-section>
+              <q-item-label>{{ $t('normTypes') }}</q-item-label>
+            </q-item-section>
+          </q-item>
+
+        </q-expansion-item>
+        
         <q-expansion-item :content-inset-level="0.5" expand-separator icon="source" :label="$t('trainings.title')"
           :caption="$t('trainings.caption')">
 

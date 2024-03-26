@@ -86,6 +86,7 @@ import { useTraining } from "stores/training";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { unloadScript } from "vue-plugin-load-script";
 
 export default {
   name: "TrainingEdit",
@@ -94,6 +95,11 @@ export default {
     const store = useTraining();
     const router = useRouter();
     const loading = computed(() => store.getLoading);
+
+    Promise.all([
+      unloadScript("/js/ckeditor.js"),
+      unloadScript("/js/es.js")
+    ])
 
     return {
       store,

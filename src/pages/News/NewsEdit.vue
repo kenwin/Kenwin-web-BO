@@ -79,45 +79,45 @@
           </q-item-section>
         </q-item>
         <div class="row">
-  <q-item class="col-12">
-    <q-item-section>
-      <q-input @update:model-value="(val) => {
-        newsData.image = val[0];
-      }" filled type="file" :hint="$t('coverImage')" />
-    </q-item-section>
-  </q-item>
-  <div class="col-12" v-if="newsData.imagen_portada">
-    <q-item>
-      <q-item-section>
-        <p class="text-h6"><b>{{$t('preview')}}:</b></p>
-        <v-img :src="imgUrl + newsData.imagen_portada" max-width="450px"/>
-      </q-item-section>
-    </q-item>
-  </div>
-</div>
+          <q-item class="col-12">
+            <q-item-section>
+              <q-input @update:model-value="(val) => {
+      newsData.image = val[0];
+    }" filled type="file" :hint="$t('coverImage')" />
+            </q-item-section>
+          </q-item>
+          <div class="col-12" v-if="newsData.imagen_portada">
+            <q-item>
+              <q-item-section>
+                <p class="text-h6"><b>{{ $t('preview') }}:</b></p>
+                <v-img :src="imgUrl + newsData.imagen_portada" max-width="450px" />
+              </q-item-section>
+            </q-item>
+          </div>
+        </div>
 
-<div class="row">
-  <q-item class="col-12">
-    <q-item-section>
-      <q-input @update:model-value="(val) => {
-        newsData.video = val[0];
-      }" filled type="file" :hint="$t('videoUpload')" />
-    </q-item-section>
-  </q-item>
-  <div class="col-12" v-if="newsData.video">
-    <q-item>
-      <q-item-section>
-        <p class="text-h6"><b>{{$t('videoPreview')}}:</b></p>
-        <video width="500" controls>
-          <video ref="videoPlayer" :src="videoUrl + newsData.video" class="video-js vjs-theme-city" controls preload="auto" width="600" height="400"
-                          @click="handleVideoClick">
-                        </video>
-          {{$t('videoNotSupported')}}
-        </video>
-      </q-item-section>
-    </q-item>
-  </div>
-</div>
+        <div class="row">
+          <q-item class="col-12">
+            <q-item-section>
+              <q-input @update:model-value="(val) => {
+      newsData.video = val[0];
+    }" filled type="file" :hint="$t('videoUpload')" />
+            </q-item-section>
+          </q-item>
+          <div class="col-12" v-if="newsData.video">
+            <q-item>
+              <q-item-section>
+                <p class="text-h6"><b>{{ $t('videoPreview') }}:</b></p>
+                <video width="500" controls>
+                  <video ref="videoPlayer" :src="videoUrl + newsData.video" class="video-js vjs-theme-city" controls
+                    preload="auto" width="600" height="400" @click="handleVideoClick">
+                  </video>
+                  {{ $t('videoNotSupported') }}
+                </video>
+              </q-item-section>
+            </q-item>
+          </div>
+        </div>
         <q-item>
           <q-item-section>
             <q-checkbox size="lg" val="lg" v-model="newsData.video_top" :label="$t('videoTop')" />
@@ -153,6 +153,10 @@ import { useCategories } from "stores/categories";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 import moment from "moment";
+import { loadScript } from "vue-plugin-load-script";
+
+loadScript("/js/ckeditor.js")
+loadScript("/js/es.js")
 
 export default {
   name: "NewsEdit",
@@ -212,148 +216,153 @@ export default {
     if (this.news_id) {
       this.getNews(this.news_id).then(() => {
         this.newsData.fecha_alta = moment(this.newsData.fecha_alta).format('DD/MM/YYYY');
-        CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
-          toolbar: {
-            items: [
-              'exportPDF', 'exportWord', '|',
-              'findAndReplace', 'selectAll', '|',
-              'heading', '|',
-              'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript', 'removeFormat', '|',
-              'bulletedList', 'numberedList', 'todoList', '|',
-              'outdent', 'indent', '|',
-              'undo', 'redo',
-              '-',
-              'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
-              'alignment', '|',
-              'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
-              'specialCharacters', 'horizontalLine', 'pageBreak', '|',
-              'textPartLanguage', '|',
-              'sourceEditing'
-            ],
-            shouldNotGroupWhenFull: true
-          },
-          language: 'es',
-          list: {
-            properties: {
-              styles: true,
-              startIndex: true,
-              reversed: true
-            }
-          },
-          heading: {
-            options: [
-              { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-              { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-              { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
-              { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
-              { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
-              { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
-              { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
-            ]
-          },
-          placeholder: 'Welcome to CKEditor 5!',
-          fontFamily: {
-            options: [
-              'Encode Sans, Encode Sans Condensed',
-              'default',
-              'Arial, Helvetica, sans-serif',
-              'Courier New, Courier, monospace',
-              'Georgia, serif',
-              'Lucida Sans Unicode, Lucida Grande, sans-serif',
-              'Tahoma, Geneva, sans-serif',
-              'Times New Roman, Times, serif',
-              'Trebuchet MS, Helvetica, sans-serif',
-              'Verdana, Geneva, sans-serif'
-            ],
-            supportAllValues: true
-          },
-          fontSize: {
-            options: [10, 12, 14, 'default', 18, 20, 22],
-            supportAllValues: true
-          },
-          htmlSupport: {
-            allow: [
-              {
-                name: /.*/,
-                attributes: true,
-                classes: true,
-                styles: true
+        Promise.all([
+          loadScript("/js/ckeditor.js"),
+          loadScript("/js/es.js")
+        ]).then(() => {
+          CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
+            toolbar: {
+              items: [
+                'exportPDF', 'exportWord', '|',
+                'findAndReplace', 'selectAll', '|',
+                'heading', '|',
+                'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript', 'removeFormat', '|',
+                'bulletedList', 'numberedList', 'todoList', '|',
+                'outdent', 'indent', '|',
+                'undo', 'redo',
+                '-',
+                'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
+                'alignment', '|',
+                'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
+                'specialCharacters', 'horizontalLine', 'pageBreak', '|',
+                'textPartLanguage', '|',
+                'sourceEditing'
+              ],
+              shouldNotGroupWhenFull: true
+            },
+            language: 'es',
+            list: {
+              properties: {
+                styles: true,
+                startIndex: true,
+                reversed: true
               }
-            ]
-          },
-          htmlEmbed: {
-            showPreviews: true
-          },
-          mediaEmbed: {previewsInData: true},
-          link: {
-            decorators: {
-              addTargetToExternalLinks: true,
-              defaultProtocol: 'https://',
-              toggleDownloadable: {
-                mode: 'manual',
-                label: 'Downloadable',
-                attributes: {
-                  download: 'file'
+            },
+            heading: {
+              options: [
+                { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+                { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+                { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
+                { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
+                { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
+              ]
+            },
+            placeholder: 'Welcome to CKEditor 5!',
+            fontFamily: {
+              options: [
+                'Encode Sans, Encode Sans Condensed',
+                'default',
+                'Arial, Helvetica, sans-serif',
+                'Courier New, Courier, monospace',
+                'Georgia, serif',
+                'Lucida Sans Unicode, Lucida Grande, sans-serif',
+                'Tahoma, Geneva, sans-serif',
+                'Times New Roman, Times, serif',
+                'Trebuchet MS, Helvetica, sans-serif',
+                'Verdana, Geneva, sans-serif'
+              ],
+              supportAllValues: true
+            },
+            fontSize: {
+              options: [10, 12, 14, 'default', 18, 20, 22],
+              supportAllValues: true
+            },
+            htmlSupport: {
+              allow: [
+                {
+                  name: /.*/,
+                  attributes: true,
+                  classes: true,
+                  styles: true
+                }
+              ]
+            },
+            htmlEmbed: {
+              showPreviews: true
+            },
+            mediaEmbed: { previewsInData: true },
+            link: {
+              decorators: {
+                addTargetToExternalLinks: true,
+                defaultProtocol: 'https://',
+                toggleDownloadable: {
+                  mode: 'manual',
+                  label: 'Downloadable',
+                  attributes: {
+                    download: 'file'
+                  }
                 }
               }
-            }
-          },
-          mention: {
-            feeds: [
-              {
-                marker: '@',
-                feed: [
-                  '@apple', '@bears', '@brownie', '@cake', '@cake', '@candy', '@canes', '@chocolate', '@cookie', '@cotton', '@cream',
-                  '@cupcake', '@danish', '@donut', '@dragée', '@fruitcake', '@gingerbread', '@gummi', '@ice', '@jelly-o',
-                  '@liquorice', '@macaroon', '@marzipan', '@oat', '@pie', '@plum', '@pudding', '@sesame', '@snaps', '@soufflé',
-                  '@sugar', '@sweet', '@topping', '@wafer'
-                ],
-                minimumCharacters: 1
-              }
+            },
+            mention: {
+              feeds: [
+                {
+                  marker: '@',
+                  feed: [
+                    '@apple', '@bears', '@brownie', '@cake', '@cake', '@candy', '@canes', '@chocolate', '@cookie', '@cotton', '@cream',
+                    '@cupcake', '@danish', '@donut', '@dragée', '@fruitcake', '@gingerbread', '@gummi', '@ice', '@jelly-o',
+                    '@liquorice', '@macaroon', '@marzipan', '@oat', '@pie', '@plum', '@pudding', '@sesame', '@snaps', '@soufflé',
+                    '@sugar', '@sweet', '@topping', '@wafer'
+                  ],
+                  minimumCharacters: 1
+                }
+              ]
+            },
+            // The "super-build" contains more premium features that require additional configuration, disable them below.
+            // Do not turn them on unless you read the documentation and know how to configure them and setup the editor.
+            removePlugins: [
+              // These two are commercial, but you can try them out without registering to a trial.
+              // 'ExportPdf',
+              // 'ExportWord',
+              //'CKBox',
+              //'CKFinder',
+              'EasyImage',
+              // This sample uses the Base64UploadAdapter to handle image uploads as it requires no configuration.
+              // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/base64-upload-adapter.html
+              // Storing images as Base64 is usually a very bad idea.
+              // Replace it on production website with other solutions:
+              // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/image-upload.html
+              // 'Base64UploadAdapter',
+              'RealTimeCollaborativeComments',
+              'RealTimeCollaborativeTrackChanges',
+              'RealTimeCollaborativeRevisionHistory',
+              'PresenceList',
+              'Comments',
+              'TrackChanges',
+              'TrackChangesData',
+              'RevisionHistory',
+              'Pagination',
+              'WProofreader',
+              // Careful, with the Mathtype plugin CKEditor will not load when loading this sample
+              // from a local file system (file://) - load this site via HTTP server if you enable MathType
+              'MathType'
             ]
-          },
-          // The "super-build" contains more premium features that require additional configuration, disable them below.
-          // Do not turn them on unless you read the documentation and know how to configure them and setup the editor.
-          removePlugins: [
-            // These two are commercial, but you can try them out without registering to a trial.
-            // 'ExportPdf',
-            // 'ExportWord',
-            //'CKBox',
-            //'CKFinder',
-            'EasyImage',
-            // This sample uses the Base64UploadAdapter to handle image uploads as it requires no configuration.
-            // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/base64-upload-adapter.html
-            // Storing images as Base64 is usually a very bad idea.
-            // Replace it on production website with other solutions:
-            // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/image-upload.html
-            // 'Base64UploadAdapter',
-            'RealTimeCollaborativeComments',
-            'RealTimeCollaborativeTrackChanges',
-            'RealTimeCollaborativeRevisionHistory',
-            'PresenceList',
-            'Comments',
-            'TrackChanges',
-            'TrackChangesData',
-            'RevisionHistory',
-            'Pagination',
-            'WProofreader',
-            // Careful, with the Mathtype plugin CKEditor will not load when loading this sample
-            // from a local file system (file://) - load this site via HTTP server if you enable MathType
-            'MathType'
-          ]
-        }).then(editor => {
-          this.editor = editor;
+          }).then(editor => {
+            this.editor = editor;
 
-          editor.model.document.on("change:data", () => {
-            this.newsData.cuerpo = editor.getData();
+            editor.model.document.on("change:data", () => {
+              this.newsData.cuerpo = editor.getData();
+            });
+
+            //editor.setData(this.newsData.cuerpo);
+            editor.setData(this.newsData.cuerpo || '');
+          }).catch(error => {
+            console.error('Error al inicializar CKEditor:', error);
           });
-
-          //editor.setData(this.newsData.cuerpo);
-          editor.setData(this.newsData.cuerpo || '');
-        }).catch(error => {
-          console.error('Error al inicializar CKEditor:', error);
         });
-      });
+      })
     } else {
       this.router.push({ path: "/news" });
     }
@@ -381,7 +390,7 @@ export default {
 <style>
 @font-face {
   font-family: 'Encode Sans';
-    src: url('/src/assets/fonts/EncodeSans-Regular.woff2') format('woff2'),
+  src: url('/src/assets/fonts/EncodeSans-Regular.woff2') format('woff2'),
     url('/src/assets/fonts/EncodeSans-Regular.woff') format('woff');
 }
 
