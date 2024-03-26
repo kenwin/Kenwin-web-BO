@@ -86,11 +86,11 @@
       }" filled type="file" :hint="$t('coverImage')" />
     </q-item-section>
   </q-item>
-  <div class="col-12" v-if="newsData.image">
+  <div class="col-12" v-if="newsData.imagen_portada">
     <q-item>
       <q-item-section>
         <p class="text-h6"><b>{{$t('preview')}}:</b></p>
-        <img width="500" :src="newsData.image" />
+        <v-img :src="imgUrl + newsData.imagen_portada" max-width="450px"/>
       </q-item-section>
     </q-item>
   </div>
@@ -109,7 +109,9 @@
       <q-item-section>
         <p class="text-h6"><b>{{$t('videoPreview')}}:</b></p>
         <video width="500" controls>
-          <source :src="baseUrl + newsData.video">
+          <video ref="videoPlayer" :src="videoUrl + newsData.video" class="video-js vjs-theme-city" controls preload="auto" width="600" height="400"
+                          @click="handleVideoClick">
+                        </video>
           {{$t('videoNotSupported')}}
         </video>
       </q-item-section>
@@ -195,7 +197,15 @@ export default {
     },
     baseUrl() {
       return process.env.NODE_ENV == 'development' ? "http://localhost:8000" : "https://api2023.kenwin.net";
-    }
+    },
+    imgUrl() {
+      var api = process.env.NODE_ENV == 'development' ? "http://localhost:8000/" : "https://api2023.kenwin.net/";
+      return api + "images/news_images/";
+    },
+    videoUrl() {
+      var api = process.env.NODE_ENV == 'development' ? "http://localhost:8000/" : "https://api2023.kenwin.net/";
+      return api + "storage/news_videos/";
+    },
   },
 
   mounted() {
