@@ -244,6 +244,7 @@ export default {
           placeholder: 'Welcome to CKEditor 5!',
           fontFamily: {
             options: [
+              'Encode Sans, Encode Sans Condensed',
               'default',
               'Arial, Helvetica, sans-serif',
               'Courier New, Courier, monospace',
@@ -366,3 +367,22 @@ export default {
   },
 };
 </script>
+
+<style>
+@font-face {
+  font-family: 'Encode Sans';
+    src: url('/src/assets/fonts/EncodeSans-Regular.woff2') format('woff2'),
+    url('/src/assets/fonts/EncodeSans-Regular.woff') format('woff');
+}
+
+.ck-content,
+.ck-heading_paragraph,
+.ck-heading_heading1,
+.ck-heading_heading2,
+.ck-heading_heading3,
+.ck-heading_heading4,
+.ck-heading_heading5,
+.ck-heading_heading6 {
+  font-family: 'Encode Sans', sans-serif;
+}
+</style>

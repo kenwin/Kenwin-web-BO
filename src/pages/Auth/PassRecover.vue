@@ -21,7 +21,7 @@
               <q-card-actions class="q-px-md">
                 <q-btn unelevated color="cyan-7" size="lg" class="full-width" label="Enviar" @click="send()" />
                 <q-btn unelevated flat rounded color="cyan-7" class="q-my-xs full-width"
-                  label="Ir al login/Ir para login" to="/login" />
+                  label="Ir al login/Ir para login" to="/" />
               </q-card-actions>
             </q-card>
           </div>

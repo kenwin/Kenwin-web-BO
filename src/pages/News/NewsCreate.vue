@@ -100,8 +100,8 @@
         <q-item>
           <q-item-section>
             <div id="container">
-              <q-div id="editor">
-              </q-div>
+              <div id="editor">
+              </div>
             </div>
           </q-item-section>
         </q-item>
@@ -236,6 +236,7 @@ export default {
       // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-family-feature
       fontFamily: {
         options: [
+          'Encode Sans, Encode Sans Condensed',
           'default',
           'Arial, Helvetica, sans-serif',
           'Courier New, Courier, monospace',
@@ -244,7 +245,7 @@ export default {
           'Tahoma, Geneva, sans-serif',
           'Times New Roman, Times, serif',
           'Trebuchet MS, Helvetica, sans-serif',
-          'Verdana, Geneva, sans-serif'
+          'Verdana, Geneva, sans-serif',
         ],
         supportAllValues: true
       },
@@ -356,3 +357,22 @@ export default {
   },
 };
 </script>
+
+<style>
+@font-face {
+  font-family: 'Encode Sans';
+    src: url('/src/assets/fonts/EncodeSans-Regular.woff2') format('woff2'),
+    url('/src/assets/fonts/EncodeSans-Regular.woff') format('woff');
+}
+
+.ck-content,
+.ck-heading_paragraph,
+.ck-heading_heading1,
+.ck-heading_heading2,
+.ck-heading_heading3,
+.ck-heading_heading4,
+.ck-heading_heading5,
+.ck-heading_heading6 {
+  font-family: 'Encode Sans', sans-serif;
+}
+</style>
