@@ -16,6 +16,7 @@
               <q-card-section>
                 <q-form class="q-gutter-md" @submit.prevent="send">
                   <q-input square filled v-model="data.email" type="email" label="Email" />
+                  <input type="hidden" name="back" value="true">
                 </q-form>
               </q-card-section>
               <q-card-actions class="q-px-md">
