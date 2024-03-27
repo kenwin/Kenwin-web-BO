@@ -112,6 +112,7 @@ export const useAuth = defineStore("auth", {
       };
 
       formData.set("email", data.email);
+      formData.set("back", data.back);
       try {
         const response = await api.post("/api/forgot_password", formData, config);
         if (response.data.success) {
