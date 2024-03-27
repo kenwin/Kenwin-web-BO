@@ -344,10 +344,10 @@ export const useDownloads = defineStore("downloads", {
         formData.set("file", data.data);
       }
       if (data.document_type) {
-        formData.set("document_type", data.document_type);
+        formData.set("document_type", data.document_type.id);
       }
       if (data.norm_type) {
-        formData.set("norm_type", data.norm_type);
+        formData.set("norm_type", data.norm_type.id);
       }
       if (data.norm_name) {
         formData.set("norm_name", data.norm_name);
