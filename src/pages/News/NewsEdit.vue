@@ -83,22 +83,22 @@
             <q-item-section>
               <q-input @update:model-value="(val) => {
       newsData.image = val[0];
-    }" filled type="file" :hint="$t('coverImage')" />
+    }" filled type="file" :hint="$t('coverImage') + ' ' + $t('imageAlert')" />
             </q-item-section>
           </q-item>
           <q-item>
-          <q-item-section>
-            <div class="text-h6">
-              <b>{{$t('coverImage')}}:</b> {{ newsData.imagen_portada || " " }}
-            </div>
-            <div class="q-pa-md">
-              <div class="q-gutter-md row">
-                <q-img :src="imgUrl + newsData.imagen_portada" spinner-color="white"
-                  style="max-width: 70%; height: 350px" />
+            <q-item-section>
+              <div class="text-h6">
+                <b>{{ $t('coverImage') }}:</b> {{ newsData.imagen_portada || " " }}
               </div>
-            </div>
-          </q-item-section>
-        </q-item>
+              <div class="q-pa-md">
+                <div class="q-gutter-md row">
+                  <q-img :src="imgUrl + newsData.imagen_portada" spinner-color="white"
+                    style="max-width: 70%; height: 350px" />
+                </div>
+              </div>
+            </q-item-section>
+          </q-item>
 
         </div>
 
@@ -107,7 +107,7 @@
             <q-item-section>
               <q-input @update:model-value="(val) => {
       newsData.video = val[0];
-    }" filled type="file" :hint="$t('videoUpload')" />
+    }" filled type="file" :hint="$t('videoUpload') + ' ' + $t('videoAlert')" />
             </q-item-section>
           </q-item>
           <q-item v-if="newsData.video">
@@ -117,7 +117,7 @@
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-md row">
-                  <q-video :src="videoUrl + newsData.video" spinner-color="white"
+                  <q-video :src="videoUrl + newsData.video" autoplay="false" spinner-color="white"
                     style="max-width: 70%; height: 350px" />
                 </div>
               </div>

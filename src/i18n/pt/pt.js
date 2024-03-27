@@ -121,6 +121,8 @@ export default {
   documentTypeUpdate: "Editar tipo de documento",
   documentTypeInfo: "Informações o tipo de documento",
   normTypeCreate: "Crear tipo de norma",
+  videoAlert: "enviar um novo vídeo substituirá o atual",
+  imageAlert: "(enviar uma nova imagem substituirá a atual)",
   "The email field must be a valid email address.": "Por favor insira um e-mail válido.",
   videoTop: "Vídeo no início (se não estiver marcado, está no final)",
   home: {
