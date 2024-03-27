@@ -86,14 +86,20 @@
     }" filled type="file" :hint="$t('coverImage')" />
             </q-item-section>
           </q-item>
-          <div class="col-12" v-if="loaded && newsData.imagen_portada">
-            <q-item>
-              <q-item-section>
-                <p class="text-h6"><b>{{ $t('preview') }}:</b></p>
-                <v-img :src="imgUrl + newsData.imagen_portada" max-width="450px" />
-              </q-item-section>
-            </q-item>
-          </div>
+          <q-item>
+          <q-item-section>
+            <div class="text-h6">
+              <b>{{$t('coverImage')}}:</b> {{ newsData.imagen_portada || " " }}
+            </div>
+            <div class="q-pa-md">
+              <div class="q-gutter-md row">
+                <q-img :src="imgUrl + newsData.imagen_portada" spinner-color="white"
+                  style="max-width: 70%; height: 350px" />
+              </div>
+            </div>
+          </q-item-section>
+        </q-item>
+
         </div>
 
         <div class="row">
@@ -104,19 +110,19 @@
     }" filled type="file" :hint="$t('videoUpload')" />
             </q-item-section>
           </q-item>
-          <div class="col-12" v-if="loaded && newsData.video">
-            <q-item>
-              <q-item-section>
-                <p class="text-h6"><b>{{ $t('videoPreview') }}:</b></p>
-                <video width="500" controls>
-                  <video ref="videoPlayer" :src="videoUrl + newsData.video" class="video-js vjs-theme-city" controls
-                    preload="auto" width="600" height="400" @click="handleVideoClick">
-                  </video>
-                  {{ $t('videoNotSupported') }}
-                </video>
-              </q-item-section>
-            </q-item>
-          </div>
+          <q-item v-if="newsData.video">
+            <q-item-section>
+              <div class="text-h6">
+                <b>Video:</b> {{ newsData.video || " " }}
+              </div>
+              <div class="q-pa-md">
+                <div class="q-gutter-md row">
+                  <q-video :src="videoUrl + newsData.video" spinner-color="white"
+                    style="max-width: 70%; height: 350px" />
+                </div>
+              </div>
+            </q-item-section>
+          </q-item>
         </div>
         <q-item>
           <q-item-section>
@@ -188,7 +194,6 @@ export default {
   data() {
     return {
       editor: null,
-      loaded: false,
     };
   },
   computed: {
@@ -216,7 +221,6 @@ export default {
   mounted() {
     if (this.news_id) {
       this.getNews(this.news_id).then(() => {
-        this.loaded = true;
         this.newsData.fecha_alta = moment(this.newsData.fecha_alta).format('DD/MM/YYYY');
         Promise.all([
           loadScript("/js/ckeditor.js"),
