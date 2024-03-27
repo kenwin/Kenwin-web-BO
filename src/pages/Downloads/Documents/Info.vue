@@ -38,7 +38,7 @@ import moment from "moment";
 
 export default {
   name: "DocumentInfo",
-  props: ["document_id"],
+  props: ["tipo_documento_id"],
   setup() {
     const store = useDocument();
     const router = useRouter();
@@ -54,18 +54,18 @@ export default {
     };
   },
   mounted() {
-    if (this.document_id) {
-      this.getDocument(this.document_id);
+    if (this.tipo_documento_id) {
+      this.getDocument(this.tipo_documento_id);
     } else {
-      this.router.push({ path: "/downloads" });
+      this.router.push({ path: "/tipo_documento" });
     }
   },
   methods: {
-    async getDocument(document_id) {
-      await this.store.getDocumentById(document_id);
+    async getDocument(tipo_documento_id) {
+      await this.store.getDocumentById(tipo_documento_id);
     },
-    async deleteDocument(document_id) {
-      await this.store.deleteDocument(document_id);
+    async deleteDocument(tipo_documento_id) {
+      await this.store.deleteDocument(tipo_documento_id);
     },
   },
 };

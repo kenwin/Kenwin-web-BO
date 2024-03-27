@@ -124,7 +124,7 @@ export const useDocument = defineStore("document", {
         this.loading = false;
       }
     },
-    async editDocument(id) {
+    async updateDocument(id) {
       this.loading = true;
       const auth = useAuth();
 
@@ -135,19 +135,13 @@ export const useDocument = defineStore("document", {
 
       const config = {
         headers: {
-          "content-type": "multipart/form-data",
           Authorization: "Bearer " + auth.getToken,
         },
       };
 
-      const formData = new FormData();
-      if (this.document) {
-        formData.set("nombre", this.document.nombre);
-      }
-
       try {
         await api
-          .post("/api/document_type/" + id, formData, config)
+          .put("/api/document_type/" + id, { nombre: this.document.nombre }, config)
           .then((response) => {
             console.log(response);
             this.loading = false;

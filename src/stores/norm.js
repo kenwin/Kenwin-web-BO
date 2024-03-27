@@ -42,7 +42,7 @@ export const useNorm = defineStore("norm", {
       try {
         await api.get("/api/norm_type", config)
           .then((response) => {
-            console.log(response.data);
+            console.log(response);
             this.normList = response.data;
             this.loading = false;
           })
@@ -124,7 +124,7 @@ export const useNorm = defineStore("norm", {
         this.loading = false;
       }
     },
-    async editNorm(id) {
+    async updateNorm(id) {
       this.loading = true;
       const auth = useAuth();
 
@@ -135,19 +135,13 @@ export const useNorm = defineStore("norm", {
 
       const config = {
         headers: {
-          "content-type": "multipart/form-data",
           Authorization: "Bearer " + auth.getToken,
         },
       };
 
-      const formData = new FormData();
-      if (this.norm) {
-        formData.set("nombre", this.norm.nombre);
-      }
-
       try {
         await api
-          .post("/api/norm_type/" + id, formData, config)
+          .put("/api/norm_type/" + id, { nombre: this.norm.nombre }, config)
           .then((response) => {
             console.log(response);
             this.loading = false;

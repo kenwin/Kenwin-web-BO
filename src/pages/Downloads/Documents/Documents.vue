@@ -2,9 +2,9 @@
   <q-page>
     <div class="row q-pa-sm">
       <div class="col-12">
-        <p class="text-h5">{{ $t('DocumentTypeList') }}</p>
+        <p class="text-h5">{{ $t('documentTypeList') }}</p>
       </div>
-      <div v-if="d.length == 0" class="col-12">
+      <div v-if="documentList.length == 0" class="col-12">
         <q-list bordered separator>
           <q-item>
             <q-item-section>

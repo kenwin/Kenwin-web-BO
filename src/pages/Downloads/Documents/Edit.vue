@@ -44,7 +44,7 @@ import { useRouter } from "vue-router";
 
 export default {
   name: "DocumentEditSection",
-  props: ["document_id"],
+  props: ["tipo_documento_id"],
   setup() {
     const store = useDocument();
     const router = useRouter();
@@ -60,7 +60,7 @@ export default {
     return {};
   },
   computed: {
-    sectionData: {
+    documentData: {
       get() {
         return this.store.getDocument;
       },
@@ -70,18 +70,18 @@ export default {
     },
   },
   mounted() {
-    if (this.document_id) {
-      this.getDocument(this.document_id);
+    if (this.tipo_documento_id) {
+      this.getDocument(this.tipo_documento_id);
     } else {
       this.router.push({ path: "/tipo_documento" });
     }
   },
   methods: {
-    async getDocument(document_id) {
-      await this.store.getDocumentById(document_id);
+    async getDocument(tipo_documento_id) {
+      await this.store.getDocumentById(tipo_documento_id);
     },
     async onSubmit() {
-      await this.store.updateDocument(this.document_id).then(() => {
+      await this.store.updateDocument(this.tipo_documento_id).then(() => {
         this.router.push({ path: "/tipo_documento" });
       });
     },
