@@ -120,6 +120,7 @@ export default {
   documentTypeCreate: "Crear tipo de documento",
   documentTypeUpdate: "Editar tipo de documento",
   documentTypeInfo: "Informações o tipo de documento",
+  normTypeCreate: "Crear tipo de norma",
   "The email field must be a valid email address.": "Por favor insira um e-mail válido.",
   videoTop: "Vídeo no início (se não estiver marcado, está no final)",
   home: {
