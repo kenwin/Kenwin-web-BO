@@ -136,9 +136,6 @@ export default {
     const categoriesList = computed(() => useCategories().getCategoriesList);
     const loading = computed(() => store.getLoading);
 
-    loadScript("/js/ckeditor.js")
-    loadScript("/js/es.js")
-
     return {
       store,
       router,
@@ -347,7 +344,7 @@ export default {
       });
 
       // Si deseas establecer un contenido inicial, puedes hacerlo aquí
-      editor.setData(this.form.cuerpo);
+      editor.setData(this.form.cuerpo || '');
     }).catch(error => {
       console.error('Error al inicializar CKEditor:', error);
     })
