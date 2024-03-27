@@ -86,7 +86,7 @@
     }" filled type="file" :hint="$t('coverImage')" />
             </q-item-section>
           </q-item>
-          <div class="col-12" v-if="newsData.imagen_portada">
+          <div class="col-12" v-if="loaded && newsData.imagen_portada">
             <q-item>
               <q-item-section>
                 <p class="text-h6"><b>{{ $t('preview') }}:</b></p>
@@ -104,7 +104,7 @@
     }" filled type="file" :hint="$t('videoUpload')" />
             </q-item-section>
           </q-item>
-          <div class="col-12" v-if="newsData.video">
+          <div class="col-12" v-if="loaded && newsData.video">
             <q-item>
               <q-item-section>
                 <p class="text-h6"><b>{{ $t('videoPreview') }}:</b></p>
@@ -188,6 +188,7 @@ export default {
   data() {
     return {
       editor: null,
+      loaded: false,
     };
   },
   computed: {
@@ -215,6 +216,7 @@ export default {
   mounted() {
     if (this.news_id) {
       this.getNews(this.news_id).then(() => {
+        this.loaded = true;
         this.newsData.fecha_alta = moment(this.newsData.fecha_alta).format('DD/MM/YYYY');
         Promise.all([
           loadScript("/js/ckeditor.js"),
